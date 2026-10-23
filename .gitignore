@@ -159,8 +159,11 @@ tools/vendor/
 game_copy/*
 extracted/*
 !game_copy/.gitkeep
+!extracted/.gitkeep
 
 
 # Ignore heavy data files inside extracted/ab_text, keep folder structure
 extracted/ab_text/*
+extracted/ilspy/*
 !extracted/ab_text/.gitkeep
+!extracted/ilspy/.gitkeep
