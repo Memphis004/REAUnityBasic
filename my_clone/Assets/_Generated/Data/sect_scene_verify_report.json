@@ -1,0 +1,13 @@
+﻿{
+  "errors": 0,
+  "cameras": 2,
+  "spriteRenderers": 1351,
+  "labels": 43,
+  "cells": 158,
+  "entities": 35,
+  "layerRoots": 10,
+  "stageTiles": 5518,
+  "stageTileChunks": 12,
+  "stagePlaces": 1143,
+  "stageTilesOutOfMeshBounds": 2
+}

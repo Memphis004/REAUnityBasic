@@ -1,0 +1,32 @@
+{
+  "mcpServers": {
+    "rea": {
+      "command": [
+        "cmd.exe",
+        "/d",
+        "/c",
+        "npx",
+        "-y",
+        "rea-agents@6.7.0",
+        "mcp"
+      ]
+    },
+    "rea-agents": {
+      "command": [
+        "cmd.exe",
+        "/d",
+        "/c",
+        "npx",
+        "-y",
+        "rea-agents@6.7.0",
+        "mcp"
+      ]
+    },
+    "mcp": {
+      "unityMCP": {
+        "url": "http://127.0.0.1:8081/mcp",
+        "type": "http"
+      }
+    }
+  }
+}

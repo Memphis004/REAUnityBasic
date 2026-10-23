@@ -167,3 +167,10 @@ extracted/ab_text/*
 extracted/ilspy/*
 !extracted/ab_text/.gitkeep
 !extracted/ilspy/.gitkeep
+
+# ---------------------------------------------------------------------------
+# Local reference assets extracted from the game (read-only reference, not distributable)
+# Added before any extraction; see notes/local_reference_demo.md
+# ---------------------------------------------------------------------------
+my_clone/Assets/_LocalReference/
+my_clone/Assets/_LocalReference.meta

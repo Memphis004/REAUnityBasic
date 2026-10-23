@@ -1,0 +1,17 @@
+﻿{
+    "layoutPath": "Assets/_Generated/Data/sect_layout.json",
+    "scenePath": "Assets/_Generated/SectMapPlaceholder.unity",
+    "sortingLayersAdded": 21,
+    "cells": 158,
+    "entities": 35,
+    "stageTiles": 5518,
+    "stageTileChunks": 12,
+    "stagePlaces": 1143,
+    "labelCount": 201,
+    "spriteRendererCount": 1351,
+    "gameObjectCount": 1596,
+    "hexGridChildren": 3,
+    "backgroundChildren": 3,
+    "parallaxChildren": 3,
+    "skipped": []
+}

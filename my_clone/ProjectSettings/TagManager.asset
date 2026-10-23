@@ -41,3 +41,66 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: ITWater1
+    uniqueID: 1193605322
+    locked: 0
+  - name: ITWater2
+    uniqueID: 1176827703
+    locked: 0
+  - name: ITGround1
+    uniqueID: 2335093902
+    locked: 0
+  - name: ITGround2
+    uniqueID: 2318316283
+    locked: 0
+  - name: ITDecoration1
+    uniqueID: 1527217533
+    locked: 0
+  - name: ITDecoration2
+    uniqueID: 1476884676
+    locked: 0
+  - name: ITDecoration3
+    uniqueID: 1493662295
+    locked: 0
+  - name: ITDecoration4
+    uniqueID: 1443329438
+    locked: 0
+  - name: ITArea1
+    uniqueID: 3144946056
+    locked: 0
+  - name: ITArea2
+    uniqueID: 3195278913
+    locked: 0
+  - name: ITGrid
+    uniqueID: 3531407904
+    locked: 0
+  - name: ITRoad1
+    uniqueID: 3225637389
+    locked: 0
+  - name: ITRoad2
+    uniqueID: 3175304532
+    locked: 0
+  - name: ITDrawCollect
+    uniqueID: 1712838772
+    locked: 0
+  - name: ITDrawRoad
+    uniqueID: 712281008
+    locked: 0
+  - name: ITBuilding
+    uniqueID: 1441873304
+    locked: 0
+  - name: ITGrid2
+    uniqueID: 1825194582
+    locked: 0
+  - name: ITSkyBD
+    uniqueID: 2709110347
+    locked: 0
+  - name: ITDrag
+    uniqueID: 956661986
+    locked: 0
+  - name: ITSky1
+    uniqueID: 2767599524
+    locked: 0
+  - name: ITUI
+    uniqueID: 3227725154
+    locked: 0
