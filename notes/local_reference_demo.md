@@ -1,10 +1,11 @@
-# Local reference demo — Spine 2 ตัวจากเกม (full body + chibi)
+# Local reference demo — Spine 5 slot จากเกม (scene char, portrait, chibi, third, weapon)
 
 วันที่: 2026-10-23
 โปรเจกต์: `C:\Workspace\REA\my_clone` (Unity 2021.3.45f2, color space = Gamma / `m_ActiveColorSpace: 0`)
 เกม (อ่านอย่างเดียว): `C:\Workspace\REA\game_copy\Immortal Clan Grandmastery_Data`
 
-ขอบเขต: ดึง Spine ตัวเต็มตัว 1 ตัว + ตัวจิบิ 1 ตัว มาแสดงในซีนเดียวเพื่อดูภาพรวม
+ขอบเขต: ดึง Spine 5 ชุด (scene char `1113002_1`, portrait `2110101`, chibi `1123011`, third `1113101_1`, weapon) มาแสดงในซีนเดียวเพื่อดูภาพรวม
+รายละเอียดรอบพอร์ตเทรต (ไฟล์/สกิน/ผลตรวจ) อยู่ใน `notes/portrait_2110101.md`
 **ยังไม่**ประกอบหน้าตาให้ตรงกับตัวละครเฉพาะ (เช่น Amy Robinson) — ดูข้อ 8 ว่าต้องใช้อะไรเพิ่ม
 
 ไฟล์จากเกมทั้งหมดอยู่ใน `my_clone/Assets/_LocalReference/` ซึ่งถูก ignore แล้วใน `.gitignore`
@@ -95,7 +96,7 @@ Assets/_LocalReference/Demo.unity
 
 ---
 
-## 4. ซีน Demo (Observed — build 2026-10-23 รอบล่าสุด, 3 ตัว)
+## 4. ซีน Demo (Observed — build 2026-10-23 รอบล่าสุด, 5 slot: 3 ตัวละคร + weapon + portrait ที่ใช้ slot เดียวกับ FullBody)
 
 `Assets/_LocalReference/Demo.unity` สร้างด้วย **Tools/Local Reference/Build Demo Scene**
 
@@ -104,37 +105,57 @@ Assets/_LocalReference/Demo.unity
 - Camera 1 ตัว: SolidColor (0.07, 0.08, 0.11), orthographic size 5, z = −10, tag `MainCamera`
 - EventSystem 1 ตัว (StandaloneInputModule)
 - Canvas: Screen Space - Overlay + CanvasScaler `ScaleWithScreenSize`, reference 1920×1080, match 0.5
-- ใต้ Canvas: `ActorRoot` (RectTransform แบบ stretch เต็มจอ) ถือ actor ทั้งสาม + `DemoCanvasLayout` + `DemoZoomPan`;
+- ใต้ Canvas: `ActorRoot` (RectTransform แบบ stretch เต็มจอ) ถือ actor ทั้งห้า (FullBody / Chibi / Third / Weapon / Portrait) + `DemoCanvasLayout` + `DemoZoomPan`;
   UI (Title / InfoPanel / Controls) อยู่ใต้ Canvas โดยตรง → ซูม/แพนไม่กระทบ UI
 
-| | `FullBody_1113002_1` | `Chibi_1123011` | `Third_1113101_1` |
-|---|---|---|---|
-| ตำแหน่ง (สัดส่วนความกว้าง canvas) | −0.25 (ซีกซ้าย) | +0.20 | +0.40 |
-| ความสูงเป้าหมาย | **70%** = 756 px | **25%** = 270 px | **25%** = 270 px |
-| mesh ที่วัด (setup ∪ idle 0.1s) | 115.254 × 110.548 | 120.699 × 84.860 | 125.455 × 154.416 |
-| localScale | 6.633 | 3.086 | 1.696 |
-| ขนาดบนจอ (fit) | 764.5 × 756 | 372.5 × 270 | 212.8 × 270 |
-| ฐานเท้า | y = −400 (140 px จากขอบล่าง) | เท่ากัน | เท่ากัน |
-| Initial Skin | `body_1113002_1` | `body_1123011_1` | `body_1113101_1` |
-| Initial Animation (loop) | `idle1` | `stand` | `idle1` |
-| normalMaterial | `FullBody/1113002_1_Material.mat` | `Chibi/1123011_Material.mat` | `Third/1113101_1_Material.mat` |
-| grayMaterial | `..._Material_Gray.mat` (โฟลเดอร์เดียวกัน) | เหมือนกัน | เหมือนกัน |
+| | `FullBody_1113002_1` | `Chibi_1123011` | `Third_1113101_1` | `Weapon_w_jian` |
+|---|---|---|---|---|
+| ตำแหน่ง (สัดส่วนความกว้าง canvas) | −0.25 (ซีกซ้าย) | +0.20 | +0.40 | **+0.06** (ระหว่าง FullBody กับ Chibi) |
+| ความสูงเป้าหมาย | **70%** = 756 px | **25%** = 270 px | **25%** = 270 px | **25%** = 270 px |
+| mesh ที่วัด (setup ∪ idle 0.1s) | 115.254 × 110.548 | 120.699 × 84.860 | 125.455 × 154.416 | 70.6 × 10.8 (**หมุน 90°**) |
+| localScale | 6.633 | 3.086 | 1.696 | 3.71 |
+| ขนาดบนจอ (fit) | 764.5 × 756 | 372.5 × 270 | 212.8 × 270 | 40 × 262 (แนวดิ่ง) |
+| ฐานเท้า | y = −400 (140 px จากขอบล่าง) | เท่ากัน | เท่ากัน | เท่ากัน |
+| Initial Skin | `body_1113002_1` | `body_1123011_1` | `body_1113101_1` | `w_jian/w_jian_300101` (skin เดียวกับปุ่ม Mount) |
+| Initial Animation (loop) | `idle1` | `stand` | `idle1` | `stand` (animation เดียวของ weapon) |
+| normalMaterial | `FullBody/1113002_1_Material.mat` | `Chibi/1123011_Material.mat` | `Third/1113101_1_Material.mat` | `Weapon/weapon_Material.mat` |
+| grayMaterial | `..._Material_Gray.mat` (โฟลเดอร์เดียวกัน) | เหมือนกัน | เหมือนกัน | `Weapon/weapon_Material_Gray.mat` (สร้างใหม่รอบนี้) |
 
-- actor ทั้งสามถูกเก็บ reference ครบใน `SpineDemoController` (`fullBody`, `chibi`, `third`, `info`) + `mountData/mountSkin/mountBone` — ไม่มี None
+- **`Portrait_2110101`** (รอบล่าสุด) ใช้ **slot เดียวกันกับ FullBody** (−0.25, 70%, ฐานเท้าเดียวกัน) — แสดงทีละตัวด้วย Graphic alpha
+  (ตัวที่ซ่อนยัง built อยู่ จึงยังวัด mesh/ปุ่มทำงานได้); mesh 656.0 × 613.1 → 784.7 × 756 px, Initial Skin `body_2110101_4_1`,
+  animation `stand` (เดียวของ skeleton), material `Portrait/2110101_Material.mat`; เริ่มต้นซ่อน แล้วปุ่ม **Show Portrait** สลับ
+  → ดูตัวเลข/ผลตรวจใน `notes/portrait_2110101.md`
+- weapon เป็น attachment เดียว (4 verts, atlas region `300101` 71×11) — ตั้งฉาก 90° เพื่อให้ blade ยืนในช่องว่างโดยไม่คร่อมตัวละคร
+  (mesh กว้าง ~6.5 เท่าของสูง; ถ้าวางแนวนอนที่ 25% จะกว้าง ~1,700 px)
+- actor ทั้งสี่ถูกเก็บ reference ครบใน `SpineDemoController` (`fullBody`, `chibi`, `third`, `weapon`, `info`) + `mountData/mountSkin/mountBone` — ไม่มี None
+  (weapon ไม่ถูก `Next Skin`/`Next Animation` แตะ — ตั้งใจให้เป็น reference ของ skin ที่ mount อยู่)
   (`initialLoop = 1`, `canvasGroupCompatible = 0` → pmaVertexColors = true)
 - **ซูม/แพน**: `DemoZoomPan` บน `ActorRoot` — wheel = ซูมเข้าหาตำแหน่งเมาส์ (0.6×–8×), คลิกขวาลาก = แพน, ปุ่ม `Reset View` = กลับ 1×
-  (`Zoom`, `Pan`, `ZoomBy`, `SetZoom`, `ResetView` เป็น public; ตรวจใน batch แล้วว่า `SetZoom(2.5)` → scale 2.5 และ Reset กลับเป็น 1/pan 0)
+  **คีย์บอร์ด**: `+`/`=`/`]` = ซูมเข้า (×1.25), `-`/`[` = ซูมออก, `0` = reset, ลูกศร = แพน (กด Shift = เร็ว 3 เท่า)
+  **อ่านค่าซูม**: `Zoom 1.00x   pan 0, 0` มุมขวาบน (ใต้ Title) + บรรทัดคำสั่งคีย์ใต้มัน; ทั้งคู่เป็น UI นอก `ActorRoot` จึงไม่ถูกซูม
+  (`Zoom`, `Pan`, `ZoomBy`, `ZoomIn`, `ZoomOut`, `PanBy`, `SetZoom`, `ResetView`, `Label` เป็น public;
+  ตรวจใน batch แล้วว่า SetZoom(2.5) → scale 2.5, ZoomIn → 3.125, ZoomOut → 2.5, PanBy(40,−30) → pan (40,−30),
+  Reset กลับ 1/pan 0 และ readout แสดงค่าตรงทุกขั้น)
 - **ทดสอบหลายอัตราส่วน (Observed)**: `DemoCanvasLayout` ใช้ mesh box ที่ builder วัดไว้ แล้วแมปกับ canvas rect สด
-  ⇒ 16:9 (1920×1080), 4:3 (1663×1247), 21:9 (2217×935) ให้ผลเท่ากัน: **67.9% / 24.3% / 24.3%** ของความสูง canvas
-  และตำแหน่ง mesh center x = **−480 / 384 / 768**, **−415.8 / 332.6 / 665.2**, **−554.3 / 443.4 / 886.8** ตามลำดับ
+  ⇒ 16:9 (1920×1080), 4:3 (1663×1247), 21:9 (2217×935) ให้ผลเท่ากัน: **67.9% / 24.3% / 24.3% / 24.3%** ของความสูง canvas
+  และตำแหน่ง mesh center x = **−480 / 384 / 768 / 115.2**, **−415.8 / 332.6 / 665.2 / 99.8**, **−554.3 / 443.4 / 886.8 / 133** ตามลำดับ
   (ค่า = `heightFraction × 0.97` ของความสูง; 0.97 คือ margin กัน bbox ที่โตตาม idle ไปทับแถบปุ่ม)
+- **Ultrawide (Observed)**: `topReserve = 88` (แถบ Title) — ที่ **32:9 (2715×764)** ไม่ต้อง clamp (top 646.8 < 676) ยังได้ 67.9/24.3/24.3
+  และ `InfoPanel` ย้ายจากมุมซ้ายล่างไป**มุมขวาบน** (ใต้ readout/hint, `infoDockTop = 168`) เพราะ aspect 3.55 ≥ `infoDockAspect = 2.4`
+  → ไม่ทับ actor ใดเลย (`infoPanel=right overlap=False` ทั้ง 4 slot); ที่ **48:9 (3325×623)** FullBody ถูก clamp ใต้แถบ Title
+  เหลือ **65.3%** (top = 535 = stageTop พอดี) ส่วน Chibi/Third/Weapon ยัง 24.3% — ไม่มี overlap (stress case); weapon x = 163 / 200 ที่ 32:9 / 48:9
+  21:9 (2.37) ยังไม่ถึงเกณฑ์ → panel อยู่มุมซ้ายล่างเหมือนเดิม
 - `DemoCanvasLayout` ตอบ `OnRectTransformDimensionsChange` ด้วย → ตอน `SaveScreenshot` ที่สลับ canvas เป็น Screen Space - Camera
   และตอนผู้เล่นเปลี่ยนขนาดหน้าต่าง จะจัดวางใหม่ในเฟรมเดียวกันก่อนเรนเดอร์
-- Info: panel สีเข้ม 980×156 ที่ (24, 118) + Text 20 px (3 บรรทัด×2) แสดง bones/slots/skins/anims + skin/animation ของทั้งสามตัว
-- ปุ่ม 8 ปุ่มใต้ canvas (panel 1830×84 ที่ y = 20): `Next Skin`, `Next Animation`, `Flip X`, `Toggle Gray`, `Reset View`, `Mount`, `Audit Skins`, `Screenshot`
-  ผูกด้วย `UnityEventTools.AddPersistentListener` (observed: `buttons=8`)
+- Info: panel สีเข้ม 980×176 + Text 18 px (1 บรรทัดต่อ actor + บรรทัด `shown` + mounted) แสดง bones/slots/skins/anims + skin/animation
+  ของ Scene char / Portrait / Chibi / Third (weapon ไม่มีบรรทัดในแผง — ชื่อ `w_jian` อยู่ใน Title)
+  ตำแหน่งปกติ (24, 118) ซ้ายล่าง; canvas กว้าง/สูง ≥ 1.7 จะ dock มุมขวาบนที่ (−24, −164) ให้พ้นแนว actor
+  (16:9 จึง dock ด้วย; 4:3 ยังซ้ายล่างเพราะหัว actor จะอยู่ใต้แผง)
+- ปุ่ม 9 ปุ่มใต้ canvas (panel 1740×84 ที่ y = 20, ปุ่ม 180×56): `Show Portrait` / `Show Scene Char`, `Next Skin`, `Next Animation`,
+  `Flip X`, `Toggle Gray`, `Reset View`, `Mount`, `Audit Skins`, `Screenshot`
+  ผูกด้วย `UnityEventTools.AddPersistentListener` (observed: `buttons=9`)
 
-ผล `Verify` ท้าย build (edit mode): `cameras=1 canvases=1 buttons=8 errors=0`;
+ผล `Verify` ท้าย build (edit mode, รอบล่าสุด): `cameras=1 canvases=1 buttons=9 errors=0`;
 FullBody 745.2 px = 69% (fit 67.9%, meshX −477), Chibi 260.5 px = 24.1% (meshX 388), Third 246 px = 22.8% (meshX 769)
 
 ---
@@ -171,14 +192,33 @@ FullBody 745.2 px = 69% (fit 67.9%, meshX −477), Chibi 260.5 px = 24.1% (meshX
 - FULL BODY: `verts=486 shader=Spine/SkeletonGraphic skin=demo_combined_0 animation=idle1` → **861.9 px = 69.1%** (scale 7.66)
 - CHIBI: `verts=126 ... animation=stand` → **300.8 px = 24.1%** (scale 3.564)
 - THIRD: `verts=359 ... animation=idle1` → **283.3 px = 22.7%** (scale 1.958)
-- `DemoCanvasLayout.ApplyForSize(1663×1247)` ระหว่างเล่น → 67.9% / 24.3% / 24.3% และ x = −415.8 / 332.6 / 665.2 ตามที่ออกแบบ
+- WEAPON: `verts=4 shader=Spine/SkeletonGraphic skin=w_jian/w_jian_300101 animation=stand` → **302 px = 24.3%** (scale 4.282, หมุน 90°)
+- `DemoCanvasLayout.ApplyForSize(1663×1247)` ระหว่างเล่น → 67.9% / 24.3% / 24.3% / 24.3% และ x = −415.8 / 332.6 / 665.2 / 99.8 ตามที่ออกแบบ
   แล้วคืนค่าเป็นขนาด canvas จริงทันที (เทสต์เดียวกับที่ `Update` ใช้)
-- ปุ่มที่กดผ่าน `onClick.Invoke()`: Next Skin / Next Animation / Toggle Gray / Flip X / Reset View — ไม่มี exception, verts รวมคงที่ 971
-- ภาพเรนเดอร์ 1920×1080 (วิเคราะห์ pixel): FullBody x 114–840 (ซีกซ้าย), Chibi+Third x 1169–1834 (ซีกขวา) ไม่หลุดขอบ
-- ภาพเก็บไว้: `Assets/_LocalReference/Screenshots/demo_built_idle1.png`, `demo_three_actors.png`, `demo_after_buttons.png`
+- edit-mode `Verify` ตรวจเพิ่ม 32:9 (2715×764) และ 48:9 (3325×623): ไม่มี actor ไหนล้ำแถบ Title และไม่ทับ Info panel ที่ dock ขวา
+  (48:9 FullBody ถูก clamp เหลือ 65.3%; 32:9 ยังได้ 67.9%) — ดูข้อ 4
+- readout ระหว่างเล่น: `Zoom 2.50x   pan 40, -30` (หลัง SetZoom 2.5 + PanBy) → `Zoom 1.00x   pan 0, 0` หลัง ResetView
+  (ปุ่ม/คีย์เรียกเมธอดเดียวกัน; batch เรียก `ZoomIn/ZoomOut/PanBy` ตรง ๆ เพราะจำลอง `Input.GetKey` ไม่ได้)
+- ปุ่มที่กดผ่าน `onClick.Invoke()`: Next Skin / Next Animation / Toggle Gray / Flip X / Reset View — ไม่มี exception,
+  verts รวมคงที่ 971 (นับเฉพาะ 3 ตัวละคร; weapon 4 verts ไม่ได้อยู่ในผลรวมนี้)
+- ภาพเรนเดอร์ 1920×1080 (วิเคราะห์ pixel): FullBody x 114–840, Chibi+Third x 1169–1834, sword ~x 1,070 (ยืนแนวตั้งระหว่าง FullBody กับ Chibi) ไม่หลุดขอบ
+- ภาพเก็บไว้: `Assets/_LocalReference/Screenshots/demo_four_slots.png` (รอบ 4 slot ล่าสุด — ใช้เป็นหลักฐาน),
+  `demo_01_idle1_variant0.png` (ภาพจากปุ่ม Screenshot รอบเดียวกัน); `demo_three_actors.png` / `demo_built_idle1.png` / `demo_after_buttons.png` เป็นรอบก่อนหน้า
 
 **Observed (ทำไมไม่ใช่ 70/25 เป๊ะ)**: fit ที่ 97% ของเป้าหมาย เพื่อให้ bbox ที่โตขึ้นตาม idle (สูงขึ้น ~2–5%) ไม่ล้นลงไปใต้แถบปุ่ม;
 68–69% / 23–24% คือช่วงที่วัดได้จริงระหว่างเล่น
+
+### 5.4 ผลการรันล่าสุด — 5 slot + ปุ่ม swap (Observed, 2026-10-23)
+
+- canvas 1247 (4:3): `SCENE CHAR (fox)` verts 486 → **848.6 px = 68.0%** (scale 7.66); `PORTRAIT 2110101` verts 24 → **846.8 px = 67.9%** (scale 1.381)
+- CHIBI 299.4 px = 24.0% (verts 126), THIRD 283.7 px = 22.7% (verts 359), WEAPON 4 verts = 24.3%
+- `ApplyForSize(1663×1247)`: 67.9 / 24.3 / 24.3 / 24.3 / 67.9% และ x = −415.8 / 332.6 / 665.2 / 99.8 / **−415.8** (portrait ใช้ x เดียวกับ SCENE CHAR)
+- ตอน `Start()`: portrait `alpha=0`, fox `alpha=1`; กด `Show Portrait` → portrait alpha 1 / fox alpha 0 / caption เปลี่ยนเป็น `Show Scene Char`
+  กดซ้ำ (ผ่าน `ToggleMainActor`) → กลับเป็น fox และ caption กลับเป็น `Show Portrait`
+- ปุ่มที่กด: Next Skin / Next Animation / Toggle Gray / Flip X / Reset View — ไม่มี exception; verts รวม **995** (486+126+359+24)
+- `PORTRAIT renderers`: `SkeletonGraphic=1 CanvasRenderer=1 allowMultipleCanvasRenderers=False atlasPages=1 verts=24`,
+  slots ที่วาด 6/19: `hair_b`, `body`, `face`, `face_acc`, `hair_f`, `hat_f` (หลัง Next Skin 2 ครั้ง — พิสูจน์ว่า `face` กับ `face_acc` อยู่ร่วมกันได้)
+- ภาพ: `Screenshots/demo_five_slots.png` (ค่าเริ่มต้น = fox) และ `Screenshots/demo_portrait_2110101.png` (หลัง swap เป็น portrait)
 
 ---
 
@@ -190,7 +230,9 @@ FullBody 745.2 px = 69% (fit 67.9%, meshX −477), Chibi 260.5 px = 24.1% (meshX
 - timeout 180 วินาที → exit 1 (กันค้างแบบรอบก่อนที่ต้อง kill process)
 - ต้องมี graphics device (ไม่ใส่ `-nographics`) ไม่งั้น `SaveScreenshot` render ไม่ได้
 - ค่าที่ใช้ตัดสิน: การมีตัวละคร/verts/material, skin+animation ที่เล่นจริง, ความสูงเทียบความสูง canvas จริง,
-  `DemoCanvasLayout.ApplyForSize(4:3)` ระหว่างเล่น, `DemoZoomPan` set/reset, ปุ่มทั้ง 5 ทำงาน และมีไฟล์ภาพออกมา
+  `DemoCanvasLayout.ApplyForSize(4:3)` ระหว่างเล่น, `DemoZoomPan` set/zoom-in/zoom-out/pan/reset + readout ตรงกับค่าจริง,
+  ปุ่มทั้ง 5 ทำงาน และมีไฟล์ภาพออกมา; ส่วน 32:9/48:9 เป็น edit-mode `CheckLayout` (คำนวณ canvas rect สมมติ
+  เพราะ batch ไม่สามารถเปลี่ยนความละเอียด Game view ได้)
 
 ## 6. ปัญหาที่เหลือ (Observed / Inferred)
 
@@ -209,9 +251,17 @@ FullBody 745.2 px = 69% (fit 67.9%, meshX −477), Chibi 260.5 px = 24.1% (meshX
 3. ~~Play mode ยังไม่ได้รันจริงใน batch~~ → **แก้แล้ว (Observed)**: `PlayCheckBatch` เข้า play mode ใน batch ได้จริงบน 2021.3.45f2
    (ต้องไม่ใส่ `-nographics`, ไม่ใส่ `-quit`, เก็บสถานะข้าม domain reload ด้วย `EditorPrefs` + `[InitializeOnLoadMethod]`; timeout 180 วินาที)
    รอบล่าสุด PASS exit 0 — รายละเอียดที่ตรวจดูข้อ 5.2/5.3
-4. **Actor ถูกสร้างใหม่ทุกครั้งที่โหลดซีน**: `Start()` จะ `Build()` ใหม่ (destroy/recreate `SpineGraphic`) ในโหมด Editor การ destroy เป็นแบบ deferred
-   จึงอาจเห็น `SpineGraphic` เปล่า (verts=0) ค้างอยู่ใน hierarchy ชั่วคราว — ใน play mode ไม่มีปัญหา
+4. **Actor ถูกสร้างใหม่ทุกครั้งที่โหลดซีน**: `Start()` จะ `Build()` ใหม่ (destroy/recreate `SpineGraphic`)
+   - Observed: ซีนที่บันทึกไว้มี `SpineGraphic` ของรอบ editor build ค้างอยู่ (verts=0) เพราะ `SpineUiActor` ไม่ serialize renderer reference
+     → `SpineDemoController.EnsureBuilt()` ลบ child ที่ค้างก่อน `Build()` (แก้เฉพาะ demo ไม่แตะ `SpineUiActor`); หลังแก้ตรวจได้
+     `SkeletonGraphic=1 CanvasRenderer=1` ต่อ actor
+   - ใน play mode ก่อนหน้านี้ไม่เห็นปัญหาเพราะ child ที่ค้างมี 0 verts (ไม่วาด)
 5. **คำเตือนตอน AddComponent**: ตามข้อ 5 (แก้ไม่ได้ถ้าไม่แก้ `SpineUiActor` ซึ่งห้ามแก้ในรอบนี้)
+6. **Weapon slot แสดง skin เดียว**: `weapon` skeleton มี 153 skins แต่ slot ที่สี่เล่นเฉพาะ `w_jian/w_jian_300101`
+   (skin เดียวกับที่ปุ่ม Mount ใช้) และ mesh เป็น quad เดียว (4 verts) — skin อื่น (ดาบ/กระบี่คนละแบบ) ไม่มีปุ่มให้วน
+   - Observed: วางแนวนอนที่ 25% จะกว้าง ~1,715 px (aspect ~6.5:1) จึงหมุน 90° และใช้ `maxWidthFraction` เป็นเพดานกันพลาด
+   - Observed: ที่ 4:3 sword อยู่ x 77–123 ซึ่งทับพื้นหลัง Info panel บางส่วน (เหมือนขา FullBody ที่ทับอยู่แล้ว);
+     เฉพาะ ultrawide ที่ `CheckLayout` บังคับว่า overlap = False
 
 ---
 
@@ -221,24 +271,36 @@ FullBody 745.2 px = 69% (fit 67.9%, meshX −477), Chibi 260.5 px = 24.1% (meshX
 
 1. เปิด Unity Editor ที่โปรเจกต์ `my_clone`
 2. เปิด `Assets/_LocalReference/Demo.unity` (**ไม่ใช่ซีน Untitled ที่ค้างอยู่** — ถ้ามีซีน Untitled ให้ปิดทิ้งโดยไม่ต้องบันทึก)
-3. กด Play: `SpineDemoController.Start()` จะ `Build()` actor ทั้งสามใหม่ (เพราะ `SpineUiActor.m_Graphic` ไม่ถูก serialize),
-   รวม skin กลุ่มละตัว แล้วเล่น `InitialAnimation` ที่เซ็ตไว้ (`idle1` / `stand` / `idle1`) — ป้าย Info แสดง bones/slots/skins/anims + skin/animation ของทั้งสามตัว
+3. กด Play: `SpineDemoController.Start()` จะ `Build()` actor ทั้งห้าใหม่ (เพราะ `SpineUiActor.m_Graphic` ไม่ถูก serialize),
+   รวม skin กลุ่มละตัว แล้วเล่น `InitialAnimation` ที่เซ็ตไว้ (`idle1` / `stand` / `stand` / `idle1` / `stand`) — ป้าย Info แสดง
+   bones/slots/skins/anims + skin/animation ของ Scene char / Portrait / Chibi / Third; ตัวที่ห้าคือดาบ `w_jian` แนวนอน→หมุน 90° ยืนระหว่าง SCENE CHAR กับ Chibi
+   (ไม่ถูก `Next Skin`/`Next Animation` เปลี่ยน — ใช้เทียบกับชิ้นที่ปุ่ม Mount ติดตั้ง)
+   ปุ่ม **Show Portrait** สลับช่อง 70% ซ้ายระหว่าง SCENE CHAR (fox) กับ PORTRAIT 2110101 (เริ่มที่ fox)
 4. **ซูม/แพน**: หมุนล้อเมาส์ = ซูมเข้าหาเคอร์เซอร์ (0.6×–8×), คลิกขวาลาก = แพน, ปุ่ม `Reset View` = กลับ 1×
-   (actor อยู่ใต้ `ActorRoot` ที่ถูกซูม/แพน; Title/Info/ปุ่มไม่ขยับ) — ใช้ดู texture ของ 1113002_1 (364×80) แบบใกล้ ๆ ได้
+   **แป้นพิมพ์**: `+`/`=` = ซูมเข้า, `-` = ซูมออก, `0` = Reset View, ลูกศร = แพน (Shift = 3×)
+   **มุมขวาบน** แสดง `Zoom 1.00x   pan 0, 0` (อัปเดตทันที) พร้อมบรรทัดคำสั่งคีย์
+   (actor อยู่ใต้ `ActorRoot` ที่ถูกซูม/แพน; Title/Info/readout/ปุ่มไม่ขยับ) — ใช้ดู texture ของ 1113002_1 (364×80) แบบใกล้ ๆ ได้
 5. ปรับขนาดหน้าต่าง/สลับ aspect ได้ระหว่างเล่น: `DemoCanvasLayout` คำนวณใหม่ทันที (ไม่ต้องกด Play ใหม่)
+   — จอตั้งแต่ 16:9 ขึ้นไป Info panel ย้ายไปมุมขวาบนเอง; จอเตี้ยมาก actor สูงสุดจะถูกย่อให้พ้นแถบ Title
 
 ### 7.2 ปุ่ม
 
 | ปุ่ม | เรียก | ผลที่เห็น |
 |---|---|---|
-| **Next Skin** | `SpineDemoController.NextSkin()` | เลื่อน variant ถัดไปของทุกกลุ่ม skin พร้อมกัน ทั้งสาม actor (FullBody: `body/face/head_1113002_1`; Chibi: `body/head_1123011_1..7`; Third: `body/face/head_1113101_1`) แล้ว refresh ป้าย Info |
-| **Next Animation** | `NextAnimation()` | เล่นแอนิเมชันถัดไปในรายการของ skeleton (คนละรายการระหว่างสามตัว) แบบ loop |
-| **Flip X** | `ToggleFlip()` | `SpineUiActor.SetFlipX(!FlipX)` ทั้งสามตัว (กลับด้านซ้าย–ขวา) |
-| **Toggle Gray** | `ToggleGray()` | สลับ material ปกติ ↔ `Spine/SkeletonGraphic Grayscale` (`_GrayAmount = 1`); กดอีกครั้งคืนสี |
+| **Show Portrait** | `SpineDemoController.ToggleMainActor()` | สลับ Graphic alpha ระหว่าง SCENE CHAR (fox) กับ PORTRAIT 2110101 ที่ใช้ slot เดียวกัน; caption เปลี่ยนเป็น `Show Scene Char` เมื่อแสดง portrait |
+| **Next Skin** | `SpineDemoController.NextSkin()` | เลื่อน variant ถัดไปของทุกกลุ่ม skin พร้อมกัน ทั้ง fox/portrait/chibi/third (fox: `body/face/head_1113002_1`; portrait: `body/face/face_acc/hair/hat_2110101_*`; Chibi: `body/head_1123011_1..7`; Third: `body/face/head_1113101_1`) แล้ว refresh ป้าย Info |
+| **Next Animation** | `NextAnimation()` | เล่นแอนิเมชันถัดไปในรายการของ skeleton (คนละรายการระหว่าง actor) แบบ loop; portrait มี animation เดียว (`stand`) จึงไม่เปลี่ยน |
+| **Flip X** | `ToggleFlip()` | `SpineUiActor.SetFlipX(!FlipX)` ทุกตัว (กลับด้านซ้าย–ขวา) |
+| **Toggle Gray** | `ToggleGray()` | สลับ material ปกติ ↔ `Spine/SkeletonGraphic Grayscale` (`_GrayAmount = 1`) ให้ทุกตัวรวม portrait; กดอีกครั้งคืนสี |
 | **Reset View** | `DemoZoomPan.ResetView()` | คืน zoom = 1 และ pan = 0 (เหมือนตอนเปิดซีน) |
 | Mount | `ToggleMount()` | `fullBody.Mount(weaponData, "w_jian/w_jian_300101")` + `MountToBone("wuqi")`; กดอีกครั้ง = `UnMount()` (ซ่อน ไม่ลบ) |
 | Audit Skins | `AuditSkins()` | log ทุก skin variant: slots ที่มี attachment, verts, ขนาด mesh, slot ที่ว่าง, สรุป `complete variants` |
 | Screenshot | `CaptureScreenshot()` | render canvas 1920×1080 ลง `Assets/_LocalReference/Screenshots/demo_NN_<anim>_variant<k>.png` |
+
+- **แป้นพิมพ์** (ไม่ใช่ปุ่ม): `+`/`=`/`]` = `DemoZoomPan.ZoomIn()`, `-`/`[` = `ZoomOut()`, `0` = `ResetView()`,
+  ลูกศร = `PanBy()` ต่อเนื่อง (600 หน่วย/วินาที, Shift = 3×)
+- **แถบอ่านค่า** มุมขวาบน (นอก `ActorRoot`): `Zoom 1.00x   pan 0, 0` + `+ / - = zoom   arrows = pan (shift = faster)   0 = reset`
+  — เห็นใน `Screenshots/demo_01_idle1_variant0.png` (ภาพจากปุ่ม Screenshot รอบล่าสุด)
 
 ### 7.3 สร้างซีนใหม่
 

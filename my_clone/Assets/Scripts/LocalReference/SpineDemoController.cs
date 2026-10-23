@@ -19,6 +19,17 @@ namespace MyClone.LocalReference
 		public SpineUiActor fullBody;
 		public SpineUiActor chibi;
 		public SpineUiActor third;
+
+		[Tooltip ("Standalone weapon skeleton shown for comparison; it is not cycled by the buttons.")]
+		public SpineUiActor weapon;
+
+		[Tooltip ("Disciple half-body portrait (2110101). Shares the 70% left slot with fullBody; " +
+			"only one of the two is visible at a time.")]
+		public SpineUiActor portrait;
+
+		[Tooltip ("Caption of the button that swaps the 70% actor between the scene character and the portrait.")]
+		public Text mainToggleLabel;
+
 		public Text info;
 
 		[Header ("Mounted component (game: dbcomponentcfg.followSlot)")]
@@ -30,7 +41,10 @@ namespace MyClone.LocalReference
 		int m_AnimationCursor;
 		Canvas m_Canvas;
 		SpineActorBase m_MountedActor;
+		bool m_PortraitShown;
 		static int s_ScreenshotIndex;
+
+		public bool PortraitShown { get { return m_PortraitShown; } }
 
 		void Start ()
 		{
@@ -40,13 +54,18 @@ namespace MyClone.LocalReference
 			EnsureBuilt (fullBody);
 			EnsureBuilt (chibi);
 			EnsureBuilt (third);
+			EnsureBuilt (weapon);   // keeps its configured skin/animation, so no ApplyCombinedSkin here
+			EnsureBuilt (portrait);
 
 			ApplyCombinedSkin (fullBody);
 			ApplyCombinedSkin (chibi);
 			ApplyCombinedSkin (third);
+			ApplyCombinedSkin (portrait);
 			PlayConfiguredAnimation (fullBody);
 			PlayConfiguredAnimation (chibi);
 			PlayConfiguredAnimation (third);
+			PlayConfiguredAnimation (portrait);
+			SetPortraitShown (false);
 			RefreshLabel ();
 
 			m_Canvas = GetComponentInParent<Canvas> ();
@@ -58,6 +77,16 @@ namespace MyClone.LocalReference
 		{
 			if (actor == null || actor.IsBuilt)
 				return;
+
+			// The scene was saved after an editor build, so it still contains the preview
+			// SpineGraphic child. SpineUiActor does not serialize its renderer reference, so that
+			// child would sit next to the one Build() creates (an empty extra CanvasRenderer).
+			// Demo-only cleanup; SpineUiActor is untouched.
+			var stale = actor.GetComponentsInChildren<SpineSkeletonGraphic> (true);
+			for (int i = 0; i < stale.Length; i++)
+				if (stale[i] != null && stale[i].transform.parent == actor.transform)
+					Object.Destroy (stale[i].gameObject);
+
 			actor.Build ();
 		}
 
@@ -71,6 +100,7 @@ namespace MyClone.LocalReference
 			ApplyCombinedSkin (fullBody);
 			ApplyCombinedSkin (chibi);
 			ApplyCombinedSkin (third);
+			ApplyCombinedSkin (portrait);
 			RefreshLabel ();
 		}
 
@@ -80,6 +110,7 @@ namespace MyClone.LocalReference
 			PlayCycledAnimation (fullBody, m_AnimationCursor);
 			PlayCycledAnimation (chibi, m_AnimationCursor);
 			PlayCycledAnimation (third, m_AnimationCursor);
+			PlayCycledAnimation (portrait, m_AnimationCursor);
 			RefreshLabel ();
 		}
 
@@ -88,6 +119,7 @@ namespace MyClone.LocalReference
 			if (fullBody != null) fullBody.SetFlipX (!fullBody.FlipX);
 			if (chibi != null) chibi.SetFlipX (!chibi.FlipX);
 			if (third != null) third.SetFlipX (!third.FlipX);
+			if (portrait != null) portrait.SetFlipX (!portrait.FlipX);
 		}
 
 		public void ToggleGray ()
@@ -96,6 +128,39 @@ namespace MyClone.LocalReference
 			if (fullBody != null) fullBody.SetGray (gray);
 			if (chibi != null) chibi.SetGray (gray);
 			if (third != null) third.SetGray (gray);
+			if (portrait != null) portrait.SetGray (gray);
+		}
+
+		// ------------------------------------------------------------------
+		// Main slot swap (scene character <-> portrait)
+		// ------------------------------------------------------------------
+
+		/// <summary>
+		/// Both actors hold the same 70% left slot; visibility is Graphic alpha so the hidden one keeps
+		/// its mesh (the layout/measurement code and the buttons still see a built actor).
+		/// </summary>
+		public void ToggleMainActor ()
+		{
+			SetPortraitShown (!m_PortraitShown);
+			RefreshLabel ();
+		}
+
+		public void SetPortraitShown (bool show)
+		{
+			m_PortraitShown = show && portrait != null;
+			SetAlpha (portrait, m_PortraitShown ? 1f : 0f);
+			SetAlpha (fullBody, m_PortraitShown ? 0f : 1f);
+			if (mainToggleLabel != null)
+				mainToggleLabel.text = m_PortraitShown ? "Show Scene Char" : "Show Portrait";
+		}
+
+		static void SetAlpha (SpineUiActor actor, float alpha)
+		{
+			if (actor == null || !actor.IsBuilt || actor.Graphic == null)
+				return;
+			Color color = actor.Graphic.color;
+			color.a = alpha;
+			actor.SetColor (color);
 		}
 
 		/// <summary>
@@ -196,10 +261,7 @@ namespace MyClone.LocalReference
 				if (skin == null || skin.Name == "default")
 					continue;
 
-				string key = skin.Name;
-				int underscore = key.IndexOf ('_');
-				if (underscore > 0)
-					key = key.Substring (0, underscore);
+				string key = SkinGroupKey (skin.Name);
 
 				List<Skin> list;
 				if (!groups.TryGetValue (key, out list)) {
@@ -209,6 +271,21 @@ namespace MyClone.LocalReference
 				}
 				list.Add (skin);
 			}
+		}
+
+		/// <summary>
+		/// Group key for a skin name. Most groups are the prefix before the first underscore
+		/// (body_/face_/hair_/hat_), but the portrait also has face_acc_*: splitting that at the
+		/// first underscore would put it in the face group and the combined skin would show the
+		/// accessory INSTEAD of the face.
+		/// </summary>
+		static string SkinGroupKey (string name)
+		{
+			if (name.StartsWith ("face_acc_", System.StringComparison.Ordinal))
+				return "face_acc";
+
+			int underscore = name.IndexOf ('_');
+			return underscore > 0 ? name.Substring (0, underscore) : name;
 		}
 
 		// ------------------------------------------------------------------
@@ -516,9 +593,11 @@ namespace MyClone.LocalReference
 			if (info == null)
 				return;
 
-			info.text = Describe ("FULL BODY", fullBody) + "\n" + Describe ("CHIBI", chibi);
+			info.text = Describe ("SCENE CHAR (fox)", fullBody) + "\n" + Describe ("PORTRAIT 2110101", portrait) +
+				"\n" + Describe ("CHIBI", chibi);
 			if (third != null)
 				info.text += "\n" + Describe ("THIRD", third);
+			info.text += "\n    shown: " + (m_PortraitShown ? "PORTRAIT 2110101" : "SCENE CHAR (fox)");
 			if (m_MountedActor != null)
 				info.text += "\n    mounted: " + (mountSkin ?? "-") + " @ " + mountBone;
 		}
@@ -532,7 +611,7 @@ namespace MyClone.LocalReference
 			var current = actor.AnimationState.GetCurrent (0);
 			string anim = current == null || current.Animation == null ? "-" : current.Animation.Name;
 			return string.Format (
-				"{0}: bones {1}  slots {2}  skins {3}  anims {4}\n    skin {5}  anim {6}",
+				"{0}: bones {1} slots {2} skins {3} anims {4} | {5} | {6}",
 				title, data.Bones.Count, data.Slots.Count, data.Skins.Count,
 				data.Animations.Count, actor.Skeleton.Skin == null ? "default" : actor.Skeleton.Skin.Name, anim);
 		}

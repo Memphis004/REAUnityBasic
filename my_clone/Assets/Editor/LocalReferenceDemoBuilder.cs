@@ -45,6 +45,8 @@ namespace MyClone.EditorTools
 		const float FullSide = -0.25f;
 		const float ChibiSide = 0.20f;
 		const float ThirdSide = 0.40f;
+		const float WeaponSide = 0.06f;   // stands in the gap between the full body and the chibi
+		const float WeaponRotation = 90f;    // the blade is ~6.5:1; upright it fits the narrow right column
 
 		const string FullSkeleton = FullDir + "/1113002_1.skel.bytes";
 		const string FullAtlasText = FullDir + "/1113002_1.atlas.txt";
@@ -81,8 +83,26 @@ namespace MyClone.EditorTools
 		const string WeaponTexture = WeaponDir + "/weapon.png";
 		const string WeaponAtlasAsset = WeaponDir + "/weapon_Atlas.asset";
 		const string WeaponMaterial = WeaponDir + "/weapon_Material.mat";
+		const string WeaponGrayMaterial = WeaponDir + "/weapon_Material_Gray.mat";
 		const string WeaponDataAsset = WeaponDir + "/weapon_SkeletonData.asset";
+		// Fifth actor: the disciple half-body portrait used by the Disciple page (2110101, jianxiu).
+		// It shares the 70% left slot with the full body; the Swap button shows one at a time.
+		const string PortraitDir = Root + "/Portrait";
+		const string PortraitSkeleton = PortraitDir + "/2110101.skel.bytes";
+		const string PortraitAtlasText = PortraitDir + "/2110101.atlas.txt";
+		const string PortraitTexture = PortraitDir + "/2110101.png";
+		const string PortraitAtlasAsset = PortraitDir + "/2110101_Atlas.asset";
+		const string PortraitMaterial = PortraitDir + "/2110101_Material.mat";
+		const string PortraitGrayMaterial = PortraitDir + "/2110101_Material_Gray.mat";
+		const string PortraitDataAsset = PortraitDir + "/2110101_SkeletonData.asset";
+		const float PortraitHeight = CanvasHeight * 0.70f;    // same slot as the full body
 		const string MountBone = "wuqi";
+
+		// Fourth slot: the shared weapon skeleton shown on its own next to the characters, using the
+		// same skin the Mount button attaches. A sword is much wider than it is tall, so the slot is
+		// capped by width instead of height to stay inside its column.
+		const float WeaponHeight = CanvasHeight * 0.25f;      // 270 px requested
+		const float WeaponWidthFraction = 0.28f;             // cap = 538 px at 1920 wide
 
 		[MenuItem ("Tools/Local Reference/Build Demo Scene")]
 		public		static void BuildFromMenu ()
@@ -137,6 +157,17 @@ namespace MyClone.EditorTools
 			var thirdData = EnsureSkeletonData (
 				ThirdSkeleton, ThirdAtlasText, ThirdTexture, ThirdAtlasAsset, ThirdMaterial, ThirdDataAsset);
 
+			SkeletonDataAsset portraitData = null;
+			if (File.Exists (PortraitSkeleton)) {
+				ConfigureTexture (PortraitTexture);
+				portraitData = EnsureSkeletonData (
+					PortraitSkeleton, PortraitAtlasText, PortraitTexture, PortraitAtlasAsset,
+					PortraitMaterial, PortraitDataAsset);
+			} else {
+				Debug.LogWarning ("[LocalReferenceDemo] " + PortraitSkeleton +
+					" not found; the portrait slot will be skipped");
+			}
+
 			var fullGray = EnsureGrayMaterial (FullGrayMaterial, FullMaterial, "1113002_1");
 			var chibiGray = EnsureGrayMaterial (ChibiGrayMaterial, ChibiMaterial, "1123011");
 			var thirdGray = EnsureGrayMaterial (ThirdGrayMaterial, ThirdMaterial, "1113101_1");
@@ -157,8 +188,32 @@ namespace MyClone.EditorTools
 			var chibiNormal = AssetDatabase.LoadAssetAtPath<Material> (ChibiMaterial);
 			var thirdNormal = AssetDatabase.LoadAssetAtPath<Material> (ThirdMaterial);
 
-			BuildScene (fullData, chibiData, thirdData, weaponData,
-				fullNormal, fullGray, chibiNormal, chibiGray, thirdNormal, thirdGray);
+			Material portraitNormal = null, portraitGray = null;
+			if (portraitData != null) {
+				portraitNormal = AssetDatabase.LoadAssetAtPath<Material> (PortraitMaterial);
+				portraitGray = EnsureGrayMaterial (PortraitGrayMaterial, PortraitMaterial, "2110101");
+				var pd = portraitData.GetSkeletonData (true);
+				var names = new List<string> ();
+				foreach (var skin in pd.Skins) names.Add (skin.Name);
+				var anims = new List<string> ();
+				foreach (var a in pd.Animations) anims.Add (a.Name);
+				Debug.LogFormat ("[LocalReferenceDemo] portrait 2110101: version={0} bones={1} slots={2} skins={3} anims={4} | skins=[{5}] | anims=[{6}]",
+					pd.Version, pd.Bones.Count, pd.Slots.Count, pd.Skins.Count, pd.Animations.Count,
+					string.Join (",", names.ToArray ()), string.Join (",", anims.ToArray ()));
+			}
+
+			Material weaponNormal = null, weaponGray = null;
+			string weaponSkin = null;
+			if (weaponData != null) {
+				weaponNormal = AssetDatabase.LoadAssetAtPath<Material> (WeaponMaterial);
+				weaponGray = EnsureGrayMaterial (WeaponGrayMaterial, WeaponMaterial, "weapon");
+				weaponSkin = PickWeaponSkin (weaponData.GetSkeletonData (true));
+				Debug.Log ("[LocalReferenceDemo] standalone weapon skin: " + weaponSkin);
+			}
+
+			BuildScene (fullData, chibiData, thirdData, weaponData, portraitData,
+				fullNormal, fullGray, chibiNormal, chibiGray, thirdNormal, thirdGray,
+				weaponNormal, weaponGray, weaponSkin, portraitNormal, portraitGray);
 			AssetDatabase.SaveAssets ();
 
 			Debug.Log ("[LocalReferenceDemo] build done -> " + ScenePath);
@@ -298,9 +353,11 @@ namespace MyClone.EditorTools
 
 		static void BuildScene (
 			SkeletonDataAsset fullData, SkeletonDataAsset chibiData, SkeletonDataAsset thirdData,
-			SkeletonDataAsset weaponData,
+			SkeletonDataAsset weaponData, SkeletonDataAsset portraitData,
 			Material fullNormal, Material fullGray, Material chibiNormal, Material chibiGray,
-			Material thirdNormal, Material thirdGray)
+			Material thirdNormal, Material thirdGray,
+			Material weaponNormal, Material weaponGray, string weaponSkin,
+			Material portraitNormal, Material portraitGray)
 		{
 			// Reopen the existing scene so its Main Camera survives a rebuild; only a missing scene
 			// falls back to an empty one, which keeps this menu usable on a fresh checkout.
@@ -334,7 +391,7 @@ namespace MyClone.EditorTools
 			scaler.matchWidthOrHeight = 0.5f;
 
 			var title = CreateText (canvas.transform, "Title",
-				"Spine local reference - 1113002_1 (70%) / 1123011 (25%) / 1113101_1 (25%)   |   wheel = zoom, right-drag = pan", 32, TextAnchor.UpperCenter);
+				"Spine local reference - SCENE CHAR 1113002_1 (fox) / PORTRAIT 2110101 (70%, Swap) / 1123011 / 1113101_1 / w_jian (25%)   |   wheel = zoom, right-drag = pan", 30, TextAnchor.UpperCenter);
 			var titleRt = title.rectTransform;
 			titleRt.anchorMin = new Vector2 (0f, 1f);
 			titleRt.anchorMax = new Vector2 (1f, 1f);
@@ -362,13 +419,72 @@ namespace MyClone.EditorTools
 				"Third_1113101_1", new Vector2 (CanvasWidth * ThirdSide, FeetBaseline + ThirdHeight * 0.5f), ThirdHeight,
 				out thirdMeshSize, out thirdMeshCenter);
 
+			// Fourth slot: the weapon skeleton standalone, same skin the Mount button uses, so the
+			// mounted result can be compared with the source atlas.
+			SpineUiActor weapon = null;
+			Vector2 weaponMeshSize = Vector2.one, weaponMeshCenter = Vector2.zero;
+			if (weaponData != null) {
+				weapon = CreateActor (actorRoot, weaponData, weaponNormal, weaponGray,
+					"Weapon_w_jian", new Vector2 (CanvasWidth * WeaponSide, FeetBaseline + WeaponHeight * 0.5f), WeaponHeight,
+					out weaponMeshSize, out weaponMeshCenter, weaponSkin);
+			}
+
+			// Fifth slot: the disciple half-body portrait. Same slot as the full body, hidden until the
+			// Swap button shows it (alpha, so both actors stay built and measurable).
+			SpineUiActor portrait = null;
+			Vector2 portraitMeshSize = Vector2.one, portraitMeshCenter = Vector2.zero;
+			if (portraitData != null) {
+				portrait = CreateActor (actorRoot, portraitData, portraitNormal, portraitGray,
+					"Portrait_2110101", new Vector2 (CanvasWidth * FullSide, FeetBaseline + PortraitHeight * 0.5f), PortraitHeight,
+					out portraitMeshSize, out portraitMeshCenter);
+			}
+
 			var layout = actorRootGo.AddComponent<DemoCanvasLayout> ();
-			layout.Configure (
+			var slotList = new List<DemoCanvasLayout.Slot> {
 				new DemoCanvasLayout.Slot { actor = full, heightFraction = 0.70f, sideFraction = FullSide, referenceMeshSize = fullMeshSize, referenceMeshCenter = fullMeshCenter },
 				new DemoCanvasLayout.Slot { actor = chibi, heightFraction = 0.25f, sideFraction = ChibiSide, referenceMeshSize = chibiMeshSize, referenceMeshCenter = chibiMeshCenter },
-				new DemoCanvasLayout.Slot { actor = third, heightFraction = 0.25f, sideFraction = ThirdSide, referenceMeshSize = thirdMeshSize, referenceMeshCenter = thirdMeshCenter });
+				new DemoCanvasLayout.Slot { actor = third, heightFraction = 0.25f, sideFraction = ThirdSide, referenceMeshSize = thirdMeshSize, referenceMeshCenter = thirdMeshCenter }
+			};
+			if (weapon != null) {					slotList.Add (new DemoCanvasLayout.Slot {
+					actor = weapon, heightFraction = 0.25f, sideFraction = WeaponSide, maxWidthFraction = WeaponWidthFraction,
+					rotationDegrees = WeaponRotation,
+					referenceMeshSize = weaponMeshSize, referenceMeshCenter = weaponMeshCenter
+				});
+			}
+			if (portrait != null) {
+				slotList.Add (new DemoCanvasLayout.Slot {
+					actor = portrait, heightFraction = 0.70f, sideFraction = FullSide,
+					referenceMeshSize = portraitMeshSize, referenceMeshCenter = portraitMeshCenter
+				});
+			}
+			layout.Configure (slotList.ToArray ());
+			// Apply once in edit mode (Update does this at runtime) so the saved scene matches what
+			// Play shows, including the weapon's width cap.
+			layout.ApplyForSize (new Vector2 (CanvasWidth, CanvasHeight));
 
 			var zoom = actorRootGo.AddComponent<DemoZoomPan> ();
+
+			// Live zoom level, top right under the title, plus the keyboard map. Both are siblings of
+			// ActorRoot, so they stay readable while the scene is zoomed.
+			var zoomText = CreateText (canvas.transform, "ZoomReadout", "", 22, TextAnchor.UpperRight);
+			var zoomRt = zoomText.rectTransform;
+			zoomRt.anchorMin = new Vector2 (1f, 1f);
+			zoomRt.anchorMax = new Vector2 (1f, 1f);
+			zoomRt.pivot = new Vector2 (1f, 1f);
+			zoomRt.anchoredPosition = new Vector2 (-24f, -88f);
+			zoomRt.sizeDelta = new Vector2 (1000f, 30f);
+			zoomText.color = new Color (0.78f, 0.84f, 0.95f, 1f);
+			zoom.SetLabel (zoomText);
+
+			var zoomHint = CreateText (canvas.transform, "ZoomHint",
+				"+ / - = zoom      arrows = pan (shift = faster)      0 = reset", 20, TextAnchor.UpperRight);
+			var zoomHintRt = zoomHint.rectTransform;
+			zoomHintRt.anchorMin = new Vector2 (1f, 1f);
+			zoomHintRt.anchorMax = new Vector2 (1f, 1f);
+			zoomHintRt.pivot = new Vector2 (1f, 1f);
+			zoomHintRt.anchoredPosition = new Vector2 (-24f, -120f);
+			zoomHintRt.sizeDelta = new Vector2 (1000f, 26f);
+			zoomHint.color = new Color (0.62f, 0.68f, 0.8f, 1f);
 
 			// Dark plate behind the label: the full body's dress reaches this corner when it is
 			// scaled to 70% of the canvas, so white text alone would sit on the artwork.
@@ -379,10 +495,12 @@ namespace MyClone.EditorTools
 			infoPanelRt.anchorMax = new Vector2 (0f, 0f);
 			infoPanelRt.pivot = new Vector2 (0f, 0f);
 			infoPanelRt.anchoredPosition = new Vector2 (24f, 118f);
-			infoPanelRt.sizeDelta = new Vector2 (980f, 156f);
-			infoPanelGo.GetComponent<Image> ().color = new Color (0.06f, 0.07f, 0.1f, 0.82f);
+			infoPanelRt.sizeDelta = new Vector2 (980f, 176f);
+			infoPanelGo.GetComponent<Image> ().color = new Color (0.06f, 0.07f, 0.1f, 0.72f);
 
-			var info = CreateText (infoPanelGo.transform, "Info", "", 20, TextAnchor.LowerLeft);
+			layout.SetInfoPanel (infoPanelRt);
+
+			var info = CreateText (infoPanelGo.transform, "Info", "", 18, TextAnchor.LowerLeft);
 			var infoRt = info.rectTransform;
 			infoRt.anchorMin = Vector2.zero;
 			infoRt.anchorMax = Vector2.one;
@@ -395,6 +513,8 @@ namespace MyClone.EditorTools
 			controller.fullBody = full;
 			controller.chibi = chibi;
 			controller.third = third;
+			controller.weapon = weapon;
+			controller.portrait = portrait;
 			controller.info = info;
 			controller.mountBone = MountBone;
 			if (weaponData != null) {
@@ -406,7 +526,15 @@ namespace MyClone.EditorTools
 
 			CreateControls (canvas.transform, controller, zoom);
 
-			s_LastVerifyErrors = Verify (scene, camera, canvas, scaler, actorRoot, layout, zoom, full, chibi, third, info, controller);
+			// The portrait starts hidden so the saved scene matches what Play shows.
+			if (portrait != null) {
+				portrait.SetColor (new Color (1f, 1f, 1f, 0f));
+				var swap = FindButton (canvas, "Show Portrait");
+				if (swap != null)
+					controller.mainToggleLabel = swap.GetComponentInChildren<Text> (true);
+			}
+
+			s_LastVerifyErrors = Verify (scene, camera, canvas, scaler, actorRoot, layout, zoom, full, chibi, third, weapon, portrait, info, controller);
 
 			EditorSceneManager.MarkSceneDirty (scene);
 			EditorSceneManager.SaveScene (scene, ScenePath);
@@ -415,13 +543,13 @@ namespace MyClone.EditorTools
 		static SpineUiActor CreateActor (
 			Transform parent, SkeletonDataAsset data, Material normalMaterial, Material grayMaterial,
 			string name, Vector2 anchoredPosition, float targetHeightPixels,
-			out Vector2 referenceMeshSize, out Vector2 referenceMeshCenter)
+			out Vector2 referenceMeshSize, out Vector2 referenceMeshCenter, string initialSkinOverride = null)
 		{
 			referenceMeshSize = Vector2.one;
 			referenceMeshCenter = Vector2.zero;
 			var skeletonData = data.GetSkeletonData (true);
 			string idle = PickIdle (skeletonData);
-			string initialSkin = PickInitialSkin (skeletonData);
+			string initialSkin = string.IsNullOrEmpty (initialSkinOverride) ? PickInitialSkin (skeletonData) : initialSkinOverride;
 
 			// build:false so the material fields and CanvasGroupCompatible are in place before the
 			// mesh settings are baked. false -> pmaVertexColors = true, matching the game's PMA
@@ -678,9 +806,7 @@ namespace MyClone.EditorTools
 			var order = new List<string> ();
 			foreach (var skin in skeleton.Data.Skins) {
 				if (skin == null || skin.Name == "default") continue;
-				string key = skin.Name;
-				int i = key.IndexOf ('_');
-				if (i > 0) key = key.Substring (0, i);
+				string key = SkinGroupKey (skin.Name);
 				List<Skin> list;
 				if (!groups.TryGetValue (key, out list)) {
 					list = new List<Skin> ();
@@ -712,6 +838,20 @@ namespace MyClone.EditorTools
 			skeleton.SetSlotsToSetupPose ();
 		}
 
+		/// <summary>
+		/// Group key for a skin name. The portrait has face_acc_* next to face_*; splitting at the
+		/// first underscore would merge them, and the combined skin would show the accessory
+		/// instead of the face (or vice versa).
+		/// </summary>
+		static string SkinGroupKey (string name)
+		{
+			if (name.StartsWith ("face_acc_", StringComparison.Ordinal))
+				return "face_acc";
+
+			int underscore = name.IndexOf ('_');
+			return underscore > 0 ? name.Substring (0, underscore) : name;
+		}
+
 		// ------------------------------------------------------------------
 		// UI helpers
 		// ------------------------------------------------------------------
@@ -725,17 +865,18 @@ namespace MyClone.EditorTools
 			panelRt.anchorMax = new Vector2 (0.5f, 0f);
 			panelRt.pivot = new Vector2 (0.5f, 0f);
 			panelRt.anchoredPosition = new Vector2 (0f, 20f);
-			panelRt.sizeDelta = new Vector2 (1830f, 84f);
+			panelRt.sizeDelta = new Vector2 (1740f, 84f);
 			panel.GetComponent<Image> ().color = new Color (0.12f, 0.13f, 0.17f, 0.9f);
 
-			CreateButton (panel.transform, "Next Skin", new Vector2 (-770f, 0f), controller.NextSkin);
-			CreateButton (panel.transform, "Next Animation", new Vector2 (-550f, 0f), controller.NextAnimation);
-			CreateButton (panel.transform, "Flip X", new Vector2 (-330f, 0f), controller.ToggleFlip);
-			CreateButton (panel.transform, "Toggle Gray", new Vector2 (-110f, 0f), controller.ToggleGray);
-			CreateButton (panel.transform, "Reset View", new Vector2 (110f, 0f), zoom.ResetView);
-			CreateButton (panel.transform, "Mount", new Vector2 (330f, 0f), controller.ToggleMount);
-			CreateButton (panel.transform, "Audit Skins", new Vector2 (550f, 0f), controller.AuditSkins);
-			CreateButton (panel.transform, "Screenshot", new Vector2 (770f, 0f), controller.CaptureScreenshot);
+			CreateButton (panel.transform, "Show Portrait", new Vector2 (-760f, 0f), controller.ToggleMainActor);
+			CreateButton (panel.transform, "Next Skin", new Vector2 (-570f, 0f), controller.NextSkin);
+			CreateButton (panel.transform, "Next Animation", new Vector2 (-380f, 0f), controller.NextAnimation);
+			CreateButton (panel.transform, "Flip X", new Vector2 (-190f, 0f), controller.ToggleFlip);
+			CreateButton (panel.transform, "Toggle Gray", new Vector2 (0f, 0f), controller.ToggleGray);
+			CreateButton (panel.transform, "Reset View", new Vector2 (190f, 0f), zoom.ResetView);
+			CreateButton (panel.transform, "Mount", new Vector2 (380f, 0f), controller.ToggleMount);
+			CreateButton (panel.transform, "Audit Skins", new Vector2 (570f, 0f), controller.AuditSkins);
+			CreateButton (panel.transform, "Screenshot", new Vector2 (760f, 0f), controller.CaptureScreenshot);
 		}
 
 		static void CreateButton (Transform parent, string label, Vector2 pos, UnityEngine.Events.UnityAction action)
@@ -743,7 +884,7 @@ namespace MyClone.EditorTools
 			var go = new GameObject (label, typeof (RectTransform), typeof (Image), typeof (Button));
 			go.transform.SetParent (parent, false);
 			var rt = (RectTransform) go.transform;
-			rt.sizeDelta = new Vector2 (200f, 56f);
+			rt.sizeDelta = new Vector2 (180f, 56f);
 			rt.anchoredPosition = pos;
 			go.GetComponent<Image> ().color = new Color (0.24f, 0.26f, 0.33f, 1f);
 
@@ -821,8 +962,8 @@ namespace MyClone.EditorTools
 		static int Verify (
 			Scene scene, Camera camera, Canvas canvas, CanvasScaler scaler,
 			RectTransform actorRoot, DemoCanvasLayout layout, DemoZoomPan zoom,
-			SpineUiActor full, SpineUiActor chibi, SpineUiActor third,
-			Text info, SpineDemoController controller)
+			SpineUiActor full, SpineUiActor chibi, SpineUiActor third, SpineUiActor weapon,
+			SpineUiActor portrait, Text info, SpineDemoController controller)
 		{
 			var errors = new List<string> ();
 
@@ -843,6 +984,13 @@ namespace MyClone.EditorTools
 			CheckActor (full, "FULL BODY", FullBodyHeight, -1f, actorRoot, errors);
 			CheckActor (chibi, "CHIBI", ChibiHeight, 1f, actorRoot, errors);
 			CheckActor (third, "THIRD", ThirdHeight, 1f, actorRoot, errors);
+			if (weapon != null)
+				CheckActor (weapon, "WEAPON", WeaponHeight, 1f, actorRoot, errors, WeaponWidthFraction, WeaponRotation);
+			if (portrait != null) {
+				CheckActor (portrait, "PORTRAIT 2110101", PortraitHeight, -1f, actorRoot, errors);
+				if (portrait.Graphic != null && portrait.Graphic.color.a > 0.001f)
+					errors.Add ("PORTRAIT 2110101: starts visible (the Swap button should show it first)");
+			}
 
 			if (info == null) errors.Add ("controller.info = None");
 			if (controller == null) {
@@ -851,15 +999,19 @@ namespace MyClone.EditorTools
 				if (controller.fullBody == null || controller.fullBody != full) errors.Add ("controller.fullBody is not the FullBody actor");
 				if (controller.chibi == null || controller.chibi != chibi) errors.Add ("controller.chibi is not the Chibi actor");
 				if (controller.third == null || controller.third != third) errors.Add ("controller.third is not the Third actor");
+				if (portrait != null && (controller.portrait == null || controller.portrait != portrait))
+					errors.Add ("controller.portrait is not the Portrait actor");
+				if (portrait != null && controller.mainToggleLabel == null)
+					errors.Add ("controller.mainToggleLabel = None");
 				if (controller.mountData == null) errors.Add ("controller.mountData = None");
 				if (string.IsNullOrEmpty (controller.mountSkin)) errors.Add ("controller.mountSkin is empty");
 				if (string.IsNullOrEmpty (controller.mountBone)) errors.Add ("controller.mountBone is empty");
 			}
 
-			CheckLayout (actorRoot, layout, zoom, full, chibi, third, errors);
+			CheckLayout (actorRoot, layout, zoom, full, chibi, third, weapon, portrait, errors);
 
 			var buttons = canvas == null ? new Button[0] : canvas.GetComponentsInChildren<Button> (true);
-			string[] required = { "Next Skin", "Next Animation", "Toggle Gray", "Flip X" };
+			string[] required = { "Show Portrait", "Next Skin", "Next Animation", "Toggle Gray", "Flip X" };
 			foreach (var label in required) {
 				var button = FindButton (canvas, label);
 				if (button == null) { errors.Add ("button missing: " + label); continue; }
@@ -877,12 +1029,14 @@ namespace MyClone.EditorTools
 
 		/// <summary>
 		/// Checks the aspect-independent layout: the same mesh box is mapped onto the live canvas rect,
-		/// so 70%-/25%-of-height must hold for 16:9, 4:3 and 21:9 (the values are applied explicitly
-		/// here because an edit-mode Canvas has no screen-driven rect).
+		/// so 70%-/25%-of-height holds for 16:9, 4:3 and 21:9 (the values are applied explicitly here
+		/// because an edit-mode Canvas has no screen-driven rect). On short ultrawide canvases the
+		/// actors are clamped under the title band and the Info panel must dock clear of them.
 		/// </summary>
 		static void CheckLayout (
 			RectTransform actorRoot, DemoCanvasLayout layout, DemoZoomPan zoom,
-			SpineUiActor full, SpineUiActor chibi, SpineUiActor third, List<string> errors)
+			SpineUiActor full, SpineUiActor chibi, SpineUiActor third, SpineUiActor weapon,
+			SpineUiActor portrait, List<string> errors)
 		{
 			if (actorRoot == null) { errors.Add ("no ActorRoot"); return; }
 			if (actorRoot.parent == null || actorRoot.parent.GetComponent<Canvas> () == null)
@@ -893,10 +1047,14 @@ namespace MyClone.EditorTools
 				errors.Add ("DemoCanvasLayout fitMargin " + layout.FitMargin + " != builder margin " + IdleFitMargin);
 
 			var slots = layout.Slots;
-			if (slots.Length != 3) errors.Add ("DemoCanvasLayout slots = " + slots.Length);
+			int expectedSlots = 3 + (weapon == null ? 0 : 1) + (portrait == null ? 0 : 1);
+			if (slots.Length != expectedSlots)
+				errors.Add ("DemoCanvasLayout slots = " + slots.Length + " (expected " + expectedSlots + ")");
 
-			var expectedActors = new[] { full, chibi, third };
-			for (int i = 0; i < slots.Length && i < expectedActors.Length; i++) {
+			var expectedActors = new List<SpineUiActor> { full, chibi, third };
+			if (weapon != null) expectedActors.Add (weapon);
+			if (portrait != null) expectedActors.Add (portrait);
+			for (int i = 0; i < slots.Length && i < expectedActors.Count; i++) {
 				if (slots[i] == null || slots[i].actor != expectedActors[i])
 					errors.Add ("layout slot " + i + " is not the expected actor");
 				else if (slots[i].referenceMeshSize.y <= 0.5f)
@@ -906,21 +1064,61 @@ namespace MyClone.EditorTools
 			Vector2[] sizes = {
 				new Vector2 (CanvasWidth, CanvasHeight),   // 16:9 reference
 				new Vector2 (1663f, 1247f),                // 4:3
-				new Vector2 (2217f, 935f)                  // 21:9
+				new Vector2 (2217f, 935f),                 // 21:9
+				new Vector2 (2715f, 764f),                 // 32:9
+				new Vector2 (3325f, 623f)                  // 48:9 stress case
 			};
 
 			foreach (var size in sizes) {
 				layout.ApplyForSize (size);
+
+				float feet = Mathf.Max (size.y * layout.FeetFraction, layout.BottomClearance);
+				float stageTop = size.y - layout.TopReserve;
+				Rect panelRect = layout.InfoPanelRectFor (size);
+				bool wide = size.x / size.y >= layout.InfoDockAspect;
+				// The docked panel is right-aligned to the canvas edge; a 980 px panel starts just left of
+				// centre at 16:9, so "x > 0" would call it left-aligned. Compare with the left position
+				// instead (-canvas/2 + margin).
+				bool panelDocked = panelRect.x > -size.x * 0.25f;
+
+				if (wide != panelDocked)
+					errors.Add (string.Format ("info panel dock: {0:0}x{1:0} wide={2} docked={3}", size.x, size.y, wide, panelDocked));
+
+				// The rect math above and the anchors must agree, otherwise the panel looks docked in the
+				// check while sitting somewhere else on screen.
+				var panel = layout.InfoPanel;
+				if (panel == null) {
+					errors.Add ("layout has no info panel reference");
+				} else {
+					Vector2 anchors = wide ? Vector2.one : Vector2.zero;
+					Vector2 panelPos = wide
+						? new Vector2 (-layout.InfoMargin, -layout.InfoDockTop)
+						: new Vector2 (layout.InfoMargin, layout.InfoBottom);
+					if (panel.anchorMin != anchors || panel.anchorMax != anchors || panel.pivot != anchors ||
+						(panel.anchoredPosition - panelPos).sqrMagnitude > 0.01f)
+						errors.Add (string.Format ("info panel anchors: {0:0}x{1:0} anchors={2} pos={3} (wanted {4})",
+							size.x, size.y, panel.anchorMin, panel.anchoredPosition, panelPos));
+				}
+
 				for (int i = 0; i < slots.Length; i++) {
 					var slot = slots[i];
 					if (slot == null || slot.actor == null || !slot.actor.IsBuilt)
 						continue;
 
 					var rt = (RectTransform) slot.actor.transform;
-					float height = slot.referenceMeshSize.y * rt.localScale.y;
+					bool rotated = Mathf.Abs (slot.rotationDegrees) > 0.01f;
+					float fitExtent = rotated ? slot.referenceMeshSize.x : slot.referenceMeshSize.y;
+					float acrossExtent = rotated ? slot.referenceMeshSize.y : slot.referenceMeshSize.x;
+					float height = fitExtent * rt.localScale.y;
 					float ratio = height / size.y;
-					float wanted = slot.heightFraction * layout.FitMargin;
-					float centreX = rt.anchoredPosition.x + slot.referenceMeshCenter.x * rt.localScale.x;
+					float expectedHeight = Mathf.Min (size.y * slot.heightFraction * layout.FitMargin, stageTop - feet);
+					if (slot.maxWidthFraction > 0f)
+						expectedHeight = Mathf.Min (expectedHeight, size.x * slot.maxWidthFraction * fitExtent / Mathf.Max (0.0001f, acrossExtent));
+					float wanted = expectedHeight / size.y;
+					Vector2 meshOffset = slot.referenceMeshCenter * rt.localScale.x;
+					if (rotated)
+						meshOffset = Quaternion.Euler (0f, 0f, slot.rotationDegrees) * (Vector3) meshOffset;
+					float centreX = rt.anchoredPosition.x + meshOffset.x;
 					float wantedX = size.x * slot.sideFraction;
 
 					Debug.LogFormat ("[LocalReferenceDemo][verify] layout {0:0}x{1:0} slot {2}: {3:0.#}% (wanted {4:0.#}%) x={5:0.#} (wanted {6:0.#})",
@@ -929,6 +1127,31 @@ namespace MyClone.EditorTools
 						errors.Add (string.Format ("layout {0:0}x{1:0} slot {2}: {3:0.#}% != {4:0.#}%", size.x, size.y, i, ratio * 100f, wanted * 100f));
 					if (Mathf.Abs (centreX - wantedX) > 1f)
 						errors.Add (string.Format ("layout {0:0}x{1:0} slot {2}: x={3:0.#} != {4:0.#}", size.x, size.y, i, centreX, wantedX));
+
+					// Clearance: below the reserved title band and (when it is docked) beside the info panel.
+					float top = feet + height;
+					if (top > stageTop + 0.5f)
+						errors.Add (string.Format ("layout {0:0}x{1:0} slot {2}: top {3:0.#} > title band {4:0.#}", size.x, size.y, i, top, stageTop));
+
+					float halfWidth = acrossExtent * rt.localScale.x * 0.5f;
+					var actorRect = new Rect (centreX - halfWidth, feet - size.y * 0.5f, halfWidth * 2f, height);
+					bool overlapsInfo = panelRect.width > 0f && actorRect.Overlaps (panelRect);
+					if (wide && overlapsInfo)
+						errors.Add (string.Format ("layout {0:0}x{1:0} slot {2}: overlaps the docked info panel", size.x, size.y, i));
+
+					// The weapon sits in its own column: it must not run into the third character.
+					if (weapon != null && slot.actor == weapon && slots.Length > 3 && slots[2] != null && slots[2].actor != null && slots[2].actor.IsBuilt) {
+						var thirdRt = (RectTransform) slots[2].actor.transform;
+						float thirdX = thirdRt.anchoredPosition.x + slots[2].referenceMeshCenter.x * thirdRt.localScale.x;
+						float thirdHalf = slots[2].referenceMeshSize.x * thirdRt.localScale.x * 0.5f;
+						var thirdRect = new Rect (thirdX - thirdHalf, feet - size.y * 0.5f, thirdHalf * 2f,
+							slots[2].referenceMeshSize.y * thirdRt.localScale.y);
+						if (actorRect.Overlaps (thirdRect))
+							errors.Add (string.Format ("layout {0:0}x{1:0}: weapon overlaps the third actor", size.x, size.y));
+					}
+
+					Debug.LogFormat ("[LocalReferenceDemo][verify] safe {0:0}x{1:0} slot {2}: top={3:0.#}/{4:0.#} infoPanel={5} overlap={6}",
+						size.x, size.y, i, top, stageTop, panelDocked ? "right" : "left", overlapsInfo);
 				}
 			}
 
@@ -936,16 +1159,38 @@ namespace MyClone.EditorTools
 			layout.ApplyForSize (new Vector2 (CanvasWidth, CanvasHeight));
 
 			if (zoom != null) {
+				var label = zoom.Label;
+				if (label == null)
+					errors.Add ("zoom: no readout label assigned");
+				else if (label.text.IndexOf ("1.00", StringComparison.Ordinal) < 0)
+					errors.Add ("zoom: readout does not start at 1.00x (" + label.text + ")");
+
 				zoom.SetZoom (2.5f);
 				if (Mathf.Abs (actorRoot.localScale.x - 2.5f) > 0.01f)
 					errors.Add ("zoom: ActorRoot scale = " + actorRoot.localScale.x + " after SetZoom(2.5)");
+				if (label != null && label.text.IndexOf ("2.50", StringComparison.Ordinal) < 0)
+					errors.Add ("zoom: readout did not follow SetZoom(2.5) (" + label.text + ")");
+
+				zoom.ZoomIn ();
+				if (Mathf.Abs (actorRoot.localScale.x - 3.125f) > 0.01f)
+					errors.Add ("zoom: ZoomIn gave scale " + actorRoot.localScale.x + " (expected 3.125)");
+				zoom.ZoomOut ();
+				if (Mathf.Abs (actorRoot.localScale.x - 2.5f) > 0.01f)
+					errors.Add ("zoom: ZoomOut gave scale " + actorRoot.localScale.x + " (expected 2.5)");
+
+				zoom.PanBy (new Vector2 (40f, -30f));
+				if ((actorRoot.anchoredPosition - new Vector2 (40f, -30f)).sqrMagnitude > 0.01f)
+					errors.Add ("zoom: PanBy did not move ActorRoot (" + actorRoot.anchoredPosition + ")");
+
 				zoom.ResetView ();
 				if (Mathf.Abs (actorRoot.localScale.x - 1f) > 0.001f || actorRoot.anchoredPosition.sqrMagnitude > 0.001f)
 					errors.Add ("zoom: Reset View did not restore scale/position");
+				if (label != null && label.text.IndexOf ("1.00", StringComparison.Ordinal) < 0)
+					errors.Add ("zoom: readout did not return to 1.00x (" + label.text + ")");
 			}
 		}
 
-		static void CheckActor (SpineUiActor actor, string label, float targetHeight, float side, RectTransform actorRoot, List<string> errors)
+		static void CheckActor (SpineUiActor actor, string label, float targetHeight, float side, RectTransform actorRoot, List<string> errors, float widthCapFraction = 0f, float rotationDegrees = 0f)
 		{
 			if (actor == null) { errors.Add (label + ": actor is None"); return; }
 
@@ -982,13 +1227,24 @@ namespace MyClone.EditorTools
 				return;
 			}
 
-			float height = (max.y - min.y) * rt.localScale.y;
+			bool rotated = Mathf.Abs (rotationDegrees) > 0.01f;
+			float meshWidth = Mathf.Max (0.0001f, max.x - min.x);
+			float meshHeight = Mathf.Max (0.0001f, max.y - min.y);
+			float fitExtent = rotated ? meshWidth : meshHeight;
+			float acrossExtent = rotated ? meshHeight : meshWidth;
+			float height = fitExtent * rt.localScale.y;
 			float ratio = height / CanvasHeight;
-			float expected = targetHeight * IdleFitMargin / CanvasHeight;
+			float expectedHeight = targetHeight * IdleFitMargin;
+			if (widthCapFraction > 0f)
+				expectedHeight = Mathf.Min (expectedHeight, CanvasWidth * widthCapFraction * fitExtent / acrossExtent);
+			float expected = expectedHeight / CanvasHeight;
 
 			// The rect is offset by the measured mesh centre, so the side is judged by the mesh, not
 			// by the rect position (the full body's setup pose sits ~120 mesh units left of its rect).
-			float meshCentreX = rt.anchoredPosition.x + (min.x + max.x) * 0.5f * rt.localScale.x;
+			Vector2 localCentre = (min + max) * 0.5f * rt.localScale.x;
+			if (rotated)
+				localCentre = Quaternion.Euler (0f, 0f, rotationDegrees) * (Vector3) localCentre;
+			float meshCentreX = rt.anchoredPosition.x + localCentre.x;
 			if (side < 0f && meshCentreX >= 0f) errors.Add (label + ": mesh is not on the left half (x=" + meshCentreX + ")");
 			if (side > 0f && meshCentreX <= 0f) errors.Add (label + ": mesh is not on the right half (x=" + meshCentreX + ")");
 			Debug.LogFormat ("[LocalReferenceDemo][verify] {0}: {1:0.#}px tall = {2:0.#}% of canvas (requested {3:0.#}%, fit {4:0.#}%), meshX={5:0.#} verts={6}",
@@ -1106,6 +1362,7 @@ namespace MyClone.EditorTools
 			if (controller.fullBody == null) errors.Add ("controller.fullBody = None");
 			if (controller.chibi == null) errors.Add ("controller.chibi = None");
 			if (controller.third == null) errors.Add ("controller.third = None");
+			if (controller.portrait == null) errors.Add ("controller.portrait = None");
 			if (controller.info == null) errors.Add ("controller.info = None");
 
 			float canvasHeight = CanvasHeight;
@@ -1113,9 +1370,24 @@ namespace MyClone.EditorTools
 			if (canvasRect != null && canvasRect.rect.height > 1f)
 				canvasHeight = canvasRect.rect.height;
 
-			CheckRuntimeActor (controller.fullBody, "FULL BODY", 0.70f, canvasHeight, errors);
+			CheckRuntimeActor (controller.fullBody, "SCENE CHAR (fox)", 0.70f, canvasHeight, errors);
 			CheckRuntimeActor (controller.chibi, "CHIBI", 0.25f, canvasHeight, errors);
 			CheckRuntimeActor (controller.third, "THIRD", 0.25f, canvasHeight, errors);
+			CheckRuntimeActor (controller.portrait, "PORTRAIT 2110101", 0.70f, canvasHeight, errors);
+
+			if (controller.portrait != null && controller.portrait.Graphic != null &&
+				controller.portrait.Graphic.color.a > 0.001f)
+				errors.Add ("PORTRAIT 2110101: visible at Start (expected hidden; Swap shows it)");
+			if (controller.fullBody != null && controller.fullBody.Graphic != null &&
+				controller.fullBody.Graphic.color.a < 0.999f)
+				errors.Add ("SCENE CHAR (fox): alpha = " + controller.fullBody.Graphic.color.a);
+
+			var layoutInPlay = Object.FindObjectOfType<DemoCanvasLayout> ();
+			var weaponActor = controller.weapon;
+			if (weaponActor == null)
+				errors.Add ("no standalone weapon actor assigned");
+			else
+				CheckRuntimeProp (weaponActor, "WEAPON", errors);
 
 			CheckLiveLayout (errors);
 
@@ -1130,21 +1402,62 @@ namespace MyClone.EditorTools
 			else
 				Debug.Log ("[LocalReferenceDemo][play] screenshot: " + screenshot);
 
+			// Swap the 70% slot to the portrait, capture it, then swap back.
+			var swapButton = FindButton (canvas, "Show Portrait");
+			if (swapButton == null) {
+				errors.Add ("button missing: Show Portrait");
+			} else {
+				try {
+					swapButton.onClick.Invoke ();
+				} catch (Exception e) {
+					errors.Add ("button 'Show Portrait' threw " + e.GetType ().Name + ": " + e.Message);
+				}
+
+				if (!controller.PortraitShown) errors.Add ("Swap did not switch to the portrait");
+				if (controller.portrait != null && controller.portrait.Graphic != null &&
+					controller.portrait.Graphic.color.a < 0.999f)
+					errors.Add ("PORTRAIT 2110101: alpha = " + controller.portrait.Graphic.color.a + " after Swap");
+				if (controller.fullBody != null && controller.fullBody.Graphic != null &&
+					controller.fullBody.Graphic.color.a > 0.001f)
+					errors.Add ("SCENE CHAR (fox): still visible after Swap");
+				if (controller.mainToggleLabel != null && controller.mainToggleLabel.text != "Show Scene Char")
+					errors.Add ("Swap caption = '" + controller.mainToggleLabel.text + "' (expected 'Show Scene Char')");
+
+				string portraitShot = controller.SaveScreenshot ();
+				if (string.IsNullOrEmpty (portraitShot) || !File.Exists (portraitShot)) {
+					errors.Add ("portrait screenshot was not written");
+				} else {
+					string named = Path.Combine (Path.GetDirectoryName (portraitShot), "demo_portrait_2110101.png");
+					File.Copy (portraitShot, named, true);
+					Debug.Log ("[LocalReferenceDemo][play] portrait screenshot: " + named);
+				}
+
+				controller.ToggleMainActor ();
+				if (controller.PortraitShown) errors.Add ("Swap back did not return to the scene character");
+				if (controller.fullBody != null && controller.fullBody.Graphic != null &&
+					controller.fullBody.Graphic.color.a < 0.999f)
+					errors.Add ("SCENE CHAR (fox): alpha = " + controller.fullBody.Graphic.color.a + " after Swap back");
+			}
+
 			string[] required = { "Next Skin", "Next Animation", "Toggle Gray", "Flip X", "Reset View" };
 			foreach (var label in required) {
 				var button = FindButton (canvas, label);
 				if (button == null) { errors.Add ("button missing: " + label); continue; }
 
-				int before = VertexCount (controller.fullBody) + VertexCount (controller.chibi) + VertexCount (controller.third);
+				int before = VertexCount (controller.fullBody) + VertexCount (controller.chibi) +
+					VertexCount (controller.third) + VertexCount (controller.portrait);
 				try {
 					button.onClick.Invoke ();
 				} catch (Exception e) {
 					errors.Add ("button '" + label + "' threw " + e.GetType ().Name + ": " + e.Message);
 				}
-				int after = VertexCount (controller.fullBody) + VertexCount (controller.chibi) + VertexCount (controller.third);
+				int after = VertexCount (controller.fullBody) + VertexCount (controller.chibi) +
+					VertexCount (controller.third) + VertexCount (controller.portrait);
 				Debug.LogFormat ("[LocalReferenceDemo][play] button '{0}': verts {1} -> {2}", label, before, after);
 				if (after <= 0) errors.Add ("button '" + label + "' left the actors with no mesh");
 			}
+
+			LogPortraitRenderers (controller.portrait);
 
 			var graphic = controller.fullBody == null ? null : controller.fullBody.Graphic;
 			if (graphic != null && graphic.material != null &&
@@ -1186,9 +1499,18 @@ namespace MyClone.EditorTools
 					continue;
 
 				var rt = (RectTransform) slot.actor.transform;
-				float ratio = slot.referenceMeshSize.y * rt.localScale.y / test.y;
+				bool rotated = Mathf.Abs (slot.rotationDegrees) > 0.01f;
+				float fitExtent = rotated ? slot.referenceMeshSize.x : slot.referenceMeshSize.y;
+				float acrossExtent = rotated ? slot.referenceMeshSize.y : slot.referenceMeshSize.x;
+				float ratio = fitExtent * rt.localScale.y / test.y;
 				float wanted = slot.heightFraction * layout.FitMargin;
-				float x = rt.anchoredPosition.x + slot.referenceMeshCenter.x * rt.localScale.x;
+				if (slot.maxWidthFraction > 0f)
+					wanted = Mathf.Min (wanted, test.x * slot.maxWidthFraction * fitExtent /
+						Mathf.Max (0.0001f, acrossExtent) / test.y);
+				Vector2 offset = slot.referenceMeshCenter * rt.localScale.x;
+				if (rotated)
+					offset = Quaternion.Euler (0f, 0f, slot.rotationDegrees) * (Vector3) offset;
+				float x = rt.anchoredPosition.x + offset.x;
 
 				Debug.LogFormat ("[LocalReferenceDemo][play] layout 4:3 slot {0}: {1:0.#}% (wanted {2:0.#}%) x={3:0.#} (wanted {4:0.#})",
 					i, ratio * 100f, wanted * 100f, x, test.x * slot.sideFraction);
@@ -1199,13 +1521,93 @@ namespace MyClone.EditorTools
 			layout.ApplyForSize (live);   // what Update will keep on the next frame
 
 			if (zoom != null) {
+				var label = zoom.Label;
+				if (label == null)
+					errors.Add ("zoom: no readout label in play");
+
 				zoom.SetZoom (2.5f);
 				if (Mathf.Abs (actorRoot.localScale.x - 2.5f) > 0.01f)
 					errors.Add ("zoom: SetZoom(2.5) did not apply");
+				if (label != null && label.text.IndexOf ("2.50", StringComparison.Ordinal) < 0)
+					errors.Add ("zoom: readout did not follow SetZoom(2.5) (" + label.text + ")");
+
+				zoom.ZoomIn ();
+				if (Mathf.Abs (actorRoot.localScale.x - 3.125f) > 0.01f)
+					errors.Add ("zoom: ZoomIn gave scale " + actorRoot.localScale.x + " (expected 3.125)");
+				zoom.ZoomOut ();
+				if (Mathf.Abs (actorRoot.localScale.x - 2.5f) > 0.01f)
+					errors.Add ("zoom: ZoomOut gave scale " + actorRoot.localScale.x + " (expected 2.5)");
+
+				zoom.PanBy (new Vector2 (40f, -30f));
+				if ((actorRoot.anchoredPosition - new Vector2 (40f, -30f)).sqrMagnitude > 0.01f)
+					errors.Add ("zoom: PanBy did not move ActorRoot (" + actorRoot.anchoredPosition + ")");
+
+				if (label != null)
+					Debug.LogFormat ("[LocalReferenceDemo][play] zoom readout: '{0}'", label.text);
+
 				zoom.ResetView ();
 				if (Mathf.Abs (actorRoot.localScale.x - 1f) > 0.001f || actorRoot.anchoredPosition.sqrMagnitude > 0.001f)
 					errors.Add ("zoom: Reset View did not restore scale/position");
+				if (label != null && (label.text.IndexOf ("1.00", StringComparison.Ordinal) < 0 || label.text.IndexOf ("pan 0, 0", StringComparison.Ordinal) < 0))
+					errors.Add ("zoom: readout did not return to 1.00x / pan 0, 0 (" + label.text + ")");
 			}
+		}
+
+		/// <summary>
+		/// Reports how many UI renderers the portrait skeleton produced, to compare with the game's
+		/// "New Spine GameObject" children (Renderer0-4). The count follows atlas pages/materials:
+		/// this skeleton has one atlas page, so the demo draws it with one CanvasRenderer.
+		/// </summary>
+		static void LogPortraitRenderers (SpineUiActor portrait)
+		{
+			if (portrait == null || !portrait.IsBuilt || portrait.Graphic == null)
+				return;
+
+			int canvasRenderers = portrait.GetComponentsInChildren<CanvasRenderer> (true).Length;
+			int graph = portrait.GetComponentsInChildren<SkeletonGraphic> (true).Length;
+			int attachments = 0;
+			var drawnSlots = new List<string> ();
+			for (int i = 0; i < portrait.Skeleton.Slots.Count; i++) {
+				var slot = portrait.Skeleton.Slots.Items[i];
+				if (slot.Attachment == null) continue;
+				attachments++;
+				drawnSlots.Add (slot.Data.Name + ":" + slot.Attachment.Name);
+			}
+
+			var graphics = portrait.GetComponentsInChildren<SkeletonGraphic> (true);
+			var names = new List<string> ();
+			foreach (var g in graphics) names.Add (g.gameObject.name + "(" + g.MeshGenerator.Buffers.vertexCount + ")");
+
+			Debug.LogFormat (
+				"[LocalReferenceDemo][play] PORTRAIT renderers: SkeletonGraphic={0} [{8}] CanvasRenderer={1} allowMultipleCanvasRenderers={2} atlasPages={3} material={4} attachments={5}/{6} verts={7}",
+				graph, canvasRenderers, portrait.Graphic.allowMultipleCanvasRenderers,
+				portrait.Data.atlasAssets.Length == 0 ? 0 : portrait.Data.atlasAssets[0].MaterialCount,
+				portrait.Graphic.material == null ? "null" : portrait.Graphic.material.name,
+				attachments, portrait.Skeleton.Slots.Count,
+				portrait.Graphic.MeshGenerator.Buffers.vertexCount,
+				string.Join (", ", names.ToArray ()));
+
+			Debug.Log ("[LocalReferenceDemo][play] PORTRAIT drawn slots: " + string.Join (", ", drawnSlots.ToArray ()));
+		}
+
+		/// <summary>Actor-level runtime check for a slot whose size is width-capped (the weapon).</summary>
+		static void CheckRuntimeProp (SpineUiActor actor, string label, List<string> errors)
+		{
+			if (!actor.IsBuilt) { errors.Add (label + ": not built after Start()"); return; }
+			if (actor.Graphic == null) { errors.Add (label + ": Graphic is null"); return; }
+
+			int verts = actor.Graphic.MeshGenerator.Buffers.vertexCount;
+			var current = actor.AnimationState.GetCurrent (0);
+			string animation = current == null || current.Animation == null ? "-" : current.Animation.Name;
+			string shader = actor.Graphic.material == null ? "null" : actor.Graphic.material.shader.name;
+			Debug.LogFormat ("[LocalReferenceDemo][play] {0}: verts={1} shader={2} skin={3} animation={4} scale={5:0.###}",
+				label, verts, shader, actor.Skeleton.Skin == null ? "default" : actor.Skeleton.Skin.Name,
+				animation, actor.transform.localScale.x);
+
+			if (verts == 0) errors.Add (label + ": 0 vertices");
+			if (shader != "Spine/SkeletonGraphic") errors.Add (label + ": shader = " + shader);
+			if (actor.Skeleton.Skin == null) errors.Add (label + ": no skin after Start()");
+			if (current == null) errors.Add (label + ": no animation after Start()");
 		}
 
 		static void CheckRuntimeActor (SpineUiActor actor, string label, float heightFraction, float canvasHeight, List<string> errors)

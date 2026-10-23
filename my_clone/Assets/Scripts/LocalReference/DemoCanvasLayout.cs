@@ -10,8 +10,10 @@ namespace MyClone.LocalReference
 	/// The builder bakes the fit at the CanvasScaler reference resolution (1920x1080). A Canvas in
 	/// Screen Space - Overlay is measured in reference pixels, so with another aspect one screen
 	/// height is worth a different number of those pixels and 756 px stops being 70% of the canvas.
-	/// This component re-applies the same fit (measured mesh box + target share + margin) against the
-	/// live canvas rect, so the characters stay at 70% / 25% at any resolution.
+/// This component re-applies the same fit (measured mesh box + target share + margin) against the
+/// live canvas rect, so the characters stay at 70% / 25% at any resolution. On short ultrawide
+/// canvases the tallest actor is clamped under the title band instead of overrunning it, and the
+/// Info panel docks top-right (out of the actor row) from 2.4:1 upward.
 	///
 	/// Demo-only: nothing here touches SpineUiActor or game code.
 	/// </summary>
@@ -33,6 +35,12 @@ namespace MyClone.LocalReference
 
 			[Tooltip ("Mesh box centre measured by the builder, in mesh units.")]
 			public Vector2 referenceMeshCenter;
+
+			[Tooltip ("Optional cap as a share of the canvas width (0 = none). Wide props such as the weapon use it.")]
+			public float maxWidthFraction;
+
+			[Tooltip ("Roll in degrees. 90 turns a long horizontal prop (the weapon) upright; height then follows the long side.")]
+			public float rotationDegrees;
 		}
 
 		[SerializeField] Slot[] slots = new Slot[0];
@@ -46,18 +54,48 @@ namespace MyClone.LocalReference
 		[Tooltip ("Canvas pixels kept clear between the feet and the bottom edge (button bar is 104 px).")]
 		[SerializeField] float bottomClearance = 128f;
 
+		[Tooltip ("Height reserved at the top for the title band. The tallest actor is clamped below it on short canvases.")]
+		[SerializeField] float topReserve = 88f;
+
+		[Header ("Info panel")]
+		[Tooltip ("Panel that is docked bottom-left at normal aspects and moved out of the actor row on ultrawide canvases.")]
+		[SerializeField] RectTransform infoPanel;
+		[SerializeField] float infoMargin = 24f;
+		[SerializeField] float infoBottom = 118f;
+		[Tooltip ("Distance from the top edge when docked (keeps it under the zoom readout / hint).")]
+		[SerializeField] float infoDockTop = 164f;
+		[Tooltip ("Canvas width / height from which the panel docks top-right, clear of the actor row " +
+			"(16:9 = 1.78 docks; 4:3 = 1.33 keeps it bottom-left because the actor head would sit under it).")]
+		[SerializeField] float infoDockAspect = 1.7f;
+
 		RectTransform m_Rect;
 		Vector2 m_AppliedSize;
 		int m_AppliedBuiltMask = -1;
 
 		public Slot[] Slots { get { return slots; } }
 		public float FitMargin { get { return fitMargin; } }
+		public float TopReserve { get { return topReserve; } }
+		public float FeetFraction { get { return feetFraction; } }
+		public float BottomClearance { get { return bottomClearance; } }
+		public float InfoDockAspect { get { return infoDockAspect; } }
+		public float InfoMargin { get { return infoMargin; } }
+		public float InfoBottom { get { return infoBottom; } }
+		public float InfoDockTop { get { return infoDockTop; } }
+		public RectTransform InfoPanel { get { return infoPanel; } }
 
 		/// <summary>Assigns the actor slots (called by the scene builder).</summary>
 		public void Configure (params Slot[] newSlots)
 		{
 			slots = newSlots ?? new Slot[0];
 			m_AppliedBuiltMask = -1;
+		}
+
+		/// <summary>Assigns the info panel so it can be moved out of the actor row on ultrawide canvases.</summary>
+		public void SetInfoPanel (RectTransform panel)
+		{
+			infoPanel = panel;
+			m_AppliedSize = Vector2.zero;
+			ApplyCurrent ();
 		}
 
 		void OnEnable ()
@@ -113,27 +151,89 @@ namespace MyClone.LocalReference
 			m_AppliedSize = canvasSize;
 			m_AppliedBuiltMask = builtMask;
 
+			PlaceInfoPanel (canvasSize);
+
 			// Feet sit at a fixed share of the height, but never behind the button bar.
 			float feet = Mathf.Max (canvasSize.y * feetFraction, bottomClearance);
+			// The title band is reserved: on short ultrawide canvases the tallest actor is clamped
+			// below it instead of letting the head run into the title.
+			float stageTop = Mathf.Max (feet, canvasSize.y - topReserve);
 
 			for (int i = 0; i < slots.Length; i++) {
 				var slot = slots[i];
 				if (slot == null || slot.actor == null || !slot.actor.IsBuilt)
 					continue;
 
-				float meshHeight = Mathf.Max (0.0001f, slot.referenceMeshSize.y);
+				bool rotated = Mathf.Abs (slot.rotationDegrees) > 0.01f;
+				// The fitted (vertical) and across extents swap when the prop is rolled 90 degrees.
+				float fitExtent = Mathf.Max (0.0001f, rotated ? slot.referenceMeshSize.x : slot.referenceMeshSize.y);
+				float acrossExtent = Mathf.Max (0.0001f, rotated ? slot.referenceMeshSize.y : slot.referenceMeshSize.x);
 				float target = canvasSize.y * slot.heightFraction;
-				float scale = Mathf.Clamp (target * fitMargin / meshHeight, 0.0001f, 1000f);
+				float height = Mathf.Min (target * fitMargin, stageTop - feet);
+				float scale = Mathf.Clamp (height / fitExtent, 0.0001f, 1000f);
+				// Wide props (the standalone weapon) are width-capped so they stay inside their column.
+				if (slot.maxWidthFraction > 0f)
+					scale = Mathf.Min (scale, canvasSize.x * slot.maxWidthFraction / acrossExtent);
+				scale = Mathf.Max (scale, 0.0001f);
+				height = Mathf.Max (fitExtent * scale, 1f);
 
 				var rt = (RectTransform) slot.actor.transform;
 				rt.localScale = new Vector3 (scale, scale, 1f);
 				rt.sizeDelta = slot.referenceMeshSize * scale;
+				rt.localEulerAngles = new Vector3 (0f, 0f, slot.rotationDegrees);
 
 				// Canvas centre is the anchor point of both actors (anchors 0.5/0.5).
 				Vector2 targetCentre = new Vector2 (
 					canvasSize.x * slot.sideFraction,
-					feet - canvasSize.y * 0.5f + target * 0.5f);
-				rt.anchoredPosition = targetCentre - slot.referenceMeshCenter * scale;
+					feet - canvasSize.y * 0.5f + height * 0.5f);
+				Vector2 meshOffset = slot.referenceMeshCenter * scale;
+				if (rotated)
+					meshOffset = Quaternion.Euler (0f, 0f, slot.rotationDegrees) * (Vector3) meshOffset;
+				rt.anchoredPosition = targetCentre - meshOffset;
+			}
+		}
+
+		bool InfoDocked (Vector2 canvasSize)
+		{
+			return canvasSize.y > 0f && canvasSize.x / canvasSize.y >= infoDockAspect;
+		}
+
+		/// <summary>
+		/// The info panel rectangle for a canvas size, in canvas-centred units. The builder and the
+		/// play check use this to prove the panel is clear of every actor on ultrawide canvases.
+		/// </summary>
+		public Rect InfoPanelRectFor (Vector2 canvasSize)
+		{
+			if (infoPanel == null)
+				return new Rect (0f, 0f, 0f, 0f);
+
+			Vector2 size = infoPanel.sizeDelta;
+			if (InfoDocked (canvasSize)) {
+				float right = canvasSize.x * 0.5f - infoMargin;
+				float top = canvasSize.y * 0.5f - infoDockTop;
+				return new Rect (right - size.x, top - size.y, size.x, size.y);
+			}
+
+			float left = -canvasSize.x * 0.5f + infoMargin;
+			float bottom = -canvasSize.y * 0.5f + infoBottom;
+			return new Rect (left, bottom, size.x, size.y);
+		}
+
+		void PlaceInfoPanel (Vector2 canvasSize)
+		{
+			if (infoPanel == null)
+				return;
+
+			if (InfoDocked (canvasSize)) {
+				infoPanel.anchorMin = new Vector2 (1f, 1f);
+				infoPanel.anchorMax = new Vector2 (1f, 1f);
+				infoPanel.pivot = new Vector2 (1f, 1f);
+				infoPanel.anchoredPosition = new Vector2 (-infoMargin, -infoDockTop);
+			} else {
+				infoPanel.anchorMin = Vector2.zero;
+				infoPanel.anchorMax = Vector2.zero;
+				infoPanel.pivot = Vector2.zero;
+				infoPanel.anchoredPosition = new Vector2 (infoMargin, infoBottom);
 			}
 		}
 
