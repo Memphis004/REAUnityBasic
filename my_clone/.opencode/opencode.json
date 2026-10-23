@@ -1,0 +1,20 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "lsp": {
+    "csharp-ls": {
+      "command": [
+        "C:\\Users\\memph\\.dotnet\\tools\\csharp-ls.exe"
+      ]
+    }
+  },
+  "mcp": {
+    "il2cpp-frida": {
+      "unityMCP": {
+        "type": "remote",
+        "url": "http://127.0.0.1:8080/mcp",
+        "enabled": true
+      },
+      "enabled": true
+    }
+  }
+}

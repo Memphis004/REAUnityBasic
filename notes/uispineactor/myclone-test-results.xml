@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="17" result="Passed" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:48Z" duration="0.2052574">
+  <test-suite type="TestSuite" id="1028" name="my_clone" fullname="my_clone" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:48Z" duration="0.205257" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1050" name="MyClone.SpineSystem.Tests.dll" fullname="C:/Users/memph/AppData/Local/Temp/opencode/my_clone_test/Library/ScriptAssemblies/MyClone.SpineSystem.Tests.dll" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:48Z" duration="0.195328" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="18624" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+      </properties>
+      <test-suite type="TestSuite" id="1051" name="MyClone" fullname="MyClone" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:48Z" duration="0.194647" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1052" name="SpineSystem" fullname="MyClone.SpineSystem" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:48Z" duration="0.194424" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1053" name="Tests" fullname="MyClone.SpineSystem.Tests" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:48Z" duration="0.194211" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1031" name="SpineUiActorTests" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.133151" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1032" name="Build_CreatesValidGraphic" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.Build_CreatesValidGraphic" methodname="Build_CreatesValidGraphic" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="319437563" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.073298" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1038" name="FlipXAndY_MirrorSkeletonTransform" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.FlipXAndY_MirrorSkeletonTransform" methodname="FlipXAndY_MirrorSkeletonTransform" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="1302551267" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.006058" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1033" name="HasAnimation_ReflectsSkeletonData" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.HasAnimation_ReflectsSkeletonData" methodname="HasAnimation_ReflectsSkeletonData" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="727991013" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.001752" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1042" name="Mount_IsChildAndSurvivesUnMountUntilDestroyed" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.Mount_IsChildAndSurvivesUnMountUntilDestroyed" methodname="Mount_IsChildAndSurvivesUnMountUntilDestroyed" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="2052426426" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.003061" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1043" name="MountToBone_FollowsExistingBone" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.MountToBone_FollowsExistingBone" methodname="MountToBone_FollowsExistingBone" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="1588553732" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.002727" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1034" name="Play_Loop_DoesNotRaiseComplete" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.Play_Loop_DoesNotRaiseComplete" methodname="Play_Loop_DoesNotRaiseComplete" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="1468459010" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.003666" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1035" name="Play_NonLoop_RaisesCompleteOnce" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.Play_NonLoop_RaisesCompleteOnce" methodname="Play_NonLoop_RaisesCompleteOnce" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="1631529184" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.001630" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1045" name="Release_DestroysRendererAndAllowsRebuild" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.Release_DestroysRendererAndAllowsRebuild" methodname="Release_DestroysRendererAndAllowsRebuild" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="891646039" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.001908" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1041" name="SetGray_SwapsMaterialShaderAndRestores" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.SetGray_SwapsMaterialShaderAndRestores" methodname="SetGray_SwapsMaterialShaderAndRestores" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="511663014" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.005722" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1036" name="SetProgress_SeeksInsideCurrentAnimation" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.SetProgress_SeeksInsideCurrentAnimation" methodname="SetProgress_SeeksInsideCurrentAnimation" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="2001543390" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.003051" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1044" name="SetSeparatorSlots_CreatesParts" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.SetSeparatorSlots_CreatesParts" methodname="SetSeparatorSlots_CreatesParts" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="541029813" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.010435" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1040" name="SetSkin_ChangesAttachmentLookup" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.SetSkin_ChangesAttachmentLookup" methodname="SetSkin_ChangesAttachmentLookup" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="646707459" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.002607" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+              <test-case id="1039" name="SetSlotAttachment_WorksAndRejectsInvalidNames" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.SetSlotAttachment_WorksAndRejectsInvalidNames" methodname="SetSlotAttachment_WorksAndRejectsInvalidNames" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="1601396081" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.002689" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+[SpineActorBase] Slot not found: missing-slot
+[SpineActorBase] Attachment not found: missing-attachment on slot slot1
+]]></output>
+              </test-case>
+              <test-case id="1037" name="SetSpeed_ChangesAnimationStateTimeScale" fullname="MyClone.SpineSystem.Tests.SpineUiActorTests.SetSpeed_ChangesAnimationStateTimeScale" methodname="SetSpeed_ChangesAnimationStateTimeScale" classname="MyClone.SpineSystem.Tests.SpineUiActorTests" runstate="Runnable" seed="1366852359" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:47Z" duration="0.001532" asserts="0">
+                <properties />
+                <output><![CDATA[SkeletonGraphic works best with the SkeletonGraphic material.
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1046" name="SpineWorldActorTests" fullname="MyClone.SpineSystem.Tests.SpineWorldActorTests" classname="MyClone.SpineSystem.Tests.SpineWorldActorTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:48Z" duration="0.059832" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1047" name="Build_CreatesValidSkeletonAnimation" fullname="MyClone.SpineSystem.Tests.SpineWorldActorTests.Build_CreatesValidSkeletonAnimation" methodname="Build_CreatesValidSkeletonAnimation" classname="MyClone.SpineSystem.Tests.SpineWorldActorTests" runstate="Runnable" seed="1921402905" result="Passed" start-time="2026-10-23 02:30:47Z" end-time="2026-10-23 02:30:48Z" duration="0.048907" asserts="0">
+                <properties />
+              </test-case>
+              <test-case id="1048" name="PlayAndFlip_WorkOnWorldActor" fullname="MyClone.SpineSystem.Tests.SpineWorldActorTests.PlayAndFlip_WorkOnWorldActor" methodname="PlayAndFlip_WorkOnWorldActor" classname="MyClone.SpineSystem.Tests.SpineWorldActorTests" runstate="Runnable" seed="1230171651" result="Passed" start-time="2026-10-23 02:30:48Z" end-time="2026-10-23 02:30:48Z" duration="0.001008" asserts="0">
+                <properties />
+              </test-case>
+              <test-case id="1049" name="SetGray_UsesCustomMaterialOverride" fullname="MyClone.SpineSystem.Tests.SpineWorldActorTests.SetGray_UsesCustomMaterialOverride" methodname="SetGray_UsesCustomMaterialOverride" classname="MyClone.SpineSystem.Tests.SpineWorldActorTests" runstate="Runnable" seed="232618751" result="Passed" start-time="2026-10-23 02:30:48Z" end-time="2026-10-23 02:30:48Z" duration="0.007491" asserts="0">
+                <properties />
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

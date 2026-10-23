@@ -1,0 +1,72 @@
+
+extracted\ilspy\Assembly-CSharp\AppDataModel_Option.cs:232:		AppDataModel.RegOption("option.ActionSystem.UISpineActor.s_UISpineAlwaysMult", new AppDataModel.AppOption<bool>
+extracted\ilspy\Assembly-CSharp\AppDataModel_Option.cs:236:				UISpineActor.s_UISpineAlwaysMult = inputData;
+extracted\ilspy\Assembly-CSharp\AppDataModel_Option.cs:238:			cacheValue = UISpineActor.s_UISpineAlwaysMult
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:69:	private UISpineActor m_uiSpineActor;
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:207:			m_ActorTarget.DrawToBuffer(m_CommandBuffer);
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:222:			m_uiSpineActor = m_ActorGameObject.AddComponent<UISpineActor>();
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:223:			m_ActorTarget = m_uiSpineActor;
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:280:		if (m_uiSpineActor != null)
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:282:			m_uiSpineActor.EnableUpdateRendererSize(enable);
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:291:		if (m_uiSpineActor != null)
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:293:			m_uiSpineActor.EnableCanvasGroupCompatible(canvasGroupCompatible);
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:294:			m_uiSpineActor.EnablePmaVertexColor(PMAVertexColor);
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:295:			m_uiSpineActor.EnableTintBlack(TintBlack);
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:383:	public void SetSlotAttachment(string slotName, string attachmentName)
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:387:			UISpineActor uISpineActor = m_ActorTarget as UISpineActor;
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:388:			if (uISpineActor != null)
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:390:				uISpineActor.SetSlotAttachment(slotName, attachmentName);
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:466:		if (m_uiSpineActor != null)
+extracted\ilspy\Assembly-CSharp\UIModelShow.cs:468:			m_uiSpineActor.SetMountSeparatorSlotNames(new string[1] { sSlotName }, sortingOrderIncreament, baseSortingOrder);
+extracted\ilspy\Assembly-CSharp\ActionSystem\SpineActor.cs:563:				CreateSubSkeleton(list);
+extracted\ilspy\Assembly-CSharp\ActionSystem\SpineActor.cs:1599:	public virtual void DrawToBuffer(CommandBuffer commandBuffer)
+extracted\ilspy\Assembly-CSharp\ActionSystem\SpineActor.cs:1719:			m_MountActor.SeparatorSkeleton(m_SeparatorSlotNames, m_SeparatorOrtingOrderIncreament, m_SeparatorBaseSortingOrder);
+extracted\ilspy\Assembly-CSharp\ActionSystem\SpineActor.cs:1761:		SeparatorSkeleton(sSlotName, sortingOrderIncreament, baseSortingOrder);
+extracted\ilspy\Assembly-CSharp\ActionSystem\SpineActor.cs:1764:	public virtual bool SeparatorSkeleton(string[] sSlotName, int sortingOrderIncreament, int baseSortingOrder)
+extracted\ilspy\Assembly-CSharp\ActionSystem\SpineActor.cs:2067:	protected virtual void CreateSubSkeleton(List<SkinReq> skinReqs)
+extracted\ilspy\Assembly-CSharp\ActionSystem\SpineActor.cs:2097:	protected virtual FollowSpineActor CreateSkeletonActor(SpineActor parent, string targetSlotName, string followBone, string cmpRootBone, string separatorSlotName, int skinID)
+extracted\ilspy\Assembly-CSharp\ActionSystem\SpineActor.cs:2135:			value = CreateSkeletonActor(this, targetSlotName, followBoneName, cmpRootBoneName, separatorSlotName, skinReq.skinID);
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:19:public class UISpineActor : SpineActor
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:119:	internal SkeletonGraphic CreateSkeletonGraphic(SkeletonDataAsset skeletonDataAsset, bool gray, bool tintBlack = false)
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:171:		m_SkeletonGraphic = CreateSkeletonGraphic(skeletonDataAsset, m_Gray, m_TintBlack);
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:323:	public void SetSlotAttachment(string slotName, string attachName)
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:439:	public override void DrawToBuffer(CommandBuffer commandBuffer)
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:457:	protected override FollowSpineActor CreateSkeletonActor(SpineActor parent, string followSlotName, string targetBone, string cmpRootBone, string separaterSlotName, int skinID)
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:467:		followSpineActor.followActor = gameObject.AddComponent<UISpineActor>();
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:483:		InitWithUISpineActor(fsActor.ownerActor as UISpineActor);
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:487:	private void InitWithUISpineActor(UISpineActor otherActor)
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:537:			boneFollowerGraphic.skeletonGraphic = ((UISpineActor)fsActor.ownerActor).m_SkeletonGraphic;
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:553:		Debug.LogError("UISpineActor 没有实现闪光接口");
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:558:		UISpineActor uISpineActor = null;
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:563:			uISpineActor = (UISpineActor)(m_MountActor = obj.AddComponent<UISpineActor>());
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:567:			uISpineActor = m_MountActor as UISpineActor;
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:569:		uISpineActor.CreateRoot();
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:570:		uISpineActor.m_FlipX = m_FlipX;
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:571:		uISpineActor.m_FlipY = m_FlipY;
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:572:		uISpineActor.m_SortingGroup.sortingLayerName = m_SortingGroup.sortingLayerName;
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:573:		uISpineActor.m_SortingGroup.sortingOrder = m_SortingGroup.sortingOrder;
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:574:		uISpineActor.ComputerSortIndex();
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:577:	public override bool SeparatorSkeleton(string[] sSlotName, int sortingOrderIncreament, int baseSortingOrder)
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:622:		if (!m_MountActor.SeparatorSkeleton(m_SeparatorSlotNames, m_SeparatorOrtingOrderIncreament, m_SeparatorBaseSortingOrder))
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:664:	protected override void CreateSubSkeleton(List<SkinReq> skinReqs)
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:684:			SkeletonGraphic skeletonGraphic = CreateSubSkeletonGraphic(skinReq, dictionary, list, out tintBlack);
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:761:	protected SkeletonGraphic CreateSubSkeletonGraphic(SkinReq req, Dictionary<string, int> slotIndexDict, List<IndexTransform> transformIndexs, out bool tintBlack)
+extracted\ilspy\Assembly-CSharp\ActionSystem\UISpineActor.cs:764:		SkeletonGraphic skeletonGraphic = CreateSkeletonGraphic(skeletonDataAsset, m_Gray, m_TintBlack);
+extracted\ilspy\Assembly-CSharp\ActorSystem\Actor.cs:1307:	public void DrawToBuffer(CommandBuffer commandBuffer)
+extracted\ilspy\Assembly-CSharp\ActorSystem\DragonBonesActor.cs:1601:	public void DrawToBuffer(CommandBuffer commandBuffer)
+extracted\ilspy\Assembly-CSharp\ActorSystem\IActor.cs:118:	void DrawToBuffer(CommandBuffer commandBuffer);
+extracted\ilspy\Assembly-CSharp\CSGUI\CSGUIDragoneBoneImage.cs:152:			m_ActorTarget.DrawToBuffer(m_CommandBuffer);
+extracted\ilspy\Assembly-CSharp\CSGUI\CSGUITroop.cs:177:	private SkeletonGraphic CreateSkeletonGraphic(SoldierBaseInfo soldierBaseInfo)
+extracted\ilspy\Assembly-CSharp\CSGUI\CSGUITroop.cs:226:			SkeletonGraphic skeletonGraphic = CreateSkeletonGraphic(list[num]);
+extracted\ilspy\Assembly-CSharp\CSGUI\CSGUIWidgetBase.cs:3243:		GetChildTransform(index).GetComponent<UIModelShow>().SetSlotAttachment(slotName, name);
+extracted\ilspy\Assembly-CSharp\UIModelCache\UIModelCacheItem.cs:33:	private UISpineActor uISpineActor;
+extracted\ilspy\Assembly-CSharp\UIModelCache\UIModelCacheItem.cs:143:				uISpineActor = gameObject2.AddComponent<UISpineActor>();
+extracted\ilspy\Assembly-CSharp\UIModelCache\UIModelCacheItem.cs:144:				m_ActorTarget = uISpineActor;
+extracted\ilspy\Assembly-CSharp\UIModelCache\UIModelCacheItem.cs:154:		if (uISpineActor != null)
+extracted\ilspy\Assembly-CSharp\UIModelCache\UIModelCacheItem.cs:156:			uISpineActor.SetUseClipping(use: true);
+extracted\ilspy\Assembly-CSharp\UIModelCache\UIModelCacheItem.cs:192:		if (uISpineActor != null)
+extracted\ilspy\Assembly-CSharp\UIModelCache\UIModelCacheItem.cs:194:			uISpineActor.ForceUpdate();
+extracted\ilspy\spine-unity\Spine\SpineSkeletonExtensions.cs:66:			skeleton.SetSlotAttachmentToSetupPose(num2);
+extracted\ilspy\spine-unity\Spine\SpineSkeletonExtensions.cs:134:	public static void SetSlotAttachmentsToSetupPose(this Skeleton skeleton)
+extracted\ilspy\spine-unity\Spine\SpineSkeletonExtensions.cs:162:	public static void SetSlotAttachmentToSetupPose(this Skeleton skeleton, int slotIndex)
+
