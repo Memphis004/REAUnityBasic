@@ -21,9 +21,11 @@
 |---|---|---|---|
 | FullBody | `StreamingAssets\Windows\character\spinelib\body\1113002_1_skeletondata.ab` | `1e511064bbc7b841db204ccc0a0b5af77d04aae4c01d330d99e878febdc1fefd` | `FullBody/1113002_1.skel.bytes` (539,379 B), `1113002_1.atlas.txt` (2,007 B), `1113002_1.png` (364×80) |
 | Chibi | `StreamingAssets\Windows\character\spinelib\body_npc\1123011_skeletondata.ab` | `cf45fb5eb81088b7cd2e20bf6338b9881a27bcb0c25593e402003a8c25cef1da` | `Chibi/1123011.skel.bytes` (18,265 B), `1123011.atlas.txt` (8,673 B), `1123011.png` (1016×272) |
+| Third | `StreamingAssets\Windows\character\spinelib\body\1113101_1_skeletondata.ab` | `acce54075a05ea2f305789fcb4c487ee3db0fac2b9b234accad681697995565f` | `Third/1113101_1.skel.bytes` (194,142 B), `1113101_1.atlas.txt` (2,261 B), `1113101_1.png` (128×392) |
 | Weapon (component) | `StreamingAssets\Windows\character\spinelib\weapon\weapon_skeletondata.ab` | `04ade5c055d1d38965efb0f1c1075ce77872f8c4f2c0f72abbed2eb7bd1a855c` | `Weapon/weapon.skel.bytes` (12,445 B), `weapon.atlas.txt` (14,708 B), `weapon.png` (2048×364) |
 
 - ทั้งสอง bundle มี atlas **1 หน้า** → texture 1 ไฟล์ต่อชุด (ชื่อไฟล์ตรงกับ page line ใน atlas)
+- ชุดที่สาม (`Third`) มาจาก bundle `body/1113101_1` (สกัดไว้ก่อนหน้าที่ `%TEMP%\spine_cand\body1113101`) — คัดลอกเข้า `Assets/_LocalReference/Third/`
 - `source.json` ในแต่ละโฟลเดอร์เก็บ bundle path, sha256, รายละเอียด material ที่อ่านได้จาก bundle (ใช้ตรวจตอน import)
 - ไม่ต้องหาชื่อ bundle ใกล้เคียง: ชื่อที่ใช้ตรงกับที่ระบุ (full body = `body\1113002_1`, chibi = `body_npc\1123011`)
 
@@ -84,59 +86,56 @@ Assets/_LocalReference/Chibi/1123011_SkeletonData.asset
 Assets/_LocalReference/Chibi/1123011_Atlas.asset
 Assets/_LocalReference/Chibi/1123011_Material.mat
 Assets/_LocalReference/Chibi/1123011_Material_Gray.mat
+Assets/_LocalReference/Third/1113101_1_SkeletonData.asset
+Assets/_LocalReference/Third/1113101_1_Atlas.asset
+Assets/_LocalReference/Third/1113101_1_Material.mat
+Assets/_LocalReference/Third/1113101_1_Material_Gray.mat
 Assets/_LocalReference/Demo.unity
 ```
 
 ---
 
-## 4. ซีน Demo (Observed — build 2026-10-23 รอบล่าสุด)
+## 4. ซีน Demo (Observed — build 2026-10-23 รอบล่าสุด, 3 ตัว)
 
 `Assets/_LocalReference/Demo.unity` สร้างด้วย **Tools/Local Reference/Build Demo Scene**
 
 - **เปิดซีนเดิมถ้ามี** (`OpenScene`) → เก็บ `Main Camera` เดิมไว้ (log: `kept existing camera 'Main Camera'`)
   แล้วลบ root object อื่นทั้งหมดก่อนสร้างใหม่; ถ้าไม่มีซีนจะสร้าง EmptyScene + camera เอง
-  (กันสภาพ "ซีน Untitled ที่มี object ค้าง" หลัง build ล้มกลางทาง)
 - Camera 1 ตัว: SolidColor (0.07, 0.08, 0.11), orthographic size 5, z = −10, tag `MainCamera`
 - EventSystem 1 ตัว (StandaloneInputModule)
 - Canvas: Screen Space - Overlay + CanvasScaler `ScaleWithScreenSize`, reference 1920×1080, match 0.5
+- ใต้ Canvas: `ActorRoot` (RectTransform แบบ stretch เต็มจอ) ถือ actor ทั้งสาม + `DemoCanvasLayout` + `DemoZoomPan`;
+  UI (Title / InfoPanel / Controls) อยู่ใต้ Canvas โดยตรง → ซูม/แพนไม่กระทบ UI
 
-ผัง (reference pixel; 1 px = 1 หน่วย canvas):
+| | `FullBody_1113002_1` | `Chibi_1123011` | `Third_1113101_1` |
+|---|---|---|---|
+| ตำแหน่ง (สัดส่วนความกว้าง canvas) | −0.25 (ซีกซ้าย) | +0.20 | +0.40 |
+| ความสูงเป้าหมาย | **70%** = 756 px | **25%** = 270 px | **25%** = 270 px |
+| mesh ที่วัด (setup ∪ idle 0.1s) | 115.254 × 110.548 | 120.699 × 84.860 | 125.455 × 154.416 |
+| localScale | 6.633 | 3.086 | 1.696 |
+| ขนาดบนจอ (fit) | 764.5 × 756 | 372.5 × 270 | 212.8 × 270 |
+| ฐานเท้า | y = −400 (140 px จากขอบล่าง) | เท่ากัน | เท่ากัน |
+| Initial Skin | `body_1113002_1` | `body_1123011_1` | `body_1113101_1` |
+| Initial Animation (loop) | `idle1` | `stand` | `idle1` |
+| normalMaterial | `FullBody/1113002_1_Material.mat` | `Chibi/1123011_Material.mat` | `Third/1113101_1_Material.mat` |
+| grayMaterial | `..._Material_Gray.mat` (โฟลเดอร์เดียวกัน) | เหมือนกัน | เหมือนกัน |
 
-| | `FullBody_1113002_1` | `Chibi_1123011` |
-|---|---|---|
-| ตำแหน่ง mesh center (x) | −480 (ซีกซ้าย) | +480 (ซีกขวา) |
-| ความสูงเป้าหมาย | **70%** ของ canvas = 756 px | **25%** = 270 px |
-| mesh ที่วัด (setup ∪ idle 0.1s) | 115.3 × 110.5 px | 135.4 × 87.7 px |
-| localScale | 6.633 | 2.987 |
-| ขนาดบนจอ (fit) | 764.5 × 756 px | 404.4 × 270 px |
-| ฐานเท้า | y = −400 (140 px จากขอบล่าง) | y = −400 (เท่ากัน) |
-| Initial Skin | `body_1113002_1` | `body_1123011_1` |
-| Initial Animation (loop) | `idle1` | `stand` |
-| normalMaterial | `FullBody/1113002_1_Material.mat` | `Chibi/1123011_Material.mat` |
-| grayMaterial | `FullBody/1113002_1_Material_Gray.mat` | `Chibi/1123011_Material_Gray.mat` |
+- actor ทั้งสามถูกเก็บ reference ครบใน `SpineDemoController` (`fullBody`, `chibi`, `third`, `info`) + `mountData/mountSkin/mountBone` — ไม่มี None
+  (`initialLoop = 1`, `canvasGroupCompatible = 0` → pmaVertexColors = true)
+- **ซูม/แพน**: `DemoZoomPan` บน `ActorRoot` — wheel = ซูมเข้าหาตำแหน่งเมาส์ (0.6×–8×), คลิกขวาลาก = แพน, ปุ่ม `Reset View` = กลับ 1×
+  (`Zoom`, `Pan`, `ZoomBy`, `SetZoom`, `ResetView` เป็น public; ตรวจใน batch แล้วว่า `SetZoom(2.5)` → scale 2.5 และ Reset กลับเป็น 1/pan 0)
+- **ทดสอบหลายอัตราส่วน (Observed)**: `DemoCanvasLayout` ใช้ mesh box ที่ builder วัดไว้ แล้วแมปกับ canvas rect สด
+  ⇒ 16:9 (1920×1080), 4:3 (1663×1247), 21:9 (2217×935) ให้ผลเท่ากัน: **67.9% / 24.3% / 24.3%** ของความสูง canvas
+  และตำแหน่ง mesh center x = **−480 / 384 / 768**, **−415.8 / 332.6 / 665.2**, **−554.3 / 443.4 / 886.8** ตามลำดับ
+  (ค่า = `heightFraction × 0.97` ของความสูง; 0.97 คือ margin กัน bbox ที่โตตาม idle ไปทับแถบปุ่ม)
+- `DemoCanvasLayout` ตอบ `OnRectTransformDimensionsChange` ด้วย → ตอน `SaveScreenshot` ที่สลับ canvas เป็น Screen Space - Camera
+  และตอนผู้เล่นเปลี่ยนขนาดหน้าต่าง จะจัดวางใหม่ในเฟรมเดียวกันก่อนเรนเดอร์
+- Info: panel สีเข้ม 980×156 ที่ (24, 118) + Text 20 px (3 บรรทัด×2) แสดง bones/slots/skins/anims + skin/animation ของทั้งสามตัว
+- ปุ่ม 8 ปุ่มใต้ canvas (panel 1830×84 ที่ y = 20): `Next Skin`, `Next Animation`, `Flip X`, `Toggle Gray`, `Reset View`, `Mount`, `Audit Skins`, `Screenshot`
+  ผูกด้วย `UnityEventTools.AddPersistentListener` (observed: `buttons=8`)
 
-- Initial Skin = **skin แรกที่ไม่ใช่ `default`** (ทั้งสองตัวมี จึงไม่มีเคส "ปล่อยว่าง"; ถ้าไม่มี builder จะปล่อยว่างและ log `(none - no non-default skin)`)
-  - skin เดียวไม่พอต่อการแสดงเต็มตัว (FullBody แยก `body_/face_/head_`) → builder และ `SpineDemoController` ยังรวม skin กลุ่มละตัวเป็น `demo_combined_N` ให้เห็นทั้งตัว
-- การ fit: `scale = เป้าหมาย × 0.97 ÷ ความสูง mesh` โดยวัด mesh จริงหลัง `UpdateMesh()` (ขนาดจาก `SkeletonData.Height` ใช้ไม่ได้ — เป็น setup pose)
-  - วัด union ของ setup pose (หลัง `SetSlotsToSetupPose`) กับ idle ที่ t = 0.1s เพราะ bbox ระหว่างเล่นโตขึ้นอีก ~2–5%
-    ถ้า fit ที่ 100% ตรง ๆ เท้าจะจมลงไปใต้แถบปุ่ม (พบในรอบก่อน: 74% และเท้าอยู่ที่ 70 px จากขอบล่าง)
-  - ชดเชย mesh center: `anchoredPosition = เป้าหมาย − meshCenter × scale` และ `sizeDelta` = ขนาด mesh (ให้ Canvas culling เห็น)
-- **การเลือก loop (Observed)**: `idle1` ของ Chibi เป็นแอนิเมชันกลิ้ง → bbox กว้างขึ้น **8.73 เท่า** (เดินออกข้าง ~1,031 หน่วย)
-  builder จึงตรวจ loop ทุกตัว (`growth ≤ 1.6×1.7`) แล้วเลือก `stand` (growth 1.29×1.10) ให้ Chibi;
-  FullBody `idle1` ผ่าน (growth 1.02×1.09); `SpineDemoController.Start()` เล่น `InitialAnimation` ที่เซ็ตไว้ (ไม่ override กลับเป็น idle1)
-- Material (Observed ในไฟล์ `.mat`): ปกติ `Spine/SkeletonGraphic` + `_StraightAlphaInput: 0` + keyword `_STRAIGHT_ALPHA_INPUT` ปิด (PMA)
-  สีเทา `Spine/SkeletonGraphic Grayscale` (shader ใน `Assets/Scripts/SpineSystem/Shaders/Spine-SkeletonGraphic-Grayscale.shader`) + `_GrayAmount: 1` + texture เดียวกัน + PMA เหมือนกัน
-  - `SpineUiActor.normalMaterial/grayMaterial` เป็น `private [SerializeField]` ไม่มี setter → builder เซ็ตด้วย `SerializedObject` (observed: ค่าในซีนไม่เป็น None, shader ตรงตามที่ตรวจ)
-- Info: panel สีเข้ม 900×124 ที่ (24, 118) + Text 22 px ข้างใน — กันตัวอักษรขาวทับชุดของ FullBody
-- ปุ่ม 7 ปุ่มใต้ canvas (panel 1610×84 ที่ y = 20): `Next Skin`, `Next Animation`, `Flip X`, `Toggle Gray`, `Mount`, `Audit Skins`, `Screenshot`
-  ผูกด้วย `UnityEventTools.AddPersistentListener` (observed: `buttons=7` และทุกปุ่มมี persistent listener 1 ตัว)
-
-Reference ของ `SpineDemoController` (อ่านจาก Demo.unity): `fullBody → FullBody_1113002_1`, `chibi → Chibi_1123011`,
-`info → Info (Text)`, `mountData → weapon_SkeletonData`, `mountSkin = w_jian/w_jian_300101`, `mountBone = wuqi` — **ไม่มี None**
-(`initialLoop = 1` ทั้งสอง actor, `canvasGroupCompatible = 0` → pmaVertexColors = true)
-
-ผล `Verify` ท้าย build (edit mode): `cameras=1 canvases=1 buttons=7 errors=0`;
-FullBody 745.2 px = 69% (fit 67.9%), Chibi 260.7 px = 24.1% (fit 24.3%), FullBody x = −623, Chibi x = +427 (ตำแหน่ง rect หลังชดเชย mesh center)
+ผล `Verify` ท้าย build (edit mode): `cameras=1 canvases=1 buttons=8 errors=0`;
+FullBody 745.2 px = 69% (fit 67.9%, meshX −477), Chibi 260.5 px = 24.1% (meshX 388), Third 246 px = 22.8% (meshX 769)
 
 ---
 
@@ -163,20 +162,25 @@ FullBody 745.2 px = 69% (fit 67.9%), Chibi 260.7 px = 24.1% (fit 24.3%), FullBod
 - ข้อสำคัญ: component ที่มี `followSlot` จริง (311 แถวใน `dbcomponentcfg`) **ไม่มี bundle ใดในเครื่องนี้เลย**
   → ทดสอบด้วย weapon skeleton แทน; เมื่อมีชุด bundle ครบสามารถเปลี่ยน `mountData` เป็น component นั้นได้ทันที
 
-### 5.2 ผลการรันจริงใน Play mode (batch, 2026-10-23)
+### 5.2 ผลการรันจริงใน Play mode (batch, 2026-10-23, 3 actor)
 
 `PlayCheckBatch` เปิด `Demo.unity` → `EditorApplication.EnterPlaymode()` → รอ 20 เฟรม → ตรวจ → ออกด้วย exit code
 (รอบล่าสุด: **PASS, exit 0, errors = 0**; ใช้ `-batchmode` ไม่ใส่ `-nographics`/`-quit`)
 
-- FULL BODY: `verts=486 shader=Spine/SkeletonGraphic skin=demo_combined_0 animation=idle1 t=0.13` → **739.6 px = 68.5%** ของ canvas
-- CHIBI: `verts=126 shader=Spine/SkeletonGraphic skin=demo_combined_0 animation=stand t=0.13` → **251.5 px = 23.3%**
-- ปุ่ม 4 ตัว (Next Skin / Next Animation / Toggle Gray / Flip X) เรียกผ่าน `onClick.Invoke()` ได้ ไม่มี exception, verts รวมคงที่ 612
-- หลัง Toggle Gray: material ของ FullBody เป็น shader `Spine/SkeletonGraphic Grayscale`
-- ภาพ 1920×1080 จาก `SaveScreenshot` (วิเคราะห์ pixel): FullBody อยู่ซีกซ้าย (x 116–843), Chibi อยู่ซีกขวา (x 1274–1619) ไม่มีตัวไหนหลุดขอบ
-- เก็บภาพ: `Assets/_LocalReference/Screenshots/demo_built_idle1.png` (ก่อนกดปุ่ม) และ `demo_after_buttons.png` (หลังกด Flip/Gray)
+- canvas ใน play ของ batch สูง **1247 หน่วย** (4:3) — ตรวจโดยใช้ความสูงจริง ไม่ใช้ค่าคงที่ 1080
+- FULL BODY: `verts=486 shader=Spine/SkeletonGraphic skin=demo_combined_0 animation=idle1` → **861.9 px = 69.1%** (scale 7.66)
+- CHIBI: `verts=126 ... animation=stand` → **300.8 px = 24.1%** (scale 3.564)
+- THIRD: `verts=359 ... animation=idle1` → **283.3 px = 22.7%** (scale 1.958)
+- `DemoCanvasLayout.ApplyForSize(1663×1247)` ระหว่างเล่น → 67.9% / 24.3% / 24.3% และ x = −415.8 / 332.6 / 665.2 ตามที่ออกแบบ
+  แล้วคืนค่าเป็นขนาด canvas จริงทันที (เทสต์เดียวกับที่ `Update` ใช้)
+- ปุ่มที่กดผ่าน `onClick.Invoke()`: Next Skin / Next Animation / Toggle Gray / Flip X / Reset View — ไม่มี exception, verts รวมคงที่ 971
+- ภาพเรนเดอร์ 1920×1080 (วิเคราะห์ pixel): FullBody x 114–840 (ซีกซ้าย), Chibi+Third x 1169–1834 (ซีกขวา) ไม่หลุดขอบ
+- ภาพเก็บไว้: `Assets/_LocalReference/Screenshots/demo_built_idle1.png`, `demo_three_actors.png`, `demo_after_buttons.png`
 
-**Observed (ทำไมไม่ใช่ 70/25 เป๊ะ)**: bbox เปลี่ยนตามเฟรม (FullBody idle1 กว้างขึ้น 1.02 เท่า สูงขึ้น 1.09 เท่า) →
-fit ที่ 97% ของเป้าหมาย เพื่อให้ bbox ที่โตขึ้นยังไม่ล้นลงไปใต้แถบปุ่ม; ตัวเลข 68.5% / 23.3% คือค่าที่วัดได้จริงตอน play
+**Observed (ทำไมไม่ใช่ 70/25 เป๊ะ)**: fit ที่ 97% ของเป้าหมาย เพื่อให้ bbox ที่โตขึ้นตาม idle (สูงขึ้น ~2–5%) ไม่ล้นลงไปใต้แถบปุ่ม;
+68–69% / 23–24% คือช่วงที่วัดได้จริงระหว่างเล่น
+
+---
 
 ### 5.3 กลไก batch play check (Observed)
 
@@ -185,8 +189,8 @@ fit ที่ 97% ของเป้าหมาย เพื่อให้ bbo
 - รอ `EditorApplication.isPlaying` แล้ว 20 เฟรม (ให้ `Start()` สร้าง actor + animation ได้ tick) → ตรวจ → `EditorApplication.Exit(0/2)`
 - timeout 180 วินาที → exit 1 (กันค้างแบบรอบก่อนที่ต้อง kill process)
 - ต้องมี graphics device (ไม่ใส่ `-nographics`) ไม่งั้น `SaveScreenshot` render ไม่ได้
-
----
+- ค่าที่ใช้ตัดสิน: การมีตัวละคร/verts/material, skin+animation ที่เล่นจริง, ความสูงเทียบความสูง canvas จริง,
+  `DemoCanvasLayout.ApplyForSize(4:3)` ระหว่างเล่น, `DemoZoomPan` set/reset, ปุ่มทั้ง 5 ทำงาน และมีไฟล์ภาพออกมา
 
 ## 6. ปัญหาที่เหลือ (Observed / Inferred)
 
@@ -217,17 +221,21 @@ fit ที่ 97% ของเป้าหมาย เพื่อให้ bbo
 
 1. เปิด Unity Editor ที่โปรเจกต์ `my_clone`
 2. เปิด `Assets/_LocalReference/Demo.unity` (**ไม่ใช่ซีน Untitled ที่ค้างอยู่** — ถ้ามีซีน Untitled ให้ปิดทิ้งโดยไม่ต้องบันทึก)
-3. กด Play: `SpineDemoController.Start()` จะ `Build()` actor ใหม่ (เพราะ `SpineUiActor.m_Graphic` ไม่ถูก serialize),
-   รวม skin กลุ่มละตัว แล้วเล่น `InitialAnimation` ที่เซ็ตไว้ (`idle1` / `stand`) — ป้าย Info จะแสดง bones/slots/skins/anims + skin/animation ปัจจุบัน
+3. กด Play: `SpineDemoController.Start()` จะ `Build()` actor ทั้งสามใหม่ (เพราะ `SpineUiActor.m_Graphic` ไม่ถูก serialize),
+   รวม skin กลุ่มละตัว แล้วเล่น `InitialAnimation` ที่เซ็ตไว้ (`idle1` / `stand` / `idle1`) — ป้าย Info แสดง bones/slots/skins/anims + skin/animation ของทั้งสามตัว
+4. **ซูม/แพน**: หมุนล้อเมาส์ = ซูมเข้าหาเคอร์เซอร์ (0.6×–8×), คลิกขวาลาก = แพน, ปุ่ม `Reset View` = กลับ 1×
+   (actor อยู่ใต้ `ActorRoot` ที่ถูกซูม/แพน; Title/Info/ปุ่มไม่ขยับ) — ใช้ดู texture ของ 1113002_1 (364×80) แบบใกล้ ๆ ได้
+5. ปรับขนาดหน้าต่าง/สลับ aspect ได้ระหว่างเล่น: `DemoCanvasLayout` คำนวณใหม่ทันที (ไม่ต้องกด Play ใหม่)
 
 ### 7.2 ปุ่ม
 
 | ปุ่ม | เรียก | ผลที่เห็น |
 |---|---|---|
-| **Next Skin** | `SpineDemoController.NextSkin()` | เลื่อน variant ถัดไปของทุกกลุ่ม skin พร้อมกัน (FullBody: `body/face/head_1113002_1`; Chibi: `body/head_1123011_1..7`) แล้ว refresh ป้าย Info |
-| **Next Animation** | `NextAnimation()` | เล่นแอนิเมชันถัดไปในรายการของ skeleton (คนละรายการระหว่างสองตัว) แบบ loop |
-| **Flip X** | `ToggleFlip()` | `SpineUiActor.SetFlipX(!FlipX)` ทั้งสองตัว (กลับด้านซ้าย–ขวา) |
+| **Next Skin** | `SpineDemoController.NextSkin()` | เลื่อน variant ถัดไปของทุกกลุ่ม skin พร้อมกัน ทั้งสาม actor (FullBody: `body/face/head_1113002_1`; Chibi: `body/head_1123011_1..7`; Third: `body/face/head_1113101_1`) แล้ว refresh ป้าย Info |
+| **Next Animation** | `NextAnimation()` | เล่นแอนิเมชันถัดไปในรายการของ skeleton (คนละรายการระหว่างสามตัว) แบบ loop |
+| **Flip X** | `ToggleFlip()` | `SpineUiActor.SetFlipX(!FlipX)` ทั้งสามตัว (กลับด้านซ้าย–ขวา) |
 | **Toggle Gray** | `ToggleGray()` | สลับ material ปกติ ↔ `Spine/SkeletonGraphic Grayscale` (`_GrayAmount = 1`); กดอีกครั้งคืนสี |
+| **Reset View** | `DemoZoomPan.ResetView()` | คืน zoom = 1 และ pan = 0 (เหมือนตอนเปิดซีน) |
 | Mount | `ToggleMount()` | `fullBody.Mount(weaponData, "w_jian/w_jian_300101")` + `MountToBone("wuqi")`; กดอีกครั้ง = `UnMount()` (ซ่อน ไม่ลบ) |
 | Audit Skins | `AuditSkins()` | log ทุก skin variant: slots ที่มี attachment, verts, ขนาด mesh, slot ที่ว่าง, สรุป `complete variants` |
 | Screenshot | `CaptureScreenshot()` | render canvas 1920×1080 ลง `Assets/_LocalReference/Screenshots/demo_NN_<anim>_variant<k>.png` |
