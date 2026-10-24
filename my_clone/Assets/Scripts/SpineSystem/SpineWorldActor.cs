@@ -72,11 +72,36 @@ namespace MyClone.SpineSystem
 
 		protected override void DestroyRenderer ()
 		{
-			if (m_Animation != null) {
-				SafeDestroy (m_Animation.gameObject);
+			var tracked = m_Animation != null ? m_Animation.gameObject : null;
+
+			DestroyOrphanRenderers (tracked);
+
+			if (tracked != null) {
+				SafeDestroy (tracked);
 				m_Animation = null;
 			}
+
 			DestroyGrayMaterials ();
+		}
+
+		/// <summary>
+		/// m_Animation does not serialize, so a duplicate or scene reload leaves the old
+		/// SkeletonAnimation child behind and the next Build stacks a second one. Remove
+		/// any stale renderer child the tracked reference no longer owns. Mount roots
+		/// ("SpineMount") carry no SkeletonRenderer, so they are never touched here.
+		/// </summary>
+		void DestroyOrphanRenderers (GameObject keep)
+		{
+			for (int i = transform.childCount - 1; i >= 0; i--) {
+				var child = transform.GetChild (i).gameObject;
+				if (child == keep)
+					continue;
+
+				if (child.GetComponent<SkeletonRenderer> () != null) {
+					child.SetActive (false); // stop the stale renderer drawing while Destroy is pending
+					SafeDestroy (child);
+				}
+			}
 		}
 
 		void ApplySorting ()

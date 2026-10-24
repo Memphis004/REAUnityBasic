@@ -96,7 +96,47 @@ namespace MyClone.EditorTools
 		const string PortraitGrayMaterial = PortraitDir + "/2110101_Material_Gray.mat";
 		const string PortraitDataAsset = PortraitDir + "/2110101_SkeletonData.asset";
 		const float PortraitHeight = CanvasHeight * 0.70f;    // same slot as the full body
+
+		// Sixth slot: body_1110901 (Tree Farm), imported by Tools/Local Reference/Import Spine By Id.
+		// The importer writes these exact names, so the builder only consumes the result.
+		const string TreeFarmDir = Root + "/Spine/body_1110901";
+		const string TreeFarmSkeleton = TreeFarmDir + "/body_1110901.skel.bytes";
+		const string TreeFarmAtlasText = TreeFarmDir + "/body_1110901.atlas.txt";
+		const string TreeFarmTexture = TreeFarmDir + "/body_1110901.png";
+		const string TreeFarmAtlasAsset = TreeFarmDir + "/body_1110901_Atlas.asset";
+		const string TreeFarmMaterial = TreeFarmDir + "/body_1110901_Material.mat";
+		const string TreeFarmGrayMaterial = TreeFarmDir + "/body_1110901_Material_Gray.mat";
+		const string TreeFarmDataAsset = TreeFarmDir + "/body_1110901_SkeletonData.asset";
+		const float TreeFarmHeight = CanvasHeight * 0.25f;    // 270 px, same row as the chibi
+		const float TreeFarmSide = 0.30f;                     // between the chibi and the third actor
+		const string TreeFarmAnimation = "stand";             // the animation UnityExplorer reported
+		// dbbodyconfig-style combination: one variant per part group (body/face/head), stored
+		// on the actor as serialized skin parts and composed by SpineActorBase at build time.
+		static readonly string[] TreeFarmSkinParts = { "body_1110901_1", "face_1110901_1", "head_1110901_1" };
 		const string MountBone = "wuqi";
+
+		// Extra skeletons imported from the library and shown in the Tree Farm slot, one at a time.
+		// The button "Next Library" cycles body_1110901 -> these four -> back. They share the slot
+		// with the Tree Farm actor, so only the active one is visible (alpha), and the wide ones are
+		// width-capped to stay inside the gap between the chibi and the third actor.
+		static readonly string[] LibraryExtraIds = { "460011_1", "410041_1", "1110011", "570036" };
+		const float LibraryWidthFraction = 0.13f;
+
+		class LibraryEntry
+		{
+			public string id;
+			public SkeletonDataAsset data;
+			public Material normal;
+			public Material gray;
+			public SpineUiActor actor;
+			public Vector2 meshSize = Vector2.one;
+			public Vector2 meshCenter;
+		}
+
+		static string LibraryPath (string id, string suffix)
+		{
+			return Root + "/Spine/" + id + "/" + id + suffix;
+		}
 
 		// Fourth slot: the shared weapon skeleton shown on its own next to the characters, using the
 		// same skin the Mount button attaches. A sword is much wider than it is tall, so the slot is
@@ -157,6 +197,19 @@ namespace MyClone.EditorTools
 			var thirdData = EnsureSkeletonData (
 				ThirdSkeleton, ThirdAtlasText, ThirdTexture, ThirdAtlasAsset, ThirdMaterial, ThirdDataAsset);
 
+			// body_1110901 was imported once through the Spine library tool. If it is missing the
+			// slot is skipped with a warning, exactly like the portrait/weapon slots.
+			SkeletonDataAsset treeFarmData = null;
+			if (File.Exists (TreeFarmSkeleton)) {
+				ConfigureTexture (TreeFarmTexture);
+				treeFarmData = EnsureSkeletonData (
+					TreeFarmSkeleton, TreeFarmAtlasText, TreeFarmTexture, TreeFarmAtlasAsset,
+					TreeFarmMaterial, TreeFarmDataAsset);
+			} else {
+				Debug.LogWarning ("[LocalReferenceDemo] " + TreeFarmSkeleton +
+					" not found; import it with Tools/Local Reference/Import Spine By Id (body_1110901)");
+			}
+
 			SkeletonDataAsset portraitData = null;
 			if (File.Exists (PortraitSkeleton)) {
 				ConfigureTexture (PortraitTexture);
@@ -202,6 +255,44 @@ namespace MyClone.EditorTools
 					string.Join (",", names.ToArray ()), string.Join (",", anims.ToArray ()));
 			}
 
+			Material treeFarmNormal = null, treeFarmGray = null;
+			if (treeFarmData != null) {
+				treeFarmNormal = AssetDatabase.LoadAssetAtPath<Material> (TreeFarmMaterial);
+				treeFarmGray = EnsureGrayMaterial (TreeFarmGrayMaterial, TreeFarmMaterial, "body_1110901");
+				var td = treeFarmData.GetSkeletonData (true);
+				Debug.LogFormat ("[LocalReferenceDemo] tree farm body_1110901: version={0} bones={1} slots={2} skins={3} anims={4} stand={5}",
+					td.Version, td.Bones.Count, td.Slots.Count, td.Skins.Count, td.Animations.Count,
+					td.FindAnimation (TreeFarmAnimation) != null ? "yes" : "MISSING");
+			}
+
+			var libraryExtras = new List<LibraryEntry> ();
+			foreach (var id in LibraryExtraIds) {
+				string skeleton = LibraryPath (id, ".skel.bytes");
+				if (!File.Exists (skeleton)) {
+					Debug.LogWarning ("[LocalReferenceDemo] " + skeleton + " not found; import it with " +
+						"Tools/Local Reference/Import Spine By Id (" + id + ")");
+					continue;
+				}
+
+				ConfigureTexture (LibraryPath (id, ".png"));
+				var data = EnsureSkeletonData (
+					skeleton, LibraryPath (id, ".atlas.txt"), LibraryPath (id, ".png"),
+					LibraryPath (id, "_Atlas.asset"), LibraryPath (id, "_Material.mat"),
+					LibraryPath (id, "_SkeletonData.asset"));
+				var normal = AssetDatabase.LoadAssetAtPath<Material> (LibraryPath (id, "_Material.mat"));
+				var gray = EnsureGrayMaterial (LibraryPath (id, "_Material_Gray.mat"),
+					LibraryPath (id, "_Material.mat"), id);
+				var sd = data == null ? null : data.GetSkeletonData (true);
+				if (sd != null) {
+					Debug.LogFormat ("[LocalReferenceDemo] library {0}: version={1} bones={2} slots={3} skins={4} anims={5} stand={6}",
+						id, sd.Version, sd.Bones.Count, sd.Slots.Count, sd.Skins.Count, sd.Animations.Count,
+						sd.FindAnimation (TreeFarmAnimation) != null ? "yes" : "MISSING");
+				}
+				libraryExtras.Add (new LibraryEntry {
+					id = id, data = data, normal = normal, gray = gray
+				});
+			}
+
 			Material weaponNormal = null, weaponGray = null;
 			string weaponSkin = null;
 			if (weaponData != null) {
@@ -213,7 +304,8 @@ namespace MyClone.EditorTools
 
 			BuildScene (fullData, chibiData, thirdData, weaponData, portraitData,
 				fullNormal, fullGray, chibiNormal, chibiGray, thirdNormal, thirdGray,
-				weaponNormal, weaponGray, weaponSkin, portraitNormal, portraitGray);
+				weaponNormal, weaponGray, weaponSkin, portraitNormal, portraitGray,
+				treeFarmData, treeFarmNormal, treeFarmGray, libraryExtras);
 			AssetDatabase.SaveAssets ();
 
 			Debug.Log ("[LocalReferenceDemo] build done -> " + ScenePath);
@@ -357,7 +449,9 @@ namespace MyClone.EditorTools
 			Material fullNormal, Material fullGray, Material chibiNormal, Material chibiGray,
 			Material thirdNormal, Material thirdGray,
 			Material weaponNormal, Material weaponGray, string weaponSkin,
-			Material portraitNormal, Material portraitGray)
+			Material portraitNormal, Material portraitGray,
+			SkeletonDataAsset treeFarmData, Material treeFarmNormal, Material treeFarmGray,
+			List<LibraryEntry> libraryExtras)
 		{
 			// Reopen the existing scene so its Main Camera survives a rebuild; only a missing scene
 			// falls back to an empty one, which keeps this menu usable on a fresh checkout.
@@ -391,7 +485,7 @@ namespace MyClone.EditorTools
 			scaler.matchWidthOrHeight = 0.5f;
 
 			var title = CreateText (canvas.transform, "Title",
-				"Spine local reference - SCENE CHAR 1113002_1 (fox) / PORTRAIT 2110101 (70%, Swap) / 1123011 / 1113101_1 / w_jian (25%)   |   wheel = zoom, right-drag = pan", 30, TextAnchor.UpperCenter);
+				"Spine local reference - SCENE CHAR 1113002_1 (fox) / PORTRAIT 2110101 (70%, Swap) / 1123011 / 1113101_1 / library 5 (25%, Next Library) / w_jian   |   wheel = zoom, right-drag = pan", 30, TextAnchor.UpperCenter);
 			var titleRt = title.rectTransform;
 			titleRt.anchorMin = new Vector2 (0f, 1f);
 			titleRt.anchorMax = new Vector2 (1f, 1f);
@@ -418,6 +512,25 @@ namespace MyClone.EditorTools
 			var third = CreateActor (actorRoot, thirdData, thirdNormal, thirdGray,
 				"Third_1113101_1", new Vector2 (CanvasWidth * ThirdSide, FeetBaseline + ThirdHeight * 0.5f), ThirdHeight,
 				out thirdMeshSize, out thirdMeshCenter);
+
+			// Sixth slot: the Tree Farm skeleton imported from the library, in the free gap between
+			// the chibi and the third actor. "stand" is forced because that is what the game plays.
+			SpineUiActor treeFarm = null;
+			Vector2 treeFarmMeshSize = Vector2.one, treeFarmMeshCenter = Vector2.zero;
+			if (treeFarmData != null) {
+				treeFarm = CreateActor (actorRoot, treeFarmData, treeFarmNormal, treeFarmGray,
+					"TreeFarm_body_1110901", new Vector2 (CanvasWidth * TreeFarmSide, FeetBaseline + TreeFarmHeight * 0.5f), TreeFarmHeight,
+					out treeFarmMeshSize, out treeFarmMeshCenter, null, TreeFarmAnimation, TreeFarmSkinParts);
+			}
+
+			// Library extras share the Tree Farm slot; the saved scene shows only the Tree Farm
+			// actor, the controller reveals one at a time when "Next Library" is pressed.
+			foreach (var entry in libraryExtras) {
+				entry.actor = CreateActor (actorRoot, entry.data, entry.normal, entry.gray,
+					"Library_" + entry.id, new Vector2 (CanvasWidth * TreeFarmSide, FeetBaseline + TreeFarmHeight * 0.5f), TreeFarmHeight,
+					out entry.meshSize, out entry.meshCenter, null, TreeFarmAnimation);
+				SetAlpha (entry.actor, 0f);
+			}
 
 			// Fourth slot: the weapon skeleton standalone, same skin the Mount button uses, so the
 			// mounted result can be compared with the source atlas.
@@ -449,6 +562,21 @@ namespace MyClone.EditorTools
 					actor = weapon, heightFraction = 0.25f, sideFraction = WeaponSide, maxWidthFraction = WeaponWidthFraction,
 					rotationDegrees = WeaponRotation,
 					referenceMeshSize = weaponMeshSize, referenceMeshCenter = weaponMeshCenter
+				});
+			}
+			if (treeFarm != null) {
+				slotList.Add (new DemoCanvasLayout.Slot {
+					actor = treeFarm, heightFraction = 0.25f, sideFraction = TreeFarmSide,
+					referenceMeshSize = treeFarmMeshSize, referenceMeshCenter = treeFarmMeshCenter
+				});
+			}
+			foreach (var entry in libraryExtras) {
+				if (entry.actor == null)
+					continue;
+				slotList.Add (new DemoCanvasLayout.Slot {
+					actor = entry.actor, heightFraction = 0.25f, sideFraction = TreeFarmSide,
+					maxWidthFraction = LibraryWidthFraction,
+					referenceMeshSize = entry.meshSize, referenceMeshCenter = entry.meshCenter
 				});
 			}
 			if (portrait != null) {
@@ -515,6 +643,8 @@ namespace MyClone.EditorTools
 			controller.third = third;
 			controller.weapon = weapon;
 			controller.portrait = portrait;
+			controller.treeFarm = treeFarm;
+			controller.libraryExtras = libraryExtras.ConvertAll (e => e.actor).ToArray ();
 			controller.info = info;
 			controller.mountBone = MountBone;
 			if (weaponData != null) {
@@ -526,15 +656,17 @@ namespace MyClone.EditorTools
 
 			CreateControls (canvas.transform, controller, zoom);
 
-			// The portrait starts hidden so the saved scene matches what Play shows.
+			// The portrait is the main left actor: the saved scene shows it, and Start() applies the
+			// same serialized flag (startWithPortrait), so the scene file and Play agree.
 			if (portrait != null) {
-				portrait.SetColor (new Color (1f, 1f, 1f, 0f));
 				var swap = FindButton (canvas, "Show Portrait");
 				if (swap != null)
 					controller.mainToggleLabel = swap.GetComponentInChildren<Text> (true);
+				controller.startWithPortrait = true;
+				controller.SetPortraitShown (true);
 			}
 
-			s_LastVerifyErrors = Verify (scene, camera, canvas, scaler, actorRoot, layout, zoom, full, chibi, third, weapon, portrait, info, controller);
+			s_LastVerifyErrors = Verify (scene, camera, canvas, scaler, actorRoot, layout, zoom, full, chibi, third, weapon, portrait, treeFarm, libraryExtras, info, controller);
 
 			EditorSceneManager.MarkSceneDirty (scene);
 			EditorSceneManager.SaveScene (scene, ScenePath);
@@ -543,12 +675,18 @@ namespace MyClone.EditorTools
 		static SpineUiActor CreateActor (
 			Transform parent, SkeletonDataAsset data, Material normalMaterial, Material grayMaterial,
 			string name, Vector2 anchoredPosition, float targetHeightPixels,
-			out Vector2 referenceMeshSize, out Vector2 referenceMeshCenter, string initialSkinOverride = null)
+			out Vector2 referenceMeshSize, out Vector2 referenceMeshCenter, string initialSkinOverride = null,
+			string forcedAnimation = null, string[] skinPartsOverride = null)
 		{
 			referenceMeshSize = Vector2.one;
 			referenceMeshCenter = Vector2.zero;
 			var skeletonData = data.GetSkeletonData (true);
-			string idle = PickIdle (skeletonData);
+			string idle = string.IsNullOrEmpty (forcedAnimation) ? PickIdle (skeletonData) : forcedAnimation;
+			if (!string.IsNullOrEmpty (forcedAnimation) && skeletonData.FindAnimation (forcedAnimation) == null) {
+				Debug.LogError ("[LocalReferenceDemo] " + name + ": forced animation '" +
+					forcedAnimation + "' does not exist; falling back to " + PickIdle (skeletonData));
+				idle = PickIdle (skeletonData);
+			}
 			string initialSkin = string.IsNullOrEmpty (initialSkinOverride) ? PickInitialSkin (skeletonData) : initialSkinOverride;
 
 			// build:false so the material fields and CanvasGroupCompatible are in place before the
@@ -570,11 +708,17 @@ namespace MyClone.EditorTools
 
 			// Editor preview: apply the same combined skin the runtime controller uses, then refresh
 			// the mesh, so the saved scene shows a full character (Start does this in play mode).
-			ApplyEditorSkin (actor, initialSkin);
+			// With explicit skin parts the parts are persisted instead of the legacy string.
+			if (skinPartsOverride != null && skinPartsOverride.Length > 0) {
+				SetSerializedSkinParts (actor, skinPartsOverride);
+				actor.ReapplySkinParts ();
+			} else {
+				ApplyEditorSkin (actor, initialSkin);
+			}
 
 			// Not every idle loops in place: the chibi's idle1 rolls ~1000 units sideways, which would
 			// shrink the character to fit its travel. Pick a loop that stays put (chibi -> stand).
-			string loop = PickStableLoop (actor, skeletonData, idle);
+			string loop = string.IsNullOrEmpty (forcedAnimation) ? PickStableLoop (actor, skeletonData, idle) : idle;
 			if (!string.IsNullOrEmpty (loop) && loop != idle) {
 				Debug.Log ("[LocalReferenceDemo] " + name + ": idle '" + idle +
 					"' travels, using the stable loop '" + loop + "' instead");
@@ -647,6 +791,15 @@ namespace MyClone.EditorTools
 			normal.objectReferenceValue = normalMaterial;
 			gray.objectReferenceValue = grayMaterial;
 			so.ApplyModifiedPropertiesWithoutUndo ();
+		}
+
+		static void SetAlpha (SpineUiActor actor, float alpha)
+		{
+			if (actor == null || actor.Graphic == null)
+				return;
+			Color color = actor.Graphic.color;
+			color.a = alpha;
+			actor.SetColor (color);
 		}
 
 		/// <summary>Share of the target height used for the fit, leaving room for the idle breathing.</summary>
@@ -801,6 +954,7 @@ namespace MyClone.EditorTools
 		static void ApplyEditorSkin (SpineUiActor actor, string initialSkin)
 		{
 			if (actor == null || !actor.IsBuilt) return;
+
 			var skeleton = actor.Skeleton;
 			var groups = new Dictionary<string, List<Skin>> ();
 			var order = new List<string> ();
@@ -827,15 +981,54 @@ namespace MyClone.EditorTools
 				}
 			}
 
-			var combined = new Skin ("demo_editor_combined");
+			var names = new List<string> ();
 			foreach (var key in order) {
 				var list = groups[key];
-				combined.AddSkin (list[variant % list.Count]);
+				names.Add (list[variant % list.Count].Name);
+			}
+			actor.SetSkins (names.ToArray ());
+		}
+
+		/// <summary>
+		/// Persists skin parts on the actor through SerializedObject so the saved scene
+		/// (and the play-mode Build) recompose the same combination.
+		/// </summary>
+		static void SetSerializedSkinParts (SpineUiActor actor, string[] skinNames)
+		{
+			var so = new SerializedObject (actor);
+			var parts = so.FindProperty ("skinParts");
+			if (parts == null) {
+				Debug.LogError ("[LocalReferenceDemo] SpineActorBase no longer has a skinParts field; parts were not saved.");
+				return;
 			}
 
-			skeleton.SetSkin ((Skin) null);
-			skeleton.SetSkin (combined);
-			skeleton.SetSlotsToSetupPose ();
+			parts.arraySize = skinNames.Length;
+			for (int i = 0; i < skinNames.Length; i++) {
+				var element = parts.GetArrayElementAtIndex (i);
+				element.FindPropertyRelative ("part").stringValue = SpineActorBase.SkinPartKey (skinNames[i]);
+				element.FindPropertyRelative ("skin").stringValue = skinNames[i];
+			}
+			so.ApplyModifiedPropertiesWithoutUndo ();
+		}
+
+		static bool SkinPartsMatch (SpineActorBase.SkinPart[] actual, string[] expected)
+		{
+			if (actual == null || actual.Length != expected.Length)
+				return false;
+			for (int i = 0; i < expected.Length; i++)
+				if (actual[i].skin != expected[i])
+					return false;
+			return true;
+		}
+
+		static string DescribeParts (SpineActorBase.SkinPart[] parts)
+		{
+			if (parts == null || parts.Length == 0)
+				return "(none)";
+			var names = new List<string> ();
+			for (int i = 0; i < parts.Length; i++)
+				names.Add (parts[i].part + "=" + parts[i].skin);
+			return string.Join (",", names.ToArray ());
 		}
 
 		/// <summary>
@@ -868,15 +1061,16 @@ namespace MyClone.EditorTools
 			panelRt.sizeDelta = new Vector2 (1740f, 84f);
 			panel.GetComponent<Image> ().color = new Color (0.12f, 0.13f, 0.17f, 0.9f);
 
-			CreateButton (panel.transform, "Show Portrait", new Vector2 (-760f, 0f), controller.ToggleMainActor);
-			CreateButton (panel.transform, "Next Skin", new Vector2 (-570f, 0f), controller.NextSkin);
-			CreateButton (panel.transform, "Next Animation", new Vector2 (-380f, 0f), controller.NextAnimation);
-			CreateButton (panel.transform, "Flip X", new Vector2 (-190f, 0f), controller.ToggleFlip);
-			CreateButton (panel.transform, "Toggle Gray", new Vector2 (0f, 0f), controller.ToggleGray);
-			CreateButton (panel.transform, "Reset View", new Vector2 (190f, 0f), zoom.ResetView);
-			CreateButton (panel.transform, "Mount", new Vector2 (380f, 0f), controller.ToggleMount);
-			CreateButton (panel.transform, "Audit Skins", new Vector2 (570f, 0f), controller.AuditSkins);
-			CreateButton (panel.transform, "Screenshot", new Vector2 (760f, 0f), controller.CaptureScreenshot);
+			CreateButton (panel.transform, "Show Portrait", new Vector2 (-774f, 0f), controller.ToggleMainActor);
+			CreateButton (panel.transform, "Next Skin", new Vector2 (-602f, 0f), controller.NextSkin);
+			CreateButton (panel.transform, "Next Animation", new Vector2 (-430f, 0f), controller.NextAnimation);
+			CreateButton (panel.transform, "Next Library", new Vector2 (-258f, 0f), controller.NextLibrary);
+			CreateButton (panel.transform, "Flip X", new Vector2 (-86f, 0f), controller.ToggleFlip);
+			CreateButton (panel.transform, "Toggle Gray", new Vector2 (86f, 0f), controller.ToggleGray);
+			CreateButton (panel.transform, "Reset View", new Vector2 (258f, 0f), zoom.ResetView);
+			CreateButton (panel.transform, "Mount", new Vector2 (430f, 0f), controller.ToggleMount);
+			CreateButton (panel.transform, "Audit Skins", new Vector2 (602f, 0f), controller.AuditSkins);
+			CreateButton (panel.transform, "Screenshot", new Vector2 (774f, 0f), controller.CaptureScreenshot);
 		}
 
 		static void CreateButton (Transform parent, string label, Vector2 pos, UnityEngine.Events.UnityAction action)
@@ -884,11 +1078,11 @@ namespace MyClone.EditorTools
 			var go = new GameObject (label, typeof (RectTransform), typeof (Image), typeof (Button));
 			go.transform.SetParent (parent, false);
 			var rt = (RectTransform) go.transform;
-			rt.sizeDelta = new Vector2 (180f, 56f);
+			rt.sizeDelta = new Vector2 (160f, 56f);
 			rt.anchoredPosition = pos;
 			go.GetComponent<Image> ().color = new Color (0.24f, 0.26f, 0.33f, 1f);
 
-			var text = CreateText (go.transform, "Text", label, 20, TextAnchor.MiddleCenter);
+			var text = CreateText (go.transform, "Text", label, 19, TextAnchor.MiddleCenter);
 			text.rectTransform.anchorMin = Vector2.zero;
 			text.rectTransform.anchorMax = Vector2.one;
 			text.rectTransform.sizeDelta = Vector2.zero;
@@ -963,7 +1157,8 @@ namespace MyClone.EditorTools
 			Scene scene, Camera camera, Canvas canvas, CanvasScaler scaler,
 			RectTransform actorRoot, DemoCanvasLayout layout, DemoZoomPan zoom,
 			SpineUiActor full, SpineUiActor chibi, SpineUiActor third, SpineUiActor weapon,
-			SpineUiActor portrait, Text info, SpineDemoController controller)
+			SpineUiActor portrait, SpineUiActor treeFarm, List<LibraryEntry> libraryExtras,
+			Text info, SpineDemoController controller)
 		{
 			var errors = new List<string> ();
 
@@ -984,12 +1179,37 @@ namespace MyClone.EditorTools
 			CheckActor (full, "FULL BODY", FullBodyHeight, -1f, actorRoot, errors);
 			CheckActor (chibi, "CHIBI", ChibiHeight, 1f, actorRoot, errors);
 			CheckActor (third, "THIRD", ThirdHeight, 1f, actorRoot, errors);
+			if (treeFarm != null) {
+				CheckActor (treeFarm, "CHIBI 1110901 (Tree Farm)", TreeFarmHeight, 1f, actorRoot, errors);
+				if (treeFarm.InitialAnimation != TreeFarmAnimation)
+					errors.Add ("TREE FARM: initial animation = " + treeFarm.InitialAnimation +
+						" (expected " + TreeFarmAnimation + ")");
+				if (!SkinPartsMatch (treeFarm.GetSkinParts (), TreeFarmSkinParts))
+					errors.Add ("TREE FARM: skin parts = " + DescribeParts (treeFarm.GetSkinParts ()) +
+						" (expected " + string.Join ("+", TreeFarmSkinParts) + ")");
+			}
+			if (libraryExtras != null) {
+				foreach (var entry in libraryExtras) {
+					if (entry.actor == null)
+						continue;
+					CheckActor (entry.actor, "LIBRARY " + entry.id, TreeFarmHeight, 1f, actorRoot, errors, LibraryWidthFraction);
+					if (entry.actor.Graphic != null && entry.actor.Graphic.color.a > 0.001f)
+						errors.Add ("LIBRARY " + entry.id + ": visible in the saved scene (only Tree Farm is shown)");
+				}
+			}
 			if (weapon != null)
 				CheckActor (weapon, "WEAPON", WeaponHeight, 1f, actorRoot, errors, WeaponWidthFraction, WeaponRotation);
 			if (portrait != null) {
 				CheckActor (portrait, "PORTRAIT 2110101", PortraitHeight, -1f, actorRoot, errors);
-				if (portrait.Graphic != null && portrait.Graphic.color.a > 0.001f)
-					errors.Add ("PORTRAIT 2110101: starts visible (the Swap button should show it first)");
+				if (portrait.Graphic != null && portrait.Graphic.color.a < 0.999f)
+					errors.Add ("PORTRAIT 2110101: starts hidden (alpha = " +
+						portrait.Graphic.color.a + "); it is the main left actor");
+				if (full.Graphic != null && full.Graphic.color.a > 0.001f)
+					errors.Add ("SCENE CHAR (fox): visible while the portrait is the main actor");
+				if (controller != null && controller.mainToggleLabel != null &&
+					controller.mainToggleLabel.text != "Show Scene Char")
+					errors.Add ("main toggle caption = '" + controller.mainToggleLabel.text +
+						"' (expected 'Show Scene Char' while the portrait is shown)");
 			}
 
 			if (info == null) errors.Add ("controller.info = None");
@@ -999,6 +1219,17 @@ namespace MyClone.EditorTools
 				if (controller.fullBody == null || controller.fullBody != full) errors.Add ("controller.fullBody is not the FullBody actor");
 				if (controller.chibi == null || controller.chibi != chibi) errors.Add ("controller.chibi is not the Chibi actor");
 				if (controller.third == null || controller.third != third) errors.Add ("controller.third is not the Third actor");
+				if (treeFarm != null && (controller.treeFarm == null || controller.treeFarm != treeFarm))
+					errors.Add ("controller.treeFarm is not the Tree Farm actor");
+				int extras = libraryExtras == null ? 0 : libraryExtras.Count;
+				if (controller.libraryExtras == null || controller.libraryExtras.Length != extras)
+					errors.Add ("controller.libraryExtras length = " +
+						(controller.libraryExtras == null ? "null" : controller.libraryExtras.Length.ToString ()) +
+						" (expected " + extras + ")");
+				else
+					for (int i = 0; i < extras; i++)
+						if (controller.libraryExtras[i] != libraryExtras[i].actor)
+							errors.Add ("controller.libraryExtras[" + i + "] is not " + libraryExtras[i].id);
 				if (portrait != null && (controller.portrait == null || controller.portrait != portrait))
 					errors.Add ("controller.portrait is not the Portrait actor");
 				if (portrait != null && controller.mainToggleLabel == null)
@@ -1008,10 +1239,10 @@ namespace MyClone.EditorTools
 				if (string.IsNullOrEmpty (controller.mountBone)) errors.Add ("controller.mountBone is empty");
 			}
 
-			CheckLayout (actorRoot, layout, zoom, full, chibi, third, weapon, portrait, errors);
+			CheckLayout (actorRoot, layout, zoom, full, chibi, third, weapon, portrait, treeFarm, libraryExtras, errors);
 
 			var buttons = canvas == null ? new Button[0] : canvas.GetComponentsInChildren<Button> (true);
-			string[] required = { "Show Portrait", "Next Skin", "Next Animation", "Toggle Gray", "Flip X" };
+			string[] required = { "Show Scene Char", "Next Skin", "Next Animation", "Next Library", "Toggle Gray", "Flip X" };
 			foreach (var label in required) {
 				var button = FindButton (canvas, label);
 				if (button == null) { errors.Add ("button missing: " + label); continue; }
@@ -1036,7 +1267,8 @@ namespace MyClone.EditorTools
 		static void CheckLayout (
 			RectTransform actorRoot, DemoCanvasLayout layout, DemoZoomPan zoom,
 			SpineUiActor full, SpineUiActor chibi, SpineUiActor third, SpineUiActor weapon,
-			SpineUiActor portrait, List<string> errors)
+			SpineUiActor portrait, SpineUiActor treeFarm, List<LibraryEntry> libraryExtras,
+			List<string> errors)
 		{
 			if (actorRoot == null) { errors.Add ("no ActorRoot"); return; }
 			if (actorRoot.parent == null || actorRoot.parent.GetComponent<Canvas> () == null)
@@ -1047,12 +1279,16 @@ namespace MyClone.EditorTools
 				errors.Add ("DemoCanvasLayout fitMargin " + layout.FitMargin + " != builder margin " + IdleFitMargin);
 
 			var slots = layout.Slots;
-			int expectedSlots = 3 + (weapon == null ? 0 : 1) + (portrait == null ? 0 : 1);
+			int extras = libraryExtras == null ? 0 : libraryExtras.Count;
+			int expectedSlots = 3 + (weapon == null ? 0 : 1) + (portrait == null ? 0 : 1) +
+				(treeFarm == null ? 0 : 1) + extras;
 			if (slots.Length != expectedSlots)
 				errors.Add ("DemoCanvasLayout slots = " + slots.Length + " (expected " + expectedSlots + ")");
 
 			var expectedActors = new List<SpineUiActor> { full, chibi, third };
 			if (weapon != null) expectedActors.Add (weapon);
+			if (treeFarm != null) expectedActors.Add (treeFarm);
+			if (libraryExtras != null) expectedActors.AddRange (libraryExtras.ConvertAll (e => e.actor));
 			if (portrait != null) expectedActors.Add (portrait);
 			for (int i = 0; i < slots.Length && i < expectedActors.Count; i++) {
 				if (slots[i] == null || slots[i].actor != expectedActors[i])
@@ -1218,7 +1454,8 @@ namespace MyClone.EditorTools
 			else if (gray.shader == null || gray.shader.name != "Spine/SkeletonGraphic Grayscale")
 				errors.Add (label + ": grayMaterial shader = " + (gray.shader == null ? "null" : gray.shader.name));
 
-			if (actor.Skeleton.Skin == null) errors.Add (label + ": no skin applied");
+			if (actor.Skeleton.Skin == null && HasNamedSkins (actor.Skeleton.Data))
+				errors.Add (label + ": no skin applied");
 			if (actor.AnimationState.GetCurrent (0) == null) errors.Add (label + ": no animation playing");
 
 			Vector2 min, max;
@@ -1363,6 +1600,7 @@ namespace MyClone.EditorTools
 			if (controller.chibi == null) errors.Add ("controller.chibi = None");
 			if (controller.third == null) errors.Add ("controller.third = None");
 			if (controller.portrait == null) errors.Add ("controller.portrait = None");
+			if (controller.treeFarm == null) errors.Add ("controller.treeFarm = None");
 			if (controller.info == null) errors.Add ("controller.info = None");
 
 			float canvasHeight = CanvasHeight;
@@ -1374,13 +1612,37 @@ namespace MyClone.EditorTools
 			CheckRuntimeActor (controller.chibi, "CHIBI", 0.25f, canvasHeight, errors);
 			CheckRuntimeActor (controller.third, "THIRD", 0.25f, canvasHeight, errors);
 			CheckRuntimeActor (controller.portrait, "PORTRAIT 2110101", 0.70f, canvasHeight, errors);
+			CheckRuntimeActor (controller.treeFarm, "CHIBI 1110901 (Tree Farm)", 0.25f, canvasHeight, errors);
+			if (controller.treeFarm != null) {
+				var standEntry = controller.treeFarm.AnimationState.GetCurrent (0);
+				string stand = standEntry == null || standEntry.Animation == null ? "-" : standEntry.Animation.Name;
+				if (stand != TreeFarmAnimation)
+					errors.Add ("TREE FARM: playing '" + stand + "' at Start (expected '" + TreeFarmAnimation + "')");
+			}
+
+			// The library cycle: body_1110901 + the four extras imported with Import Spine By Id.
+			if (controller.libraryExtras == null || controller.libraryExtras.Length != LibraryExtraIds.Length)
+				errors.Add ("controller.libraryExtras = " +
+					(controller.libraryExtras == null ? "None" : controller.libraryExtras.Length.ToString ()) +
+					" (expected " + LibraryExtraIds.Length + ")");
+			else {
+				for (int i = 0; i < controller.libraryExtras.Length; i++) {
+					var extra = controller.libraryExtras[i];
+					CheckRuntimeActor (extra, "LIBRARY " + LibraryExtraIds[i], 0f, canvasHeight, errors);
+					if (extra != null && extra.Graphic != null && extra.Graphic.color.a > 0.001f)
+						errors.Add ("LIBRARY " + LibraryExtraIds[i] + ": visible at Start (only Tree Farm is)");
+				}
+			}
+			if (controller.LibraryCount != 1 + LibraryExtraIds.Length)
+				errors.Add ("library count = " + controller.LibraryCount + " (expected " + (1 + LibraryExtraIds.Length) + ")");
 
 			if (controller.portrait != null && controller.portrait.Graphic != null &&
-				controller.portrait.Graphic.color.a > 0.001f)
-				errors.Add ("PORTRAIT 2110101: visible at Start (expected hidden; Swap shows it)");
+				controller.portrait.Graphic.color.a < 0.999f)
+				errors.Add ("PORTRAIT 2110101: alpha = " + controller.portrait.Graphic.color.a +
+					" at Start (it is the main left actor)");
 			if (controller.fullBody != null && controller.fullBody.Graphic != null &&
-				controller.fullBody.Graphic.color.a < 0.999f)
-				errors.Add ("SCENE CHAR (fox): alpha = " + controller.fullBody.Graphic.color.a);
+				controller.fullBody.Graphic.color.a > 0.001f)
+				errors.Add ("SCENE CHAR (fox): visible at Start (the portrait is the main actor)");
 
 			var layoutInPlay = Object.FindObjectOfType<DemoCanvasLayout> ();
 			var weaponActor = controller.weapon;
@@ -1394,49 +1656,97 @@ namespace MyClone.EditorTools
 			if (controller.info != null && string.IsNullOrEmpty (controller.info.text))
 				errors.Add ("info text is empty after Start()");
 
-			// Capture the untouched first frames (idle, normal material, no flip) before the buttons
-			// mutate the state, so the picture is what a user sees on pressing Play.
+			// Capture the untouched first frames (portrait, idle, normal material, no flip) before the
+			// buttons mutate the state, so the picture is what a user sees on pressing Play.
 			string screenshot = controller.SaveScreenshot ();
 			if (string.IsNullOrEmpty (screenshot) || !File.Exists (screenshot))
 				errors.Add ("screenshot was not written");
-			else
+			else {
 				Debug.Log ("[LocalReferenceDemo][play] screenshot: " + screenshot);
+				string named = Path.Combine (Path.GetDirectoryName (screenshot), "demo_portrait_2110101.png");
+				File.Copy (screenshot, named, true);
+				Debug.Log ("[LocalReferenceDemo][play] portrait screenshot: " + named);
+		}
 
-			// Swap the 70% slot to the portrait, capture it, then swap back.
-			var swapButton = FindButton (canvas, "Show Portrait");
+			// Swap the 70% slot to the scene character, capture it, then swap back to the portrait.
+			var swapButton = FindButton (canvas, "Show Scene Char");
 			if (swapButton == null) {
-				errors.Add ("button missing: Show Portrait");
+				errors.Add ("button missing: Show Scene Char");
 			} else {
 				try {
 					swapButton.onClick.Invoke ();
 				} catch (Exception e) {
-					errors.Add ("button 'Show Portrait' threw " + e.GetType ().Name + ": " + e.Message);
+					errors.Add ("button 'Show Scene Char' threw " + e.GetType ().Name + ": " + e.Message);
 				}
 
-				if (!controller.PortraitShown) errors.Add ("Swap did not switch to the portrait");
+				if (controller.PortraitShown) errors.Add ("Swap did not switch to the scene character");
 				if (controller.portrait != null && controller.portrait.Graphic != null &&
-					controller.portrait.Graphic.color.a < 0.999f)
-					errors.Add ("PORTRAIT 2110101: alpha = " + controller.portrait.Graphic.color.a + " after Swap");
+					controller.portrait.Graphic.color.a > 0.001f)
+					errors.Add ("PORTRAIT 2110101: still visible after Swap (alpha = " +
+						controller.portrait.Graphic.color.a + ")");
 				if (controller.fullBody != null && controller.fullBody.Graphic != null &&
-					controller.fullBody.Graphic.color.a > 0.001f)
-					errors.Add ("SCENE CHAR (fox): still visible after Swap");
-				if (controller.mainToggleLabel != null && controller.mainToggleLabel.text != "Show Scene Char")
-					errors.Add ("Swap caption = '" + controller.mainToggleLabel.text + "' (expected 'Show Scene Char')");
+					controller.fullBody.Graphic.color.a < 0.999f)
+					errors.Add ("SCENE CHAR (fox): alpha = " + controller.fullBody.Graphic.color.a + " after Swap");
+				if (controller.mainToggleLabel != null && controller.mainToggleLabel.text != "Show Portrait")
+					errors.Add ("Swap caption = '" + controller.mainToggleLabel.text + "' (expected 'Show Portrait')");
 
-				string portraitShot = controller.SaveScreenshot ();
-				if (string.IsNullOrEmpty (portraitShot) || !File.Exists (portraitShot)) {
-					errors.Add ("portrait screenshot was not written");
-				} else {
-					string named = Path.Combine (Path.GetDirectoryName (portraitShot), "demo_portrait_2110101.png");
-					File.Copy (portraitShot, named, true);
-					Debug.Log ("[LocalReferenceDemo][play] portrait screenshot: " + named);
+				string foxShot = controller.SaveScreenshot ();
+				if (string.IsNullOrEmpty (foxShot) || !File.Exists (foxShot))
+					errors.Add ("scene-character screenshot was not written");
+				else {
+					string named = Path.Combine (Path.GetDirectoryName (foxShot), "demo_scene_char_1113002_1.png");
+					File.Copy (foxShot, named, true);
+					Debug.Log ("[LocalReferenceDemo][play] scene character screenshot: " + named);
 				}
 
 				controller.ToggleMainActor ();
-				if (controller.PortraitShown) errors.Add ("Swap back did not return to the scene character");
-				if (controller.fullBody != null && controller.fullBody.Graphic != null &&
-					controller.fullBody.Graphic.color.a < 0.999f)
-					errors.Add ("SCENE CHAR (fox): alpha = " + controller.fullBody.Graphic.color.a + " after Swap back");
+				if (!controller.PortraitShown) errors.Add ("Swap back did not return to the portrait");
+				if (controller.portrait != null && controller.portrait.Graphic != null &&
+					controller.portrait.Graphic.color.a < 0.999f)
+					errors.Add ("PORTRAIT 2110101: alpha = " + controller.portrait.Graphic.color.a + " after Swap back");
+			}
+
+			// Cycle the library once through every entry and back to body_1110901. This also proves
+			// the switch works on the hidden actors, not only on the one the scene saved visible.
+			var libraryButton = FindButton (canvas, "Next Library");
+			if (libraryButton == null) {
+				errors.Add ("button missing: Next Library");
+			} else {
+				int count = controller.LibraryCount;
+				for (int step = 1; step <= count; step++) {
+					var previous = controller.LibraryActor;
+					try {
+						libraryButton.onClick.Invoke ();
+					} catch (Exception e) {
+						errors.Add ("button 'Next Library' threw " + e.GetType ().Name + ": " + e.Message);
+						break;
+					}
+
+					var active = controller.LibraryActor;
+					if (controller.LibraryIndex != step % Mathf.Max (1, count))
+						errors.Add ("Next Library: index = " + controller.LibraryIndex + " after step " + step);
+					if (active == null) { errors.Add ("Next Library: no active actor"); continue; }
+					if (active == previous) errors.Add ("Next Library did not change the actor");
+					if (VertexCount (active) == 0) errors.Add ("Next Library: " + LibraryId (active) + " has no mesh");
+					if (active.Graphic != null && active.Graphic.color.a < 0.999f)
+						errors.Add ("Next Library: active actor alpha = " + active.Graphic.color.a);
+					if (previous != null && previous.Graphic != null && previous.Graphic.color.a > 0.001f)
+						errors.Add ("Next Library: previous actor is still visible");
+					if (active.AnimationState.GetCurrent (0) == null)
+						errors.Add ("Next Library: " + LibraryId (active) + " has no animation");
+
+					if (step == 1) {
+						string libraryShot = controller.SaveScreenshot ();
+						if (string.IsNullOrEmpty (libraryShot) || !File.Exists (libraryShot))
+							errors.Add ("library screenshot was not written");
+						else {
+							string named = Path.Combine (Path.GetDirectoryName (libraryShot),
+								"demo_library_" + LibraryId (active) + ".png");
+							File.Copy (libraryShot, named, true);
+							Debug.Log ("[LocalReferenceDemo][play] library screenshot: " + named);
+						}
+					}
+				}
 			}
 
 			string[] required = { "Next Skin", "Next Animation", "Toggle Gray", "Flip X", "Reset View" };
@@ -1445,19 +1755,42 @@ namespace MyClone.EditorTools
 				if (button == null) { errors.Add ("button missing: " + label); continue; }
 
 				int before = VertexCount (controller.fullBody) + VertexCount (controller.chibi) +
-					VertexCount (controller.third) + VertexCount (controller.portrait);
+					VertexCount (controller.third) + VertexCount (controller.portrait) +
+					VertexCount (controller.treeFarm) + LibraryVertexCount (controller.libraryExtras);
 				try {
 					button.onClick.Invoke ();
 				} catch (Exception e) {
 					errors.Add ("button '" + label + "' threw " + e.GetType ().Name + ": " + e.Message);
 				}
 				int after = VertexCount (controller.fullBody) + VertexCount (controller.chibi) +
-					VertexCount (controller.third) + VertexCount (controller.portrait);
+					VertexCount (controller.third) + VertexCount (controller.portrait) +
+					VertexCount (controller.treeFarm) + LibraryVertexCount (controller.libraryExtras);
 				Debug.LogFormat ("[LocalReferenceDemo][play] button '{0}': verts {1} -> {2}", label, before, after);
 				if (after <= 0) errors.Add ("button '" + label + "' left the actors with no mesh");
 			}
 
 			LogPortraitRenderers (controller.portrait);
+
+			// The buttons must reach the Tree Farm actor too, not only the original five.
+			if (controller.treeFarm != null) {
+				if (!controller.treeFarm.FlipX)
+					errors.Add ("TREE FARM: Flip X did not reach the actor");
+				var tfGraphic = controller.treeFarm.Graphic;
+				if (tfGraphic == null || tfGraphic.material == null ||
+					tfGraphic.material.shader.name.IndexOf ("Grayscale", StringComparison.OrdinalIgnoreCase) < 0)
+					errors.Add ("TREE FARM: Toggle Gray did not switch the material (" +
+						(tfGraphic == null || tfGraphic.material == null ? "null" : tfGraphic.material.shader.name) + ")");
+				var tfAnim = controller.treeFarm.AnimationState.GetCurrent (0);
+				string tfName = tfAnim == null || tfAnim.Animation == null ? "-" : tfAnim.Animation.Name;
+				if (tfName == TreeFarmAnimation)
+					errors.Add ("TREE FARM: Next Animation left '" + TreeFarmAnimation + "' playing");
+				if (controller.treeFarm.Skeleton.Skin == null)
+					errors.Add ("TREE FARM: Next Skin left no skin applied");
+			}
+			if (controller.info != null && controller.info.text.IndexOf ("LIBRARY 1/" + controller.LibraryCount, StringComparison.Ordinal) < 0)
+				errors.Add ("HUD label 'LIBRARY 1/" + controller.LibraryCount + "' is missing");
+			if (controller.info != null && controller.info.text.IndexOf ("body_1110901", StringComparison.Ordinal) < 0)
+				errors.Add ("HUD label does not name the active library skeleton (body_1110901)");
 
 			var graphic = controller.fullBody == null ? null : controller.fullBody.Graphic;
 			if (graphic != null && graphic.material != null &&
@@ -1606,7 +1939,8 @@ namespace MyClone.EditorTools
 
 			if (verts == 0) errors.Add (label + ": 0 vertices");
 			if (shader != "Spine/SkeletonGraphic") errors.Add (label + ": shader = " + shader);
-			if (actor.Skeleton.Skin == null) errors.Add (label + ": no skin after Start()");
+			if (actor.Skeleton.Skin == null && HasNamedSkins (actor.Skeleton.Data))
+				errors.Add (label + ": no skin after Start()");
 			if (current == null) errors.Add (label + ": no animation after Start()");
 		}
 
@@ -1628,7 +1962,8 @@ namespace MyClone.EditorTools
 
 			if (verts == 0) errors.Add (label + ": 0 vertices");
 			if (shader != "Spine/SkeletonGraphic") errors.Add (label + ": shader = " + shader);
-			if (actor.Skeleton.Skin == null) errors.Add (label + ": no skin after Start()");
+			if (actor.Skeleton.Skin == null && HasNamedSkins (actor.Skeleton.Data))
+				errors.Add (label + ": no skin after Start()");
 			if (current == null) errors.Add (label + ": no animation after Start()");
 			if (!string.IsNullOrEmpty (actor.InitialAnimation) && animation != actor.InitialAnimation)
 				errors.Add (label + ": playing '" + animation + "' instead of the initial '" + actor.InitialAnimation + "'");
@@ -1638,6 +1973,9 @@ namespace MyClone.EditorTools
 				errors.Add (label + ": mesh cannot be measured");
 				return;
 			}
+
+			if (heightFraction <= 0f)
+				return;   // width-capped library actors: mesh/animation/shader are checked above
 
 			float height = (max.y - min.y) * actor.transform.localScale.y;
 			float ratio = height / canvasHeight;
@@ -1652,9 +1990,40 @@ namespace MyClone.EditorTools
 				errors.Add (string.Format ("{0}: height {1:0.#}% is far below target {2:0.#}%", label, ratio * 100f, expected * 100f));
 		}
 
+		static bool HasNamedSkins (SkeletonData data)
+		{
+			if (data == null)
+				return false;
+			foreach (var skin in data.Skins)
+				if (skin != null && skin.Name != "default")
+					return true;
+			return false;
+		}
+
 		static int VertexCount (SpineUiActor actor)
 		{
 			return actor == null || actor.Graphic == null ? 0 : actor.Graphic.MeshGenerator.Buffers.vertexCount;
+		}
+
+		static int LibraryVertexCount (SpineUiActor[] actors)
+		{
+			int total = 0;
+			if (actors != null)
+				for (int i = 0; i < actors.Length; i++)
+					total += VertexCount (actors[i]);
+			return total;
+		}
+
+		static string LibraryId (SpineUiActor actor)
+		{
+			if (actor == null)
+				return "-";
+			string name = actor.name;
+			if (name.StartsWith ("TreeFarm_", StringComparison.Ordinal))
+				return name.Substring ("TreeFarm_".Length);
+			if (name.StartsWith ("Library_", StringComparison.Ordinal))
+				return name.Substring ("Library_".Length);
+			return name;
 		}
 
 		// ------------------------------------------------------------------

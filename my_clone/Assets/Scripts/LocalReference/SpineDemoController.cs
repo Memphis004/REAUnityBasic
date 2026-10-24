@@ -27,8 +27,19 @@ namespace MyClone.LocalReference
 			"only one of the two is visible at a time.")]
 		public SpineUiActor portrait;
 
+		[Tooltip ("body_1110901 imported from the Spine library (Tree Farm), looped on 'stand'.")]
+		public SpineUiActor treeFarm;
+
+		[Tooltip ("Extra skeletons imported from the Spine library. They share the Tree Farm slot " +
+			"and are revealed one at a time by Next Library (index 0 is treeFarm).")]
+		public SpineUiActor[] libraryExtras;
+
 		[Tooltip ("Caption of the button that swaps the 70% actor between the scene character and the portrait.")]
 		public Text mainToggleLabel;
+
+		[Tooltip ("Which of the two 70% actors is shown when the scene opens. The portrait (2110101) " +
+			"is the main left actor of this demo; the button swaps to the scene character.")]
+		public bool startWithPortrait = true;
 
 		public Text info;
 
@@ -39,12 +50,22 @@ namespace MyClone.LocalReference
 
 		int m_SkinCursor;
 		int m_AnimationCursor;
+		int m_LibraryIndex;
+		int m_PartCursor;
+		string m_LastPartLabel;
+		readonly Dictionary<string, int> m_PartVariants = new Dictionary<string, int> ();
+		readonly List<SpineUiActor> m_Library = new List<SpineUiActor> ();
 		Canvas m_Canvas;
 		SpineActorBase m_MountedActor;
 		bool m_PortraitShown;
 		static int s_ScreenshotIndex;
 
 		public bool PortraitShown { get { return m_PortraitShown; } }
+		public int LibraryCount { get { return m_Library.Count; } }
+		public int LibraryIndex { get { return m_LibraryIndex; } }
+		public SpineUiActor LibraryActor {
+			get { return m_Library.Count == 0 ? null : m_Library[m_LibraryIndex % m_Library.Count]; }
+		}
 
 		void Start ()
 		{
@@ -56,16 +77,31 @@ namespace MyClone.LocalReference
 			EnsureBuilt (third);
 			EnsureBuilt (weapon);   // keeps its configured skin/animation, so no ApplyCombinedSkin here
 			EnsureBuilt (portrait);
+			EnsureBuilt (treeFarm);
+			if (libraryExtras != null)
+				for (int i = 0; i < libraryExtras.Length; i++)
+					EnsureBuilt (libraryExtras[i]);
 
 			ApplyCombinedSkin (fullBody);
 			ApplyCombinedSkin (chibi);
 			ApplyCombinedSkin (third);
 			ApplyCombinedSkin (portrait);
+			ApplyCombinedSkin (treeFarm);
 			PlayConfiguredAnimation (fullBody);
 			PlayConfiguredAnimation (chibi);
 			PlayConfiguredAnimation (third);
 			PlayConfiguredAnimation (portrait);
-			SetPortraitShown (false);
+			PlayConfiguredAnimation (treeFarm);
+
+			EnsureLibrary ();
+			for (int i = 1; i < m_Library.Count; i++) {
+				ApplyCombinedSkin (m_Library[i]);
+				PlayConfiguredAnimation (m_Library[i]);
+			}
+			m_LibraryIndex = 0;
+			ApplyLibraryVisibility ();
+
+			SetPortraitShown (startWithPortrait);
 			RefreshLabel ();
 
 			m_Canvas = GetComponentInParent<Canvas> ();
@@ -94,14 +130,69 @@ namespace MyClone.LocalReference
 		// Buttons
 		// ------------------------------------------------------------------
 
+		/// <summary>
+		/// Cycles ONE part per press (Body -> Head -> Face, discovery order of the primary
+		/// actor) through SpineActorBase.SetSkinPart, so the composed character changes one
+		/// piece at a time. Actors without that part (e.g. the chibi) are skipped.
+		/// </summary>
 		public void NextSkin ()
 		{
-			m_SkinCursor++;
-			ApplyCombinedSkin (fullBody);
-			ApplyCombinedSkin (chibi);
-			ApplyCombinedSkin (third);
-			ApplyCombinedSkin (portrait);
+			var primary = fullBody != null ? fullBody : (chibi != null ? chibi : third);
+			if (primary == null || !primary.IsBuilt)
+				return;
+
+			var primaryGroups = SpineActorBase.DetectSkinGroups (primary.Skeleton.Data);
+			if (primaryGroups.Count == 0) {
+				Debug.Log ("[SpineDemo] NextSkin: " + primary.name + " has no named part skins.");
+				return;
+			}
+
+			var target = primaryGroups[m_PartCursor % primaryGroups.Count];
+			int variant;
+			m_PartVariants.TryGetValue (target.part, out variant);
+			variant++;
+			m_PartVariants[target.part] = variant;
+
+			ApplyPartToActors (target.part, variant);
+			m_PartCursor++;
+
+			// Label from the primary actor's stored part.
+			string label = "-";
+			var parts = primary.GetSkinParts ();
+			for (int i = 0; i < parts.Length; i++) {
+				if (parts[i].part == target.part) {
+					label = parts[i].skin;
+					break;
+				}
+			}
+			m_LastPartLabel = target.part + " -> " + label;
 			RefreshLabel ();
+		}
+
+		void ApplyPartToActors (string part, int variant)
+		{
+			ApplyPartToActor (fullBody, part, variant);
+			ApplyPartToActor (chibi, part, variant);
+			ApplyPartToActor (third, part, variant);
+			ApplyPartToActor (portrait, part, variant);
+			for (int i = 0; i < m_Library.Count; i++)
+				ApplyPartToActor (m_Library[i], part, variant);
+		}
+
+		void ApplyPartToActor (SpineUiActor actor, string part, int variant)
+		{
+			if (actor == null || !actor.IsBuilt)
+				return;
+
+			var groups = SpineActorBase.DetectSkinGroups (actor.Skeleton.Data);
+			for (int i = 0; i < groups.Count; i++) {
+				if (groups[i].part != part)
+					continue;
+				var skins = groups[i].skins;
+				actor.SetSkinPart (part, skins[variant % skins.Count].Name);
+				return;
+			}
+			// The skeleton has no such part: nothing to cycle for this actor.
 		}
 
 		public void NextAnimation ()
@@ -111,7 +202,23 @@ namespace MyClone.LocalReference
 			PlayCycledAnimation (chibi, m_AnimationCursor);
 			PlayCycledAnimation (third, m_AnimationCursor);
 			PlayCycledAnimation (portrait, m_AnimationCursor);
+			for (int i = 0; i < m_Library.Count; i++)
+				PlayCycledAnimation (m_Library[i], m_AnimationCursor);
 			RefreshLabel ();
+		}
+
+		/// <summary>Cycles the library slot: body_1110901, then every imported extra, then back.</summary>
+		public void NextLibrary ()
+		{
+			EnsureLibrary ();
+			if (m_Library.Count == 0)
+				return;
+
+			m_LibraryIndex = (m_LibraryIndex + 1) % m_Library.Count;
+			ApplyLibraryVisibility ();
+			RefreshLabel ();
+			Debug.Log ("[SpineDemo] library " + (m_LibraryIndex + 1) + "/" + m_Library.Count +
+				": " + LibraryId (m_Library[m_LibraryIndex]));
 		}
 
 		public void ToggleFlip ()
@@ -120,6 +227,8 @@ namespace MyClone.LocalReference
 			if (chibi != null) chibi.SetFlipX (!chibi.FlipX);
 			if (third != null) third.SetFlipX (!third.FlipX);
 			if (portrait != null) portrait.SetFlipX (!portrait.FlipX);
+			for (int i = 0; i < m_Library.Count; i++)
+				if (m_Library[i] != null) m_Library[i].SetFlipX (!m_Library[i].FlipX);
 		}
 
 		public void ToggleGray ()
@@ -129,6 +238,39 @@ namespace MyClone.LocalReference
 			if (chibi != null) chibi.SetGray (gray);
 			if (third != null) third.SetGray (gray);
 			if (portrait != null) portrait.SetGray (gray);
+			for (int i = 0; i < m_Library.Count; i++)
+				if (m_Library[i] != null) m_Library[i].SetGray (gray);
+		}
+
+		void EnsureLibrary ()
+		{
+			if (m_Library.Count > 0)
+				return;
+
+			if (treeFarm != null)
+				m_Library.Add (treeFarm);
+			if (libraryExtras != null)
+				for (int i = 0; i < libraryExtras.Length; i++)
+					if (libraryExtras[i] != null)
+						m_Library.Add (libraryExtras[i]);
+		}
+
+		void ApplyLibraryVisibility ()
+		{
+			for (int i = 0; i < m_Library.Count; i++)
+				SetAlpha (m_Library[i], i == m_LibraryIndex ? 1f : 0f);
+		}
+
+		static string LibraryId (SpineUiActor actor)
+		{
+			if (actor == null)
+				return "-";
+			string name = actor.name;
+			if (name.StartsWith ("TreeFarm_", System.StringComparison.Ordinal))
+				return name.Substring ("TreeFarm_".Length);
+			if (name.StartsWith ("Library_", System.StringComparison.Ordinal))
+				return name.Substring ("Library_".Length);
+			return name;
 		}
 
 		// ------------------------------------------------------------------
@@ -218,38 +360,32 @@ namespace MyClone.LocalReference
 		// ------------------------------------------------------------------
 
 		/// <summary>
-		/// The game's characters are split into body/face/head skins. Build one combined skin
-		/// by picking the cursor-th variant of each group so a single click changes the whole set.
+		/// The game's characters are split into body/face/head skins. One part per group
+		/// (variant picked by the cursor) is stored on the actor as skin parts and composed
+		/// by SpineActorBase into a single combined skin.
 		/// </summary>
 		void ApplyCombinedSkin (SpineUiActor actor)
 		{
 			if (actor == null || !actor.IsBuilt)
 				return;
 
-			var skeleton = actor.Skeleton;
-			var groups = new Dictionary<string, List<Skin>> ();
-			var order = new List<string> ();
-			GroupSkins (skeleton.Data, groups, order);
-
-			if (order.Count == 0) {
+			var groups = SpineActorBase.DetectSkinGroups (actor.Skeleton.Data);
+			if (groups.Count == 0) {
 				// single-skin skeleton (chibi "default") - nothing to combine
 				if (m_SkinCursor % 2 == 1)
 					Debug.Log ("[SpineDemo] " + actor.name + " has no extra skins to cycle.");
 				return;
 			}
 
-			var combined = new Skin ("demo_combined_" + m_SkinCursor);
-			foreach (var key in order) {
-				var list = groups[key];
-				combined.AddSkin (list[m_SkinCursor % list.Count]);
+			var parts = new List<SpineActorBase.SkinPart> ();
+			for (int i = 0; i < groups.Count; i++) {
+				var skins = groups[i].skins;
+				parts.Add (new SpineActorBase.SkinPart {
+					part = groups[i].part,
+					skin = skins[m_SkinCursor % skins.Count].Name
+				});
 			}
-
-			// Reset first: Skeleton.SetSkin(Skin) merges with the currently active skin.
-			skeleton.SetSkin ((Skin)null);
-			skeleton.SetSkin (combined);
-			skeleton.SetSlotsToSetupPose ();
-			if (actor.Graphic != null)
-				actor.Graphic.SetVerticesDirty ();
+			actor.SetSkinParts (parts.ToArray ());
 		}
 
 		static void GroupSkins (SkeletonData data, Dictionary<string, List<Skin>> groups, List<string> order)
@@ -331,18 +467,13 @@ namespace MyClone.LocalReference
 				label, string.Join ("/", order.ToArray ()), variants, skeleton.Slots.Count);
 
 			for (int v = 0; v < variants; v++) {
-				var combined = new Skin ("audit_" + v);
 				var names = new List<string> ();
 				for (int g = 0; g < order.Count; g++) {
 					var list = groups[order[g]];
-					var pick = list[v % list.Count];
-					combined.AddSkin (pick);
-					names.Add (pick.Name);
+					names.Add (list[v % list.Count].Name);
 				}
 
-				skeleton.SetSkin ((Skin) null);
-				skeleton.SetSkin (combined);
-				skeleton.SetSlotsToSetupPose ();
+				actor.SetSkins (names.ToArray ());
 
 				var graphic = actor.Graphic;
 				if (graphic != null)
@@ -597,7 +728,14 @@ namespace MyClone.LocalReference
 				"\n" + Describe ("CHIBI", chibi);
 			if (third != null)
 				info.text += "\n" + Describe ("THIRD", third);
+			if (m_Library.Count > 0) {
+				var active = m_Library[m_LibraryIndex % m_Library.Count];
+				info.text += "\n" + Describe ("LIBRARY " + (m_LibraryIndex + 1) + "/" + m_Library.Count +
+					" " + LibraryId (active), active);
+			}
 			info.text += "\n    shown: " + (m_PortraitShown ? "PORTRAIT 2110101" : "SCENE CHAR (fox)");
+			if (!string.IsNullOrEmpty (m_LastPartLabel))
+				info.text += "\n    skin part: " + m_LastPartLabel;
 			if (m_MountedActor != null)
 				info.text += "\n    mounted: " + (mountSkin ?? "-") + " @ " + mountBone;
 		}

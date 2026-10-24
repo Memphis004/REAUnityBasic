@@ -1,0 +1,7050 @@
+{
+ "source": {
+  "bundle": "Windows/ui/windows/disciple/uidiscipleroleinfo2win.ab",
+  "bundleSize": 19018,
+  "root": "UIDiscipleRoleInfo2Win",
+  "gameObjectCount": 115,
+  "notes": "UnityPy dump of the shipped bundle: layout/components only, no art copied into the prefab."
+ },
+ "canvas": {
+  "layerPath": "GUI_ROOT/BottomUIContain/Canvas_BottomFirstLayer",
+  "canvasIndex": 3,
+  "renderMode": "ScreenSpaceCamera",
+  "camera": "UICamera",
+  "planeDistance": 100.0,
+  "sortingLayerId": 46863019,
+  "sortingOrder": 1000,
+  "pixelPerfect": false,
+  "additionalShaderChannels": 27,
+  "scaler": {
+   "uiScaleMode": "ScaleWithScreenSize",
+   "referenceResolution": [
+    1334.0,
+    750.0
+   ],
+   "screenMatchMode": "MatchWidthOrHeight",
+   "matchWidthOrHeight": 0.0,
+   "referencePixelsPerUnit": 100.0
+  },
+  "cameraSettings": {
+   "orthographic": true,
+   "orthographicSize": 5.0,
+   "nearClip": 0.3,
+   "farClip": 1000.0,
+   "depth": 15.0,
+   "clearFlags": 3,
+   "cullingMask": 232,
+   "backgroundColor": [
+    0.192157,
+    0.301961,
+    0.47451,
+    0.019608
+   ]
+  }
+ },
+ "window": {
+  "hideType": 3,
+  "hideScale": {
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.0
+  },
+  "canvasIndex": 3,
+  "windowPositionStyle": 5,
+  "windowKillTime": 1.0,
+  "luaEventName": "OnEvent",
+  "applySafeArea": 0,
+  "exportSelfTransformToChild": 0,
+  "childTransformCount": 44
+ },
+ "luaBinding": [
+  {
+   "index": 0,
+   "name": "#changeNameBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#changeNameBtn"
+  },
+  {
+   "index": 1,
+   "name": "#colorSign",
+   "path": "UIDiscipleRoleInfo2Win/#root/#colorSign"
+  },
+  {
+   "index": 2,
+   "name": "#colorSignbtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#colorSignbtn"
+  },
+  {
+   "index": 3,
+   "name": "#discipleDesc",
+   "path": "UIDiscipleRoleInfo2Win/#root/#discipleDescObj/#discipleDescBg/#discipleDesc"
+  },
+  {
+   "index": 4,
+   "name": "#discipleDescBg",
+   "path": "UIDiscipleRoleInfo2Win/#root/#discipleDescObj/#discipleDescBg"
+  },
+  {
+   "index": 5,
+   "name": "#discipleDescObj",
+   "path": "UIDiscipleRoleInfo2Win/#root/#discipleDescObj"
+  },
+  {
+   "index": 6,
+   "name": "#discipleFightTxt",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#fightroot/fight/#discipleFightTxt"
+  },
+  {
+   "index": 7,
+   "name": "#discipleJobBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#discipleJobBtn"
+  },
+  {
+   "index": 8,
+   "name": "#discipleJobIcon",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#discipleJobBtn/#discipleJobIcon"
+  },
+  {
+   "index": 9,
+   "name": "#discipleJobIcon2",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#discipleJobBtn/#discipleJobIcon2"
+  },
+  {
+   "index": 10,
+   "name": "#discipleModelRoot",
+   "path": "UIDiscipleRoleInfo2Win/#root/mask/#discipleModelRoot"
+  },
+  {
+   "index": 11,
+   "name": "#discipleNameText",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#discipleNameText"
+  },
+  {
+   "index": 12,
+   "name": "#dyskillList",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList"
+  },
+  {
+   "index": 13,
+   "name": "#fightroot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#fightroot"
+  },
+  {
+   "index": 14,
+   "name": "#guanlianBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#guanlianBtn"
+  },
+  {
+   "index": 15,
+   "name": "#guanlianred",
+   "path": "UIDiscipleRoleInfo2Win/#root/#guanlianBtn/#guanlianred"
+  },
+  {
+   "index": 16,
+   "name": "#injuryBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#injuryObj/#injuryBtn"
+  },
+  {
+   "index": 17,
+   "name": "#injuryIcon",
+   "path": "UIDiscipleRoleInfo2Win/#root/#injuryObj/#injuryIcon"
+  },
+  {
+   "index": 18,
+   "name": "#injuryObj",
+   "path": "UIDiscipleRoleInfo2Win/#root/#injuryObj"
+  },
+  {
+   "index": 19,
+   "name": "#injuryTxt",
+   "path": "UIDiscipleRoleInfo2Win/#root/#injuryObj/#injuryTxt"
+  },
+  {
+   "index": 20,
+   "name": "#ldLockObj",
+   "path": "UIDiscipleRoleInfo2Win/#root/#ldLockObj"
+  },
+  {
+   "index": 21,
+   "name": "#ldTxt",
+   "path": "UIDiscipleRoleInfo2Win/#root/#ldLockObj/#ldTxt"
+  },
+  {
+   "index": 22,
+   "name": "#liandonBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#liandonBtn"
+  },
+  {
+   "index": 23,
+   "name": "#orderBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#orderBtn"
+  },
+  {
+   "index": 24,
+   "name": "#pdImg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#pdRoot/#pdImg"
+  },
+  {
+   "index": 25,
+   "name": "#pdRoot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#pdRoot"
+  },
+  {
+   "index": 26,
+   "name": "#pdVal",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#pdRoot/#pdVal"
+  },
+  {
+   "index": 27,
+   "name": "#posFloatMark",
+   "path": "UIDiscipleRoleInfo2Win/#root/#discipleDescObj/doFloatImage/#posFloatMark"
+  },
+  {
+   "index": 28,
+   "name": "#postIcon",
+   "path": "UIDiscipleRoleInfo2Win/#root/#postIcon"
+  },
+  {
+   "index": 29,
+   "name": "#rolespbtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/mask/#rolespbtn"
+  },
+  {
+   "index": 30,
+   "name": "#root",
+   "path": "UIDiscipleRoleInfo2Win/#root"
+  },
+  {
+   "index": 31,
+   "name": "#showLihuiBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#showLihuiBtn"
+  },
+  {
+   "index": 32,
+   "name": "#signBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#signBtn"
+  },
+  {
+   "index": 33,
+   "name": "#signBtnTx",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#signBtn/#signBtnTx"
+  },
+  {
+   "index": 34,
+   "name": "#signEffect",
+   "path": "UIDiscipleRoleInfo2Win/#root/#signEffect"
+  },
+  {
+   "index": 35,
+   "name": "#skillContent",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent"
+  },
+  {
+   "index": 36,
+   "name": "#skillScrollView",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView"
+  },
+  {
+   "index": 37,
+   "name": "#spBg",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#discipleJobBtn/#spBg"
+  },
+  {
+   "index": 38,
+   "name": "#switchBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#switchBtn"
+  },
+  {
+   "index": 39,
+   "name": "#switchCdBg",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#switchBtn/#switchCdBg"
+  },
+  {
+   "index": 40,
+   "name": "#switchCdText",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#switchBtn/#switchCdBg/#switchCdText"
+  },
+  {
+   "index": 41,
+   "name": "#tmskillList",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList"
+  },
+  {
+   "index": 42,
+   "name": "#tmskillroot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot"
+  },
+  {
+   "index": 43,
+   "name": "#zhenfaBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#zhenfaBtn"
+  }
+ ],
+ "rootId": 2602716941695405524,
+ "nodes": [
+  {
+   "id": 2602716941695405524,
+   "name": "UIDiscipleRoleInfo2Win",
+   "path": "UIDiscipleRoleInfo2Win",
+   "parentId": null,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIWindowLua"
+   ]
+  },
+  {
+   "id": -5389621194707491203,
+   "name": "#root",
+   "path": "UIDiscipleRoleInfo2Win/#root",
+   "parentId": 2602716941695405524,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     100.0,
+     100.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": []
+  },
+  {
+   "id": 8889955195804710552,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#0",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -255.584564,
+     -20.7237
+    ],
+    "sizeDelta": [
+     527.160828,
+     566.398193
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_shuxingtu",
+     "spriteBundle": "uidisciplemainicons.ab",
+     "imageType": 1,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -4232402028144828942,
+   "name": "mask",
+   "path": "UIDiscipleRoleInfo2Win/#root/mask",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     1.0
+    ],
+    "anchorMax": [
+     0.5,
+     1.0
+    ],
+    "anchoredPosition": [
+     -245.0,
+     -76.774963
+    ],
+    "sizeDelta": [
+     522.0,
+     531.549988
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "RectMask2D",
+     "showMaskGraphic": false
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -7880741868098227543,
+   "name": "#discipleModelRoot",
+   "path": "UIDiscipleRoleInfo2Win/#root/mask/#discipleModelRoot",
+   "parentId": -4232402028144828942,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -1.5e-05,
+     55.000031
+    ],
+    "sizeDelta": [
+     477.0,
+     395.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "UIModelShow",
+     "modelId": 0,
+     "scale": 0.0,
+     "animId": 0,
+     "canvasGroupCompatible": true,
+     "pmaVertexColor": true
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 3031665773584012135,
+   "name": "#rolespbtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/mask/#rolespbtn",
+   "parentId": -4232402028144828942,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     300.0,
+     300.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    },
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      0.003922
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -9175593894759703761,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -237.0,
+     235.0
+    ],
+    "sizeDelta": [
+     300.0,
+     44.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_zhanlikuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "nameplate"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 3844592159389495750,
+   "name": "#discipleNameText",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#discipleNameText",
+   "parentId": -9175593894759703761,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     200.0,
+     40.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Text",
+     "text": "",
+     "sampleText": "Amy Robinson",
+     "fontSize": 24,
+     "fontStyle": 0,
+     "alignment": "MiddleCenter",
+     "color": [
+      0.490196,
+      0.231373,
+      0.090196,
+      1.0
+     ],
+     "richText": true,
+     "bestFit": false,
+     "horizontalOverflow": 0,
+     "verticalOverflow": 1,
+     "raycastTarget": false,
+     "font": null,
+     "enabled": true
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 462845289742963713,
+   "name": "#discipleJobBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#discipleJobBtn",
+   "parentId": -9175593894759703761,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -110.0,
+     0.0
+    ],
+    "sizeDelta": [
+     44.0,
+     44.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -2416796943156702582,
+   "name": "#spBg",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#discipleJobBtn/#spBg",
+   "parentId": 462845289742963713,
+   "siblingIndex": 0,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     5.5
+    ],
+    "sizeDelta": [
+     78.0,
+     69.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_shenhuadizixinxi_1",
+     "spriteBundle": "spdisciple_atlas_pak.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "avatar"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 8005480000285218414,
+   "name": "#discipleJobIcon2",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#discipleJobBtn/#discipleJobIcon2",
+   "parentId": 462845289742963713,
+   "siblingIndex": 1,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     20.0,
+     -6.0
+    ],
+    "sizeDelta": [
+     68.0,
+     68.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     0.6,
+     0.6
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      0.980392
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "avatar"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 5790775481352332410,
+   "name": "#discipleJobIcon",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#discipleJobBtn/#discipleJobIcon",
+   "parentId": 462845289742963713,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     44.0,
+     44.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "avatar"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 8694629419347183744,
+   "name": "#changeNameBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#changeNameBtn",
+   "parentId": -9175593894759703761,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     100.0,
+     0.0
+    ],
+    "sizeDelta": [
+     48.0,
+     48.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    },
+    {
+     "type": "Image",
+     "sprite": "button_gaiming_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "button"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -2442065720413621879,
+   "name": "click",
+   "path": "UIDiscipleRoleInfo2Win/#root/Image#2/#changeNameBtn/click",
+   "parentId": 8694629419347183744,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -85.690002,
+     0.0
+    ],
+    "sizeDelta": [
+     215.022247,
+     44.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "imageType": 0,
+     "color": [
+      1,
+      1,
+      1,
+      0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "invisible"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -6169253384865009901,
+   "name": "#postIcon",
+   "path": "UIDiscipleRoleInfo2Win/#root/#postIcon",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -60.0,
+     70.0
+    ],
+    "sizeDelta": [
+     76.0,
+     154.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "avatar"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 5448963075463384196,
+   "name": "#discipleDescObj",
+   "path": "UIDiscipleRoleInfo2Win/#root/#discipleDescObj",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 4,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -245.0,
+     186.0
+    ],
+    "sizeDelta": [
+     248.0,
+     45.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": []
+  },
+  {
+   "id": -8898512847234700703,
+   "name": "#discipleDescBg",
+   "path": "UIDiscipleRoleInfo2Win/#root/#discipleDescObj/#discipleDescBg",
+   "parentId": 5448963075463384196,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.5
+    ],
+    "anchorMax": [
+     0.0,
+     0.5
+    ],
+    "anchoredPosition": [
+     124.0,
+     22.000015
+    ],
+    "sizeDelta": [
+     248.0,
+     45.0
+    ],
+    "pivot": [
+     0.5,
+     1.0
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_zhengzaina",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    },
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    },
+    {
+     "type": "VerticalLayoutGroup",
+     "padding": [
+      30,
+      0,
+      0,
+      0
+     ],
+     "childAlignment": 4,
+     "spacing": 0.0,
+     "childForceExpandWidth": false,
+     "childForceExpandHeight": false,
+     "childControlWidth": false,
+     "childControlHeight": false
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -6541989910458319893,
+   "name": "#discipleDesc",
+   "path": "UIDiscipleRoleInfo2Win/#root/#discipleDescObj/#discipleDescBg/#discipleDesc",
+   "parentId": -8898512847234700703,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     1.0
+    ],
+    "anchorMax": [
+     0.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     139.0,
+     0.0
+    ],
+    "sizeDelta": [
+     200.0,
+     45.0
+    ],
+    "pivot": [
+     0.5,
+     1.0
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Text",
+     "text": "XXX in progress　",
+     "sampleText": "Secluded cultivation",
+     "fontSize": 22,
+     "fontStyle": 0,
+     "alignment": "MiddleCenter",
+     "color": [
+      0.094118,
+      0.078431,
+      0.070588,
+      1.0
+     ],
+     "richText": true,
+     "bestFit": false,
+     "horizontalOverflow": 0,
+     "verticalOverflow": 1,
+     "raycastTarget": false,
+     "font": null,
+     "enabled": true
+    },
+    {
+     "type": "ContentSizeFitter",
+     "horizontalFit": "Unconstrained",
+     "verticalFit": "Unconstrained"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -2055801669842430081,
+   "name": "doFloatImage",
+   "path": "UIDiscipleRoleInfo2Win/#root/#discipleDescObj/doFloatImage",
+   "parentId": 5448963075463384196,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.5
+    ],
+    "anchorMax": [
+     0.0,
+     0.5
+    ],
+    "anchoredPosition": [
+     21.099998,
+     3.299999
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     1.0
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": []
+  },
+  {
+   "id": 8623610880670705427,
+   "name": "#posFloatMark",
+   "path": "UIDiscipleRoleInfo2Win/#root/#discipleDescObj/doFloatImage/#posFloatMark",
+   "parentId": -2055801669842430081,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     16.0,
+     16.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_zhengzaina",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -3362244906718742090,
+   "name": "#orderBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#orderBtn",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 5,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -466.0,
+     200.0
+    ],
+    "sizeDelta": [
+     52.0,
+     52.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    },
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "button"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 7754927398459611025,
+   "name": "#liandonBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#liandonBtn",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 6,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -49.0,
+     -55.0
+    ],
+    "sizeDelta": [
+     75.0,
+     46.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "icon_liandongbj_2",
+     "spriteBundle": "uiglobalspriteatlas_4.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "button"
+    },
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 7412492112689667612,
+   "name": "#injuryObj",
+   "path": "UIDiscipleRoleInfo2Win/#root/#injuryObj",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 7,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -245.0,
+     -130.0
+    ],
+    "sizeDelta": [
+     215.0,
+     36.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_dyheidi_2",
+     "spriteBundle": "uidisciplemainicons.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -1028958857975946324,
+   "name": "clicker",
+   "path": "UIDiscipleRoleInfo2Win/#root/#injuryObj/clicker",
+   "parentId": 7412492112689667612,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     182.0,
+     45.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "imageType": 0,
+     "color": [
+      1,
+      1,
+      1,
+      0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "invisible"
+    },
+    {
+     "type": "Button",
+     "transition": 0,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 1
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 8659280625175723498,
+   "name": "#injuryIcon",
+   "path": "UIDiscipleRoleInfo2Win/#root/#injuryObj/#injuryIcon",
+   "parentId": 7412492112689667612,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -35.0,
+     0.0
+    ],
+    "sizeDelta": [
+     32.0,
+     32.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "avatar"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 6236532472422452347,
+   "name": "#injuryTxt",
+   "path": "UIDiscipleRoleInfo2Win/#root/#injuryObj/#injuryTxt",
+   "parentId": 7412492112689667612,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     100.0,
+     40.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Text",
+     "text": "",
+     "sampleText": "Dying",
+     "fontSize": 24,
+     "fontStyle": 0,
+     "alignment": "MiddleLeft",
+     "color": [
+      0.976471,
+      0.976471,
+      0.976471,
+      1.0
+     ],
+     "richText": true,
+     "bestFit": false,
+     "horizontalOverflow": 1,
+     "verticalOverflow": 1,
+     "raycastTarget": false,
+     "font": null,
+     "enabled": true
+    },
+    {
+     "type": "Outline",
+     "color": [
+      0.0,
+      0.0,
+      0.0,
+      0.5
+     ],
+     "effectDistance": [
+      1.0,
+      -1.0
+     ],
+     "useGraphicAlpha": true
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 845717844480937245,
+   "name": "#injuryBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#injuryObj/#injuryBtn",
+   "parentId": 7412492112689667612,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -8.249999,
+     -1.7e-05
+    ],
+    "sizeDelta": [
+     198.5,
+     36.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      0.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "button"
+    },
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 731079335297370039,
+   "name": "#ldLockObj",
+   "path": "UIDiscipleRoleInfo2Win/#root/#ldLockObj",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 8,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -250.0,
+     -100.0
+    ],
+    "sizeDelta": [
+     336.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_jztishimingkuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 1,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -2322156183059740742,
+   "name": "clicker",
+   "path": "UIDiscipleRoleInfo2Win/#root/#ldLockObj/clicker",
+   "parentId": 731079335297370039,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     336.0,
+     30.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "imageType": 0,
+     "color": [
+      1,
+      1,
+      1,
+      0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "invisible"
+    },
+    {
+     "type": "Button",
+     "transition": 0,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 1
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 4358319080546566919,
+   "name": "ldIcon",
+   "path": "UIDiscipleRoleInfo2Win/#root/#ldLockObj/ldIcon",
+   "parentId": 731079335297370039,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -144.0,
+     0.39177
+    ],
+    "sizeDelta": [
+     32.400501,
+     27.2164
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dysuo_3",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 6301798275438363710,
+   "name": "#ldTxt",
+   "path": "UIDiscipleRoleInfo2Win/#root/#ldLockObj/#ldTxt",
+   "parentId": 731079335297370039,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     13.0,
+     0.0
+    ],
+    "sizeDelta": [
+     240.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Text",
+     "text": "Disciple is locked in the Dao Debate lineup",
+     "sampleText": "Disciple is locked in the Dao Debate lineup",
+     "fontSize": 20,
+     "fontStyle": 0,
+     "alignment": "MiddleCenter",
+     "color": [
+      0.976471,
+      0.976471,
+      0.976471,
+      1.0
+     ],
+     "richText": true,
+     "bestFit": false,
+     "horizontalOverflow": 1,
+     "verticalOverflow": 1,
+     "raycastTarget": false,
+     "font": null,
+     "enabled": true
+    },
+    {
+     "type": "Outline",
+     "color": [
+      0.0,
+      0.0,
+      0.0,
+      0.5
+     ],
+     "effectDistance": [
+      1.0,
+      -1.0
+     ],
+     "useGraphicAlpha": true
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -616394162661017700,
+   "name": "#colorSign",
+   "path": "UIDiscipleRoleInfo2Win/#root/#colorSign",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 9,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -49.0,
+     200.0
+    ],
+    "sizeDelta": [
+     64.0,
+     66.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "avatar"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 7616330104966723172,
+   "name": "#colorSignbtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#colorSignbtn",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 10,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -49.0,
+     200.0
+    ],
+    "sizeDelta": [
+     75.0,
+     75.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      0.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    },
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -2088628365976917226,
+   "name": "#showLihuiBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#showLihuiBtn",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 11,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -450.0,
+     -85.0
+    ],
+    "sizeDelta": [
+     36.0,
+     36.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    },
+    {
+     "type": "Image",
+     "sprite": "button_tychakan",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "button"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -6618054969604702170,
+   "name": "buttonRoot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 12,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -251.999985,
+     -220.224625
+    ],
+    "sizeDelta": [
+     470.0,
+     144.657394
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "VerticalLayoutGroup",
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "childAlignment": 7,
+     "spacing": 0.0,
+     "childForceExpandWidth": true,
+     "childForceExpandHeight": true,
+     "childControlWidth": false,
+     "childControlHeight": false
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -8165156429445864610,
+   "name": "#fightroot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#fightroot",
+   "parentId": -6618054969604702170,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     470.0,
+     50.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": []
+  },
+  {
+   "id": -672521481116802202,
+   "name": "fight",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#fightroot/fight",
+   "parentId": -8165156429445864610,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     16.0,
+     0.0
+    ],
+    "sizeDelta": [
+     215.0,
+     40.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": []
+  },
+  {
+   "id": 2366820558728802929,
+   "name": "back",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#fightroot/fight/back",
+   "parentId": -672521481116802202,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     280.0,
+     41.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_zhanlikuang_2",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 1,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    },
+    {
+     "type": "LayoutElement",
+     "ignoreLayout": true,
+     "minWidth": -1.0,
+     "minHeight": -1.0,
+     "preferredWidth": -1.0,
+     "preferredHeight": -1.0,
+     "flexibleWidth": -1.0,
+     "flexibleHeight": -1.0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 8553614380648996537,
+   "name": "sign",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#fightroot/fight/sign",
+   "parentId": -672521481116802202,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -122.199997,
+     0.0
+    ],
+    "sizeDelta": [
+     60.0,
+     48.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_zhanzi_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    },
+    {
+     "type": "LayoutElement",
+     "ignoreLayout": true,
+     "minWidth": -1.0,
+     "minHeight": -1.0,
+     "preferredWidth": -1.0,
+     "preferredHeight": -1.0,
+     "flexibleWidth": -1.0,
+     "flexibleHeight": -1.0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 6247592263514815695,
+   "name": "#discipleFightTxt",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#fightroot/fight/#discipleFightTxt",
+   "parentId": -672521481116802202,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     10.0,
+     0.0
+    ],
+    "sizeDelta": [
+     282.100006,
+     46.290001
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Text",
+     "text": "",
+     "sampleText": "128,450",
+     "fontSize": 0,
+     "fontStyle": 0,
+     "alignment": "MiddleCenter",
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "richText": false,
+     "bestFit": false,
+     "horizontalOverflow": 1,
+     "verticalOverflow": 1,
+     "raycastTarget": false,
+     "font": "font_fight_sprite2(Font)",
+     "enabled": true
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 326535305450274786,
+   "name": "#pdRoot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#pdRoot",
+   "parentId": -6618054969604702170,
+   "siblingIndex": 1,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     1.0
+    ],
+    "anchorMax": [
+     0.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     235.0,
+     -77.5
+    ],
+    "sizeDelta": [
+     330.0,
+     55.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_zhanlikuang_2",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 1,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -5597006716482754009,
+   "name": "#pdImg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#pdRoot/#pdImg",
+   "parentId": 326535305450274786,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -75.999992,
+     0.0
+    ],
+    "sizeDelta": [
+     152.0,
+     52.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_shuwuscdjcc_1",
+     "spriteBundle": "shuwudizi_atlas_pak.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "avatar"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 3954642994328323612,
+   "name": "#pdVal",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#pdRoot/#pdVal",
+   "parentId": 326535305450274786,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     59.200001,
+     0.0
+    ],
+    "sizeDelta": [
+     100.0,
+     30.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Text",
+     "text": "+0%",
+     "sampleText": "+0%",
+     "fontSize": 0,
+     "fontStyle": 0,
+     "alignment": "MiddleLeft",
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "richText": false,
+     "bestFit": false,
+     "horizontalOverflow": 1,
+     "verticalOverflow": 1,
+     "raycastTarget": false,
+     "font": "font_fight_sprite2(Font)",
+     "enabled": true
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 1905454951082103650,
+   "name": "#tmskillroot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot",
+   "parentId": -6618054969604702170,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     470.0,
+     86.478996
+    ],
+    "pivot": [
+     0.0,
+     1.0
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": []
+  },
+  {
+   "id": -8980034035182486779,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/bg",
+   "parentId": 1905454951082103650,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_diziui_1",
+     "spriteBundle": "uidisciplemainicons.ab",
+     "imageType": 1,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 1406534534527412883,
+   "name": "#skillScrollView",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView",
+   "parentId": 1905454951082103650,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     460.0,
+     100.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "ScrollRect",
+     "horizontal": true,
+     "vertical": false,
+     "movementType": 1,
+     "elasticity": 0.1,
+     "inertia": true,
+     "decelerationRate": 0.135,
+     "scrollSensitivity": 1.0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 7419963720353365646,
+   "name": "Viewport",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport",
+   "parentId": 1406534534527412883,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.0,
+     1.0
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_diziui_1",
+     "spriteBundle": "uidisciplemainicons.ab",
+     "imageType": 1,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    },
+    {
+     "type": "Mask",
+     "showMaskGraphic": false
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 7751559350361297710,
+   "name": "#skillContent",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent",
+   "parentId": 7419963720353365646,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -0.002304,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     100.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "HorizontalLayoutGroup",
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "childAlignment": 3,
+     "spacing": 0.0,
+     "childForceExpandWidth": false,
+     "childForceExpandHeight": false,
+     "childControlWidth": false,
+     "childControlHeight": false
+    },
+    {
+     "type": "ContentSizeFitter",
+     "horizontalFit": "PreferredSize",
+     "verticalFit": "Unconstrained"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 8621125697578160016,
+   "name": "#tmskillList",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList",
+   "parentId": 7751559350361297710,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     460.0,
+     100.0
+    ],
+    "pivot": [
+     0.0,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "GridLayoutGroup",
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "childAlignment": 4,
+     "spacing": {
+      "x": 10.0,
+      "y": 0.0
+     },
+     "childForceExpandWidth": false,
+     "childForceExpandHeight": false,
+     "childControlWidth": false,
+     "childControlHeight": false,
+     "cellSize": [
+      80.0,
+      80.0
+     ],
+     "spacingXY": [
+      10.0,
+      0.0
+     ],
+     "startCorner": 0,
+     "startAxis": 0,
+     "constraint": 0,
+     "constraintCount": 2
+    }
+   ],
+   "skipped": [
+    "CSGUICommonLayoutGroup"
+   ]
+  },
+  {
+   "id": -6136793909904091217,
+   "name": "tmskilltemp (1)",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (1)",
+   "parentId": 8621125697578160016,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIBaseItem"
+   ]
+  },
+  {
+   "id": -6790175813134167605,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (1)/bg",
+   "parentId": -6136793909904091217,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     80.0,
+     80.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_jinengkuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -5476969190497461151,
+   "name": "skillicon",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (1)/skillicon",
+   "parentId": -6136793909904091217,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     -10.0,
+     -10.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage",
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": -7030090880086657446,
+   "name": "lock",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (1)/lock",
+   "parentId": -6136793909904091217,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     1.5,
+     2.0
+    ],
+    "sizeDelta": [
+     49.0,
+     41.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dygou_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 9215520605566128623,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (1)/lock/Image",
+   "parentId": -7030090880086657446,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -1.5,
+     1e-06
+    ],
+    "sizeDelta": [
+     28.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dysuo_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -4242491180628454504,
+   "name": "reddot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (1)/reddot",
+   "parentId": -6136793909904091217,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     28.000008,
+     27.999998
+    ],
+    "sizeDelta": [
+     24.0,
+     24.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_tyhongdiantishi",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -5400022055330174304,
+   "name": "tmskilltemp (2)",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (2)",
+   "parentId": 8621125697578160016,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIBaseItem"
+   ]
+  },
+  {
+   "id": -5031685791348980147,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (2)/bg",
+   "parentId": -5400022055330174304,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     80.0,
+     80.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_jinengkuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 2849165032327464820,
+   "name": "skillicon",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (2)/skillicon",
+   "parentId": -5400022055330174304,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     -10.0,
+     -10.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage",
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": -4647284228675535446,
+   "name": "lock",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (2)/lock",
+   "parentId": -5400022055330174304,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     1.5,
+     2.0
+    ],
+    "sizeDelta": [
+     49.0,
+     41.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dygou_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -4967246562331185449,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (2)/lock/Image",
+   "parentId": -4647284228675535446,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -1.5,
+     1e-06
+    ],
+    "sizeDelta": [
+     28.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dysuo_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 8869742229625445751,
+   "name": "reddot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (2)/reddot",
+   "parentId": -5400022055330174304,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     28.000008,
+     27.999998
+    ],
+    "sizeDelta": [
+     24.0,
+     24.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_tyhongdiantishi",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -1174471879546322821,
+   "name": "tmskilltemp (3)",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (3)",
+   "parentId": 8621125697578160016,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIBaseItem"
+   ]
+  },
+  {
+   "id": 5282310286874885903,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (3)/bg",
+   "parentId": -1174471879546322821,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     80.0,
+     80.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_jinengkuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 9078585241543442847,
+   "name": "skillicon",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (3)/skillicon",
+   "parentId": -1174471879546322821,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     -10.0,
+     -10.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage",
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 409524778272931153,
+   "name": "lock",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (3)/lock",
+   "parentId": -1174471879546322821,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     1.5,
+     2.0
+    ],
+    "sizeDelta": [
+     49.0,
+     41.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dygou_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 7844371141865845171,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (3)/lock/Image",
+   "parentId": 409524778272931153,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -1.5,
+     1e-06
+    ],
+    "sizeDelta": [
+     28.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dysuo_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 8348333127890010892,
+   "name": "reddot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (3)/reddot",
+   "parentId": -1174471879546322821,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     28.000008,
+     27.999998
+    ],
+    "sizeDelta": [
+     24.0,
+     24.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_tyhongdiantishi",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -8081497901970218690,
+   "name": "tmskilltemp (4)",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (4)",
+   "parentId": 8621125697578160016,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIBaseItem"
+   ]
+  },
+  {
+   "id": 7218399280942463385,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (4)/bg",
+   "parentId": -8081497901970218690,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     80.0,
+     80.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_jinengkuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 2019280944851272683,
+   "name": "skillicon",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (4)/skillicon",
+   "parentId": -8081497901970218690,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     -10.0,
+     -10.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage",
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": -8405252775837670576,
+   "name": "lock",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (4)/lock",
+   "parentId": -8081497901970218690,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     1.5,
+     2.0
+    ],
+    "sizeDelta": [
+     49.0,
+     41.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dygou_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 6150022037648061705,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (4)/lock/Image",
+   "parentId": -8405252775837670576,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -1.5,
+     1e-06
+    ],
+    "sizeDelta": [
+     28.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dysuo_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -2764961779770988165,
+   "name": "reddot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (4)/reddot",
+   "parentId": -8081497901970218690,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     28.000008,
+     27.999998
+    ],
+    "sizeDelta": [
+     24.0,
+     24.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_tyhongdiantishi",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 7875644621637619711,
+   "name": "tmskilltemp (5)",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (5)",
+   "parentId": 8621125697578160016,
+   "siblingIndex": 4,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIBaseItem"
+   ]
+  },
+  {
+   "id": 7333880503225729348,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (5)/bg",
+   "parentId": 7875644621637619711,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     80.0,
+     80.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_jinengkuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -9046527715103978792,
+   "name": "skillicon",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (5)/skillicon",
+   "parentId": 7875644621637619711,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     -10.0,
+     -10.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage",
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 6020733877175665842,
+   "name": "lock",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (5)/lock",
+   "parentId": 7875644621637619711,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     1.5,
+     2.0
+    ],
+    "sizeDelta": [
+     49.0,
+     41.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dygou_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 4688420911595498598,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (5)/lock/Image",
+   "parentId": 6020733877175665842,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -1.5,
+     1e-06
+    ],
+    "sizeDelta": [
+     28.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dysuo_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -3937445534820490436,
+   "name": "reddot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#tmskillList/tmskilltemp (5)/reddot",
+   "parentId": 7875644621637619711,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     28.000008,
+     27.999998
+    ],
+    "sizeDelta": [
+     24.0,
+     24.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_tyhongdiantishi",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -6540836650643451486,
+   "name": "#dyskillList",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList",
+   "parentId": 7751559350361297710,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     270.0,
+     100.0
+    ],
+    "pivot": [
+     0.0,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "GridLayoutGroup",
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "childAlignment": 3,
+     "spacing": {
+      "x": 10.0,
+      "y": 0.0
+     },
+     "childForceExpandWidth": false,
+     "childForceExpandHeight": false,
+     "childControlWidth": false,
+     "childControlHeight": false,
+     "cellSize": [
+      80.0,
+      80.0
+     ],
+     "spacingXY": [
+      10.0,
+      0.0
+     ],
+     "startCorner": 0,
+     "startAxis": 0,
+     "constraint": 0,
+     "constraintCount": 2
+    }
+   ],
+   "skipped": [
+    "CSGUICommonLayoutGroup"
+   ]
+  },
+  {
+   "id": -1924022391060117722,
+   "name": "tmskilltemp (1)",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (1)",
+   "parentId": -6540836650643451486,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIBaseItem"
+   ]
+  },
+  {
+   "id": -4136238229291043668,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (1)/bg",
+   "parentId": -1924022391060117722,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     80.0,
+     80.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_jinengkuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 140796094754203813,
+   "name": "skillicon",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (1)/skillicon",
+   "parentId": -1924022391060117722,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     -10.0,
+     -10.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage",
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": -726436510466072446,
+   "name": "lock",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (1)/lock",
+   "parentId": -1924022391060117722,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     1.5,
+     2.0
+    ],
+    "sizeDelta": [
+     49.0,
+     41.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dygou_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -9010122103288345751,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (1)/lock/Image",
+   "parentId": -726436510466072446,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -1.5,
+     1e-06
+    ],
+    "sizeDelta": [
+     28.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dysuo_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -868250630906875832,
+   "name": "reddot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (1)/reddot",
+   "parentId": -1924022391060117722,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     28.000008,
+     27.999998
+    ],
+    "sizeDelta": [
+     24.0,
+     24.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_tyhongdiantishi",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -5455058280775794350,
+   "name": "tmskilltemp (2)",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (2)",
+   "parentId": -6540836650643451486,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIBaseItem"
+   ]
+  },
+  {
+   "id": -6269457585838594454,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (2)/bg",
+   "parentId": -5455058280775794350,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     80.0,
+     80.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_jinengkuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 477368786403864358,
+   "name": "skillicon",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (2)/skillicon",
+   "parentId": -5455058280775794350,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     -10.0,
+     -10.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage",
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": -6288523525776993529,
+   "name": "lock",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (2)/lock",
+   "parentId": -5455058280775794350,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     1.5,
+     2.0
+    ],
+    "sizeDelta": [
+     49.0,
+     41.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dygou_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -3847792068670790870,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (2)/lock/Image",
+   "parentId": -6288523525776993529,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -1.5,
+     1e-06
+    ],
+    "sizeDelta": [
+     28.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dysuo_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 7755455064400482876,
+   "name": "reddot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (2)/reddot",
+   "parentId": -5455058280775794350,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     28.000008,
+     27.999998
+    ],
+    "sizeDelta": [
+     24.0,
+     24.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_tyhongdiantishi",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 3139010670962386464,
+   "name": "tmskilltemp (3)",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (3)",
+   "parentId": -6540836650643451486,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     0.0,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     0.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIBaseItem"
+   ]
+  },
+  {
+   "id": -4320767950791151057,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (3)/bg",
+   "parentId": 3139010670962386464,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     80.0,
+     80.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_jinengkuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -5247594545113524724,
+   "name": "skillicon",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (3)/skillicon",
+   "parentId": 3139010670962386464,
+   "siblingIndex": 1,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     -10.0,
+     -10.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage",
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 3038225457043520085,
+   "name": "lock",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (3)/lock",
+   "parentId": 3139010670962386464,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     1.5,
+     2.0
+    ],
+    "sizeDelta": [
+     49.0,
+     41.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dygou_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 208672485084143624,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (3)/lock/Image",
+   "parentId": 3038225457043520085,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -1.5,
+     1e-06
+    ],
+    "sizeDelta": [
+     28.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dysuo_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 1683804864644281204,
+   "name": "reddot",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/#skillScrollView/Viewport/#skillContent/#dyskillList/tmskilltemp (3)/reddot",
+   "parentId": 3139010670962386464,
+   "siblingIndex": 3,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     28.000008,
+     27.999998
+    ],
+    "sizeDelta": [
+     24.0,
+     24.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_tyhongdiantishi",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 7691157684807768794,
+   "name": "tmskilltemp",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/tmskilltemp",
+   "parentId": 1905454951082103650,
+   "siblingIndex": 2,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -3.399994,
+     -3.239498
+    ],
+    "sizeDelta": [
+     80.0,
+     80.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIBaseItem"
+   ]
+  },
+  {
+   "id": -499999346173861838,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/tmskilltemp/bg",
+   "parentId": 7691157684807768794,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     80.0,
+     80.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_jinengkuang_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 5482518192807373572,
+   "name": "skillicon",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/tmskilltemp/skillicon",
+   "parentId": 7691157684807768794,
+   "siblingIndex": 1,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     0.0
+    ],
+    "anchorMax": [
+     1.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     -10.0,
+     -10.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": 6662007894894402607,
+   "name": "lock",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/tmskilltemp/lock",
+   "parentId": 7691157684807768794,
+   "siblingIndex": 2,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     1.5,
+     2.0
+    ],
+    "sizeDelta": [
+     49.0,
+     41.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dygou_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 6541545784530764798,
+   "name": "Image",
+   "path": "UIDiscipleRoleInfo2Win/#root/buttonRoot/#tmskillroot/tmskilltemp/lock/Image",
+   "parentId": 6662007894894402607,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -1.5,
+     1e-06
+    ],
+    "sizeDelta": [
+     28.0,
+     28.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_dysuo_1",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 2288522349638185405,
+   "name": "layout",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 13,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -460.0,
+     -203.0
+    ],
+    "sizeDelta": [
+     90.0,
+     0.0
+    ],
+    "pivot": [
+     0.5,
+     0.0
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "VerticalLayoutGroup",
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "childAlignment": 4,
+     "spacing": 0.0,
+     "childForceExpandWidth": false,
+     "childForceExpandHeight": false,
+     "childControlWidth": false,
+     "childControlHeight": false
+    },
+    {
+     "type": "ContentSizeFitter",
+     "horizontalFit": "Unconstrained",
+     "verticalFit": "PreferredSize"
+    },
+    {
+     "type": "LayoutElement",
+     "ignoreLayout": false,
+     "minWidth": -1.0,
+     "minHeight": 96.0,
+     "preferredWidth": -1.0,
+     "preferredHeight": -1.0,
+     "flexibleWidth": -1.0,
+     "flexibleHeight": -1.0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -4330068481593520615,
+   "name": "#switchBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#switchBtn",
+   "parentId": 2288522349638185405,
+   "siblingIndex": 0,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     1.0
+    ],
+    "anchorMax": [
+     0.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     45.0,
+     -48.0
+    ],
+    "sizeDelta": [
+     91.0,
+     82.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -8219374007750036932,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#switchBtn/bg",
+   "parentId": -4330068481593520615,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     1.0
+    ],
+    "anchorMax": [
+     0.5,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     -32.0
+    ],
+    "sizeDelta": [
+     91.0,
+     64.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "button_shenhuadizixinxi_zhiyeqiehuan",
+     "spriteBundle": "spdisciple_atlas_pak.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 5480122639420526984,
+   "name": "#switchCdBg",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#switchBtn/#switchCdBg",
+   "parentId": -4330068481593520615,
+   "siblingIndex": 1,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     1.0
+    ],
+    "anchorMax": [
+     0.5,
+     1.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     -72.0
+    ],
+    "sizeDelta": [
+     82.0,
+     20.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "frame_shenhuadizixinxi_1",
+     "spriteBundle": "spdisciple_atlas_pak.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "panel"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 4902491839392091197,
+   "name": "#switchCdText",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#switchBtn/#switchCdBg/#switchCdText",
+   "parentId": 5480122639420526984,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     50.0,
+     20.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Text",
+     "text": "59:59",
+     "sampleText": "59:59",
+     "fontSize": 18,
+     "fontStyle": 0,
+     "alignment": "MiddleCenter",
+     "color": [
+      0.952941,
+      0.4,
+      0.4,
+      1.0
+     ],
+     "richText": true,
+     "bestFit": false,
+     "horizontalOverflow": 1,
+     "verticalOverflow": 1,
+     "raycastTarget": false,
+     "font": null,
+     "enabled": true
+    },
+    {
+     "type": "Outline",
+     "color": [
+      0.0,
+      0.0,
+      0.0,
+      0.768627
+     ],
+     "effectDistance": [
+      1.0,
+      -1.0
+     ],
+     "useGraphicAlpha": true
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 9132293350535762679,
+   "name": "#zhenfaBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#zhenfaBtn",
+   "parentId": 2288522349638185405,
+   "siblingIndex": 1,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     1.0
+    ],
+    "anchorMax": [
+     0.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     45.0,
+     -48.0
+    ],
+    "sizeDelta": [
+     91.0,
+     82.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 8593167955691063140,
+   "name": "bg",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#zhenfaBtn/bg",
+   "parentId": 9132293350535762679,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     100.0,
+     84.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "button_fxzf_1",
+     "spriteBundle": "fightcommonicons_atlas_pak.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "card"
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": 7027295834240536376,
+   "name": "#signBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#signBtn",
+   "parentId": 2288522349638185405,
+   "siblingIndex": 2,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.0,
+     1.0
+    ],
+    "anchorMax": [
+     0.0,
+     1.0
+    ],
+    "anchoredPosition": [
+     45.0,
+     -48.0
+    ],
+    "sizeDelta": [
+     90.0,
+     96.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    },
+    {
+     "type": "Image",
+     "sprite": null,
+     "spriteBundle": null,
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": false,
+     "placeholderKind": "button"
+    }
+   ],
+   "skipped": [
+    "CSGUIImage"
+   ]
+  },
+  {
+   "id": -4859376672207667666,
+   "name": "#signBtnTx",
+   "path": "UIDiscipleRoleInfo2Win/#root/layout/#signBtn/#signBtnTx",
+   "parentId": 7027295834240536376,
+   "siblingIndex": 0,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.0
+    ],
+    "anchorMax": [
+     0.5,
+     0.0
+    ],
+    "anchoredPosition": [
+     0.0,
+     0.0
+    ],
+    "sizeDelta": [
+     100.0,
+     35.0
+    ],
+    "pivot": [
+     0.5,
+     1.0
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Text",
+     "text": "",
+     "sampleText": "Sign",
+     "fontSize": 22,
+     "fontStyle": 0,
+     "alignment": "MiddleCenter",
+     "color": [
+      0.086275,
+      0.078431,
+      0.070588,
+      1.0
+     ],
+     "richText": false,
+     "bestFit": false,
+     "horizontalOverflow": 1,
+     "verticalOverflow": 1,
+     "raycastTarget": false,
+     "font": null,
+     "enabled": true
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -8387510854996586968,
+   "name": "#signEffect",
+   "path": "UIDiscipleRoleInfo2Win/#root/#signEffect",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 14,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -374.0,
+     120.0
+    ],
+    "sizeDelta": [
+     100.0,
+     100.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [],
+   "skipped": [
+    "CSGUIEffect"
+   ]
+  },
+  {
+   "id": 4388741574681757205,
+   "name": "#guanlianBtn",
+   "path": "UIDiscipleRoleInfo2Win/#root/#guanlianBtn",
+   "parentId": -5389621194707491203,
+   "siblingIndex": 15,
+   "active": true,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     -45.799999,
+     -160.0
+    ],
+    "sizeDelta": [
+     104.0,
+     84.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": -0.0,
+     "y": -0.0,
+     "z": -0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "button_yishidizi",
+     "spriteBundle": "liandong_atlas_pak.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": true,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "button"
+    },
+    {
+     "type": "Button",
+     "transition": 1,
+     "interactable": true,
+     "enabled": true,
+     "persistentCalls": 0
+    }
+   ],
+   "skipped": []
+  },
+  {
+   "id": -2313230870846728073,
+   "name": "#guanlianred",
+   "path": "UIDiscipleRoleInfo2Win/#root/#guanlianBtn/#guanlianred",
+   "parentId": 4388741574681757205,
+   "siblingIndex": 0,
+   "active": false,
+   "rect": {
+    "anchorMin": [
+     0.5,
+     0.5
+    ],
+    "anchorMax": [
+     0.5,
+     0.5
+    ],
+    "anchoredPosition": [
+     30.299999,
+     27.4
+    ],
+    "sizeDelta": [
+     24.0,
+     24.0
+    ],
+    "pivot": [
+     0.5,
+     0.5
+    ],
+    "localScale": [
+     1.0,
+     1.0
+    ],
+    "localRotation": {
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "w": 1.0
+    }
+   },
+   "components": [
+    {
+     "type": "Image",
+     "sprite": "image_tyhongdiantishi",
+     "spriteBundle": "uiglobalspriteatlas_1.ab",
+     "imageType": 0,
+     "color": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "raycastTarget": false,
+     "preserveAspect": false,
+     "enabled": true,
+     "placeholderKind": "avatar"
+    }
+   ],
+   "skipped": []
+  }
+ ]
+}

@@ -1,6 +1,9 @@
+using System.Reflection;
 using NUnit.Framework;
 using Spine;
+using Spine.Unity;
 using UnityEngine;
+using UnityEngine.TestTools;
 using UnityEngine.UI;
 
 namespace MyClone.SpineSystem.Tests
@@ -131,13 +134,242 @@ namespace MyClone.SpineSystem.Tests
 			Assert.IsNull (m_Actor.GetSlotAttachment ("slot1"));
 		}
 
-		[Test]
-		public void SetSkin_ChangesAttachmentLookup ()
-		{
-			Assert.IsTrue (m_Actor.SetSkin ("alt"));
-			Assert.IsTrue (m_Actor.SetSlotAttachment ("slot1", "alt1"));
-			Assert.AreEqual ("alt1", m_Actor.GetSlotAttachment ("slot1"));
+	[Test]
+	public void SetSkin_ChangesAttachmentLookup ()
+	{
+		Assert.IsTrue (m_Actor.SetSkin ("alt"));
+		Assert.IsTrue (m_Actor.SetSlotAttachment ("slot1", "alt1"));
+		Assert.AreEqual ("alt1", m_Actor.GetSlotAttachment ("slot1"));
+	}
+
+	[Test]
+	public void Build_EmptyDefaultSkin_AutoPicksFirstSkinWithAttachments ()
+	{
+		var assets = TestSpineAssets.Create (skeletonJson: TestSpineAssets.EmptyDefaultSkeletonJson);
+		try {
+			LogAssert.Expect (LogType.Warning,
+				"[SpineActorBase] No skin configured. Automatically combining the first skin of each part group: look1.");
+
+			var actor = SpineActorFactory.CreateUi (m_CanvasGo.transform, assets.Data);
+
+			Assert.AreEqual ("combined:look1", actor.Skeleton.Skin.Name);
+			Assert.AreEqual ("img1", actor.GetSlotAttachment ("slot1"));
+
+			Object.DestroyImmediate (actor.gameObject);
+		} finally {
+			assets.Destroy ();
 		}
+	}
+
+	[Test]
+	public void Build_NoUsableSkin_WarnsNothingWillBeVisible ()
+	{
+		var assets = TestSpineAssets.Create (skeletonJson: TestSpineAssets.OnlyEmptySkinsJson);
+		try {
+			LogAssert.Expect (LogType.Warning,
+				"[SpineActorBase] Skin 'default' has no attachments: nothing will be visible. Pick another Initial Skin.");
+
+			var actor = SpineActorFactory.CreateUi (m_CanvasGo.transform, assets.Data);
+
+			Assert.IsTrue (actor.IsBuilt);
+			Assert.IsNull (actor.GetSlotAttachment ("slot1"));
+
+			Object.DestroyImmediate (actor.gameObject);
+		} finally {
+			assets.Destroy ();
+		}
+	}
+
+	[Test]
+	public void Build_InitialSkinWithoutAttachments_WarnsNothingWillBeVisible ()
+	{
+		var assets = TestSpineAssets.Create (skeletonJson: TestSpineAssets.EmptyDefaultSkeletonJson);
+		try {
+			LogAssert.Expect (LogType.Warning,
+				"[SpineActorBase] Skin 'empty' has no attachments: nothing will be visible. Pick another Initial Skin.");
+
+			var actor = SpineActorFactory.CreateUi (m_CanvasGo.transform, assets.Data, skin: "empty");
+
+			Assert.IsTrue (actor.IsBuilt);
+			Assert.AreEqual ("empty", actor.Skeleton.Skin.Name);
+			Assert.IsNull (actor.GetSlotAttachment ("slot1"));
+
+			Object.DestroyImmediate (actor.gameObject);
+		} finally {
+			assets.Destroy ();
+		}
+	}
+
+	[Test]
+	public void SetSkins_CombinesParts_AllSlotsHaveAttachments ()
+	{
+		var assets = TestSpineAssets.Create (skeletonJson: TestSpineAssets.PartSkinsSkeletonJson);
+		try {
+			var actor = SpineActorFactory.CreateUi (m_CanvasGo.transform, assets.Data, skin: "body_a");
+
+			var combined = actor.SetSkins ("body_a", "head_a", "face_a");
+
+			Assert.IsNotNull (combined);
+			Assert.AreEqual ("combined:body_a+head_a+face_a", combined.Name);
+			Assert.AreEqual ("combined:body_a+head_a+face_a", actor.Skeleton.Skin.Name);
+			Assert.AreEqual ("body_img", actor.GetSlotAttachment ("body_slot"));
+			Assert.AreEqual ("head_img", actor.GetSlotAttachment ("head_slot"));
+			Assert.AreEqual ("face_img", actor.GetSlotAttachment ("face_slot"));
+
+			Object.DestroyImmediate (actor.gameObject);
+		} finally {
+			assets.Destroy ();
+		}
+	}
+
+	[Test]
+	public void SetSkins_MissingName_WarnsAndSkips ()
+	{
+		var assets = TestSpineAssets.Create (skeletonJson: TestSpineAssets.PartSkinsSkeletonJson);
+		try {
+			var actor = SpineActorFactory.CreateUi (m_CanvasGo.transform, assets.Data, skin: "body_a");
+			LogAssert.Expect (LogType.Warning,
+				"[SpineActorBase] skin 'nope' not found, skipping.");
+			LogAssert.Expect (LogType.Warning,
+				"[SpineActorBase] Combined skin leaves 1 empty slot(s): face_slot (no candidates in the combined skin)");
+
+			var combined = actor.SetSkins ("body_a", "nope", "head_a");
+
+			Assert.IsNotNull (combined);
+			// Only the existing parts made it into the combination.
+			Assert.AreEqual ("combined:body_a+head_a", combined.Name);
+			Assert.AreEqual ("body_img", actor.GetSlotAttachment ("body_slot"));
+			Assert.AreEqual ("head_img", actor.GetSlotAttachment ("head_slot"));
+			Assert.IsNull (actor.GetSlotAttachment ("face_slot"));
+
+			Object.DestroyImmediate (actor.gameObject);
+		} finally {
+			assets.Destroy ();
+		}
+	}
+
+	[Test]
+	public void SetSkinParts_CombinesParts_AllSlotsHaveAttachments ()
+	{
+		var assets = TestSpineAssets.Create (skeletonJson: TestSpineAssets.PartSkinsSkeletonJson);
+		try {
+			var actor = SpineActorFactory.CreateUi (m_CanvasGo.transform, assets.Data, skin: "body_a");
+
+			actor.SetSkinParts (
+				new SpineActorBase.SkinPart { part = "body", skin = "body_a" },
+				new SpineActorBase.SkinPart { part = "head", skin = "head_a" },
+				new SpineActorBase.SkinPart { part = "face", skin = "face_a" });
+
+			Assert.AreEqual ("combined:body_a+head_a+face_a", actor.Skeleton.Skin.Name);
+			Assert.AreEqual ("body_img", actor.GetSlotAttachment ("body_slot"));
+			Assert.AreEqual ("head_img", actor.GetSlotAttachment ("head_slot"));
+			Assert.AreEqual ("face_img", actor.GetSlotAttachment ("face_slot"));
+
+			Object.DestroyImmediate (actor.gameObject);
+		} finally {
+			assets.Destroy ();
+		}
+	}
+
+	[Test]
+	public void SetSkinPart_HeadOnly_OthersUnchanged ()
+	{
+		var assets = TestSpineAssets.Create (skeletonJson: TestSpineAssets.PartSkinsSkeletonJson);
+		try {
+			var actor = SpineActorFactory.CreateUi (m_CanvasGo.transform, assets.Data, skin: "body_a");
+			actor.SetSkinParts (
+				new SpineActorBase.SkinPart { part = "body", skin = "body_a" },
+				new SpineActorBase.SkinPart { part = "head", skin = "head_a" },
+				new SpineActorBase.SkinPart { part = "face", skin = "face_a" });
+
+			actor.SetSkinPart ("head", "head_b");
+
+			Assert.AreEqual ("combined:body_a+head_b+face_a", actor.Skeleton.Skin.Name);
+			Assert.AreEqual ("body_img", actor.GetSlotAttachment ("body_slot"));
+			Assert.AreEqual ("head_img2", actor.GetSlotAttachment ("head_slot"));
+			Assert.AreEqual ("face_img", actor.GetSlotAttachment ("face_slot"));
+
+			Object.DestroyImmediate (actor.gameObject);
+		} finally {
+			assets.Destroy ();
+		}
+	}
+
+	[Test]
+	public void SetSkinParts_SlotCollision_LaterPartWinsAndWarns ()
+	{
+		var assets = TestSpineAssets.Create (skeletonJson: TestSpineAssets.PartSkinsSkeletonJson);
+		try {
+			var actor = SpineActorFactory.CreateUi (m_CanvasGo.transform, assets.Data, skin: "body_a");
+			LogAssert.Expect (LogType.Warning,
+				"[SpineActorBase] combined skin: slot 'body_slot' attachment 'body_img' already provided by 'body_a'; later skin 'body_dup' wins");
+			LogAssert.Expect (LogType.Warning,
+				"[SpineActorBase] Combined skin leaves 2 empty slot(s): head_slot (no candidates in the combined skin); face_slot (no candidates in the combined skin)");
+
+			var combined = actor.SetSkins ("body_a", "body_dup");
+
+			Assert.AreEqual ("combined:body_a+body_dup", combined.Name);
+
+			// The later skin's attachment instance is the one kept in the combined skin.
+			int bodySlotIndex = actor.Skeleton.FindSlot ("body_slot").Data.Index;
+			var fromDup = actor.Skeleton.Data.FindSkin ("body_dup").GetAttachment (bodySlotIndex, "body_img");
+			var fromA = actor.Skeleton.Data.FindSkin ("body_a").GetAttachment (bodySlotIndex, "body_img");
+			Assert.AreSame (fromDup, combined.GetAttachment (bodySlotIndex, "body_img"));
+			Assert.AreNotSame (fromA, combined.GetAttachment (bodySlotIndex, "body_img"));
+
+			Object.DestroyImmediate (actor.gameObject);
+		} finally {
+			assets.Destroy ();
+		}
+	}
+
+	[Test]
+	public void Compose_EmptySlot_WarnsSlotAndCandidates ()
+	{
+		var assets = TestSpineAssets.Create (skeletonJson: TestSpineAssets.PartSkinsSkeletonJson);
+		try {
+			var actor = SpineActorFactory.CreateUi (m_CanvasGo.transform, assets.Data, skin: "body_alt");
+			LogAssert.Expect (LogType.Warning,
+				"[SpineActorBase] Combined skin leaves 1 empty slot(s): body_slot (candidates: body_img2 - none matches setup attachment 'body_img')");
+
+			actor.SetSkinParts (
+				new SpineActorBase.SkinPart { part = "body", skin = "body_alt" },
+				new SpineActorBase.SkinPart { part = "head", skin = "head_a" },
+				new SpineActorBase.SkinPart { part = "face", skin = "face_a" });
+
+			// Not auto-corrected: body_slot stays empty and the mismatch is only reported.
+			Assert.IsNull (actor.GetSlotAttachment ("body_slot"));
+			Assert.AreEqual ("head_img", actor.GetSlotAttachment ("head_slot"));
+			Assert.AreEqual ("face_img", actor.GetSlotAttachment ("face_slot"));
+
+			Object.DestroyImmediate (actor.gameObject);
+		} finally {
+			assets.Destroy ();
+		}
+	}
+
+	[Test]
+	public void AutoFillEmptySlots_FillsSingleCandidate ()
+	{
+		var assets = TestSpineAssets.Create (skeletonJson: TestSpineAssets.PartSkinsSkeletonJson);
+		try {
+			var actor = SpineActorFactory.CreateUi (m_CanvasGo.transform, assets.Data, skin: "body_alt");
+			SetPrivateField (actor, "autoFillEmptySlots", true);
+
+			actor.SetSkinParts (
+				new SpineActorBase.SkinPart { part = "body", skin = "body_alt" },
+				new SpineActorBase.SkinPart { part = "head", skin = "head_a" },
+				new SpineActorBase.SkinPart { part = "face", skin = "face_a" });
+
+			Assert.AreEqual ("body_img2", actor.GetSlotAttachment ("body_slot"));
+			Assert.AreEqual ("head_img", actor.GetSlotAttachment ("head_slot"));
+			Assert.AreEqual ("face_img", actor.GetSlotAttachment ("face_slot"));
+
+			Object.DestroyImmediate (actor.gameObject);
+		} finally {
+			assets.Destroy ();
+		}
+	}
 
 		[Test]
 		public void SetGray_SwapsMaterialShaderAndRestores ()
@@ -192,22 +424,106 @@ namespace MyClone.SpineSystem.Tests
 			CollectionAssert.Contains (m_Actor.Graphic.GetSeparatorSlotNames (), "slot2");
 		}
 
-		[Test]
-		public void Release_DestroysRendererAndAllowsRebuild ()
-		{
-			var first = m_Actor.Graphic;
+	[Test]
+	public void Release_DestroysRendererAndAllowsRebuild ()
+	{
+		var first = m_Actor.Graphic;
 
-			m_Actor.Release ();
+		m_Actor.Release ();
 
-			Assert.IsFalse (m_Actor.IsBuilt);
-			Assert.IsTrue (first == null);
-			Assert.IsTrue (m_Actor.Graphic == null);
+		Assert.IsFalse (m_Actor.IsBuilt);
+		Assert.IsTrue (first == null);
+		Assert.IsTrue (m_Actor.Graphic == null);
 
-			m_Actor.Build ();
+		m_Actor.Build ();
 
-			Assert.IsTrue (m_Actor.IsBuilt);
-			Assert.IsNotNull (m_Actor.Graphic);
-			Assert.IsTrue (m_Actor.Graphic.IsValid);
-		}
+		Assert.IsTrue (m_Actor.IsBuilt);
+		Assert.IsNotNull (m_Actor.Graphic);
+		Assert.IsTrue (m_Actor.Graphic.IsValid);
 	}
+
+	[Test]
+	public void Start_BuildsAutomaticallyWhenUnbuilt ()
+	{
+		var go = new GameObject ("ManualActor", typeof (RectTransform));
+		go.transform.SetParent (m_CanvasGo.transform, false);
+		var actor = go.AddComponent<SpineUiActor> ();
+		actor.Configure (m_Assets.Data);
+		Assert.IsFalse (actor.IsBuilt);
+
+		InvokeStart (actor);
+
+		Assert.IsTrue (actor.IsBuilt);
+		Assert.AreEqual (1, CountGraphicsChildren (actor.transform));
+
+		Object.DestroyImmediate (go);
+	}
+
+	[Test]
+	public void Start_DoesNotRebuildWhenAlreadyBuilt ()
+	{
+		Assert.IsTrue (m_Actor.IsBuilt);
+
+		InvokeStart (m_Actor);
+
+		Assert.AreEqual (1, CountGraphicsChildren (m_Actor.transform));
+	}
+
+	[Test]
+	public void Rebuild_DoesNotStackRendererChildren ()
+	{
+		m_Actor.Build ();
+		m_Actor.Build ();
+
+		Assert.AreEqual (1, CountGraphicsChildren (m_Actor.transform));
+	}
+
+	[Test]
+	public void Build_AfterReloadWithDifferentSkeleton_RemovesOrphanGraphic ()
+	{
+		// Simulate a duplicate or scene reload: the renderer GameObject survives in the
+		// hierarchy but m_Graphic is not serialized, so the reference is gone.
+		var orphan = m_Actor.Graphic.gameObject;
+		SetPrivateField (m_Actor, "m_Graphic", null);
+
+		var other = TestSpineAssets.Create ();
+		m_Actor.Configure (other.Data);
+		m_Actor.Build ();
+
+		Assert.IsTrue (m_Actor.IsBuilt);
+		Assert.IsTrue (orphan == null);
+		Assert.AreEqual (1, CountGraphicsChildren (m_Actor.transform));
+
+		other.Destroy ();
+	}
+
+	static int CountGraphicsChildren (Transform parent)
+	{
+		int count = 0;
+		for (int i = 0; i < parent.childCount; i++) {
+			if (parent.GetChild (i).GetComponent<SkeletonGraphic> () != null)
+				count++;
+		}
+		return count;
+	}
+
+	static void SetPrivateField (object instance, string name, object value)
+	{
+		instance.GetType ()
+			.GetField (name, BindingFlags.NonPublic | BindingFlags.Instance)
+			.SetValue (instance, value);
+	}
+
+	/// <summary>
+	/// Invokes SpineActorBase.Start via reflection: Unity blocks message dispatch of
+	/// behaviour callbacks (SendMessage("Start")) in edit mode with a
+	/// ShouldRunBehaviour assertion. Reflection matches what Unity does in play mode.
+	/// </summary>
+	static void InvokeStart (SpineActorBase actor)
+	{
+		typeof (SpineActorBase)
+			.GetMethod ("Start", BindingFlags.NonPublic | BindingFlags.Instance)
+			.Invoke (actor, null);
+	}
+}
 }

@@ -1,0 +1,29 @@
+{
+    "dataPath": "Assets/_Generated/Data/disciple_window.json",
+    "prefabPath": "Assets/_Generated/UI/DiscipleWindow.prefab",
+    "scenePath": "Assets/_Generated/UIDemo.unity",
+    "sourceBundle": "Windows/ui/windows/disciple/uidiscipleroleinfo2win.ab",
+    "spriteMode": "placeholder",
+    "gameObjectCount": 115,
+    "images": 79,
+    "texts": 8,
+    "buttons": 15,
+    "spineActor": true,
+    "spineNote": "SpineUiActor on #discipleModelRoot, Assets/_LocalReference/Portrait/2110101_SkeletonData.asset, initial skin body_2110101_4_1 / animation stand. Skins are combined per mock disciple at runtime.",
+    "skippedTypes": [
+        "CSGUIBaseItem",
+        "CSGUICommonLayoutGroup",
+        "CSGUIEffect",
+        "CSGUIImage",
+        "CSGUIWindowLua",
+        "UIModelShow"
+    ],
+    "unresolvedSprites": [],
+    "notes": [
+        "Hierarchy/RectTransform values come from the UnityPy dump; nothing is instantiated from the game.",
+        "Window root keeps its stretched RectTransform (anchors 0..1) and #root its 100x100 centre rect.",
+        "CSGUIWindowLua / CSGUIImage / CSGUIBaseItem / CSGUICommonLayoutGroup / CSGUIEffect are not reimplemented; Unity's Outline is.",
+        "Scene: UICamera(ortho 5) + GUI_ROOT/BottomUIContain/Canvas_BottomFirstLayer (1334x750, match width) + window instance.",
+        "DemoBar canvas (overlay, sorting 5000) is a test harness only and is not part of the original window."
+    ]
+}

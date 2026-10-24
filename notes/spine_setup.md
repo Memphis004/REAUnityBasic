@@ -215,3 +215,117 @@ newer version of Spine.` ทุกไฟล์ → ยืนยันว่า�
 - วิธี render `SkeletonGraphic` บน URP ด้วย runtime 3.8 (module ไม่มี shader ให้)
 - ผล compile บน Unity 2021.3 จริง (ทดสอบได้เพียง 2022.3.62f2)
 - พฤติกรรม runtime กับ skeleton ทั้ง 30 ไฟล์ (ทดสอบเชิงลึก 4 ไฟล์)
+
+---
+
+## 6. การประกอบหลาย skin (body+head+face) — 2026-10-24
+
+### 6.1 โค้ดใน my_clone (Observed — สิ่งที่เพิ่มวันนี้)
+
+- `SpineActorBase.SetSkins(params string[])`: สร้าง `Spine.Skin` ใหม่ (ชื่อ = ชื่อ skin ต่อด้วย `+`)
+  แล้ว `AddSkin` ทีละชิ้น → `Skeleton.SetSkin(null)` ก่อน `SetSkin(combined)` (กัน merge กับ skin เดิม)
+  → `SetSlotsToSetupPose` → `ApplyStateInternal` — ตรง path `BuildBody()` ของเกม
+  (`Skin("base_skin")` + `AddSkin` ต่อชิ้น) ชื่อที่ไม่มีใน skeleton → warning แล้วข้าม
+- **Initial Skin รองรับหลายชื่อคั่น `+`** เช่น `body_1110901_1+head_1110901_1+face_1110901_1`
+  (`ApplyInitialSkin` แยกเส้นทางเมื่อมี `+` → เรียก `SetSkins`)
+- ก่อนหน้านี้มี logic รวม skin ซ้ำ 3 ที่ ตอนนี้ย้ายมาที่ `SetSkins` ที่เดียว:
+  `SpineDemoController.ApplyCombinedSkin` (เดิม `demo_combined_N`), `AuditActor`,
+  และ `LocalReferenceDemoBuilder.ApplyEditorSkin` (เดิม `demo_editor_combined`)
+- Inspector (`SpineActorInspector`): dropdown Initial Skin/Animation; **checkbox list "Combine Skins"**
+  ที่เขียนกลับเป็นสตริง `+` เดิม (ไม่เพิ่ม serialized field); validation แดงเฉพาะชื่อที่ขาดจาก combo;
+  footer debug เพิ่ม `Composed Skins` และ `Empty Slots` (slot ที่ attachment เป็น null ตอนนั้น)
+- Demo scene: `TreeFarm_body_1110901` ตั้ง `Initial Skin = body_1110901_1+head_1110901_1+face_1110901_1`
+  (`TreeFarmSkins` ใน `LocalReferenceDemoBuilder`) พร้อม verify check ใหม่
+- เครื่องมือใหม่ **Tools/Local Reference/Audit Skin Groups**: เลือก SkeletonDataAsset →
+  รายงาน coverage ต่อ skin, จัดกลุ่ม skin ที่ slot ซ้อนกัน, slot ที่ไม่มี skin ใดครอบคลุม
+  เซฟ `notes/skin_groups_<id>.md`
+
+### 6.2 ผล audit ของ body_1110901 (Observed — parse `.skel.bytes` จริงด้วย spine-csharp)
+
+รายงานเต็ม: `notes/skin_groups_body_1110901.md` (และอีก 4 ตัว: 460011_1, 410041_1, 1110011, 570036)
+
+- 23 slots / 8 skins — default (1 attachment: `root_boundingBox`), `body_1110901_1..3` (13 attachments),
+  `head_1110901_1..3` (4), `face_1110901_1` (1)
+- 3 กลุ่ม (disjoint): body (13 slots) / face (1) / head (4) → เลือกอย่างละตัวประกอบกันได้
+- **ผลรวม `body_1+head_1+face_1`: เต็ม 19/23 slots**
+  ว่างเหลือ 4 ช่อง = **`w_dao`, `w_zhang`, `w_qiang`, `w_jian` (อาวุธ 4 ชนิด)**
+  ซึ่งไม่มี skin ใดของ skeleton นี้ครอบคลุมเลย — ตรงกับข้อมูลเกมที่อาวุธมาจาก
+  `dbcomponentcfg` (followSlot ว่าง → merge skin เข้า body, ไม่ใช่ renderer ใหม่)
+  `root_boundingBox` (hitbox) มาจาก default skin ผ่าน fallback ของ `GetAttachment`
+
+### 6.3 ข้อมูลเกมบอกคู่ skin อย่างไร (สำรวจอย่างเดียว — ดู notes/character_bundle_mapping.md)
+
+- `dbbodyconfig[bodyID].spineSkins[]` คือรายชื่อ skin ที่ต้องรวมกันเป็นตัวละคร
+  (เช่น 1113002 → `["body_1113002_1","face_1113002_1","head_1113002_1"]`,
+  จิบิ 2055..2059 → `["body_1123011_N","head_1123011_N"]` ต่างกันแค่ variant)
+- `dbcomponentcfg[cmpID]`: `spineSkins` รูป `group/name`, `followSlot` (ว่าง = merge เข้า body /
+  ไม่ว่าง = mount sub-skeleton ที่ bone ของ slot), `cmpRootBone`
+- `bodyID + slots[]` มาจากตาราง appearance ฝั่ง Lua/เซิร์ฟเวอร์ ไม่ใช่สองตารางนี้
+
+### 6.4 โครงตารางเทียบที่เสนอสำหรับ my_clone (ยังไม่สร้าง — ไม่ copy ข้อมูลเกม)
+
+ไฟล์เดียวที่เทียบได้ทั้ง body และ component วางที่ `Assets/_Generated/Data/spine_composites.json`
+(รูปแบบเดียวกับ `disciple_window.json` ที่มีอยู่):
+
+```jsonc
+[
+  {
+    "id": "body_1110901",                    // = bodyID (สตริงก็ได้)
+    "skeleton": "Assets/_LocalReference/Spine/body_1110901/body_1110901_SkeletonData.asset",
+    "initialSkins": ["body_1110901_1", "face_1110901_1", "head_1110901_1"],  // = spineSkins[]
+    "defaultAnimation": "stand",
+    "noComponents": true,                    // = noCmp
+    "size": [0, 0],                          // = size[] (ถ้าจะใช้คำนวณ HUD)
+    "components": [                          // = cmps[] + attachSkins รวมกัน
+      // { "id": "...", "skeleton": "...", "skins": ["w_jian/w_jian_300108"],
+      //   "followSlot": "w_jian",           // "" = merge เข้า body (SetSkins เพิ่มชื่อเข้า combo)
+      //   "cmpRootBone": null }             // ไม่ว่าง = Mount(data, skin) + MountToBone(bone ของ slot)
+    ]
+  }
+]
+```
+
+กติกาการใช้ (แม็ปลง my_clone ปัจจุบันได้ทันที):
+- `initialSkins` → `actor.SetSkins(...)` หรือ Initial Skin แบบ `a+b+c`
+- `followSlot == ""` → รวมชื่อ skin ของ component เข้า combo เดียวกัน (renderer ไม่เพิ่ม)
+- `followSlot != ""` → `Mount(data, skin)` + `MountToBone(cmpRootBone หรือ bone ของ slot นั้น)`
+- audit ใน 6.2 คือวิธีตรวจว่า combo หนึ่ง ๆ เหลือ slot ว่างอะไรก่อนตัดสินใจใส่ component
+
+### 6.5 งานต่อไปที่เห็นจาก audit
+
+- slot `w_*` 4 ช่องของ body_1110901 ว่างรออาวุธจาก component (โหลด `Weapon/` จากคลังได้)
+- ยังไม่มีตัวเก็บ `s_spineAb` (เวอร์ชันตัวย่อ) — ถ้าจะรองรับ ต้อง import bundle `_s_` เพิ่ม
+
+### 6.6 Skin Parts redesign (2026-10-24, รอบสอง — แทนกลไก "+" ใน 6.1)
+
+ปัญหา: skeleton เกมเก็บหน้าตาแยกเป็น body_*/head_*/face_* แต่ Inspector เลือก Initial Skin ได้ทีละชื่อ
+จึงได้ตัวละครแค่ชิ้นเดียว (screenshot: เลือก face_1110901_1 เห็นแค่ตา, เลือก head_* เห็นแค่หัว)
+
+โครงใหม่ (Observed — โค้ดปัจจุบัน):
+- `SpineActorBase.SkinPart { part, skin }` (Serializable) + `List<SkinPart> skinParts` (serialize)
+  — `initialSkin` เดิมเป็นโหมด legacy ใช้เมื่อ skinParts ว่างเท่านั้น (scene เก่าไม่พัง)
+- กลุ่ม part = ข้อความก่อน '_' แรกของชื่อ skin (ยกเว้น "default") — `SpineActorBase.DetectSkinGroups()`
+  ใช้ร่วมกันทั้ง runtime/demo/inspector
+- ตัวรวม `ApplyCombined`: สร้าง `Spine.Skin` ชื่อ `combined:<a+b+c>` → `AddSkin` ตามลำดับที่ตรวจพบ
+  (ชิ้นหลังชนะเมื่อ slot+ชื่อ attachment ชนกัน + log) → `SetSkin(null)` → `SetSkin(combined)`
+  → `SetSlotsToSetupPose` → รายงาน/autofill slot ว่าง → `ApplyStateInternal`
+- API: `SetSkinPart(part, skin)` (เปลี่ยนชิ้นเดียวรวมใหม่ทันที), `SetSkinParts(params SkinPart[])`,
+  `ReapplySkinParts()`, `GetSkinParts()`; `SetSkins(params string[])` ยังอยู่สำหรับเรียกแบบ ad-hoc
+- **Slot ว่างหลังรวม**: LogWarning ครั้งเดียวต่อ Build ระบุ slot ว่างทั้งหมด + ต่อ slot ลิสต์ attachment
+  ใน combined skin ที่คีย์ด้วย slot นั้น (บอกว่า "none matches setup attachment '<ชื่อ>'") — ไม่เติมเอง
+  ยกเว้นเปิด `Auto Fill Empty Slots` (serialize, ค่าเริ่มต้นปิด): slot ที่มีผู้ท้าชิงเดียวจะถูกใส่ให้
+- Inspector: skeleton ที่มี ≥2 กลุ่ม → dropdown ต่อกลุ่ม "Body Skin"/"Head Skin"/"Face Skin"
+  (ตัวเลือก "(none)" + skin ของกลุ่มนั้น; ค่าที่เก็บไว้แต่ไม่มีใน skeleton → "(missing)" + กล่องแดง)
+  เลือกแล้ว rebuild อัตโนมัติใน Edit mode (+ MarkSceneDirty) / recompose ทันทีใน Play mode
+  ปุ่ม "Reset Parts To First Available" / "Randomize Parts" สำหรับทดสอบการผสม
+  <2 กลุ่ม → ช่อง Initial Skin เดี่ยวเหมือนเดิม ไม่มีกลไก "+" อีกแล้ว (ค่าเก่าแบบ "a+b" จะ fallback ไป auto-pick)
+- Demo: ปุ่ม Next Skin วนทีละชิ้น Body → Head → Face ผ่าน `SetSkinPart` + HUD แสดง part ปัจจุบัน
+- Builder: `TreeFarm_body_1110901` บันทึก skinParts = body_1110901_1 + face_1110901_1 + head_1110901_1
+  ลง scene (SerializedObject) + verify check ใหม่แทนการเทียบสตริง "a+b"
+
+ผล audit รอบสอง (จากไฟล์จริง `notes/skin_groups_body_1110901.md`):
+- combo body_1110901_1 + face_1110901_1 + head_1110901_1 → **attachment รวม 18 ชิ้น** (13+1+4)
+- slot เต็ม 19/23 = 18 จาก combined + `root_boundingBox` 1 จาก default skin (fallback ของ GetAttachment)
+- slot ที่ยังว่าง = `w_dao`, `w_zhang`, `w_qiang`, `w_jian` (อาวุธ 4 ชนิด) — **ไม่มี skin ใดของ skeleton
+  นี้ครอบคลุมเลย (0 candidates)** จึงไม่ใช่ปัญหาชื่อไม่ตรง แต่เป็น by-design: อาวุธมาจาก
+  dbcomponentcfg (merge skin หรือ mount) ไม่ใช่จาก skin ของ body — ตัวขึ้นครบยกเว้นอาวุธ

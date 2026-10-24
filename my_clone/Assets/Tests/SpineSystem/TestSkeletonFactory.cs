@@ -35,6 +35,90 @@ namespace MyClone.SpineSystem.Tests
 }
 }";
 
+	/// <summary>Part skins on separate slots (game body/head/face shape) for SetSkins tests.
+	/// head_b = second head variant; body_dup re-provides body_slot/body_img (collision case);
+	/// body_alt provides body_slot under a different attachment name (empty-slot case).</summary>
+	public const string PartSkinsSkeletonJson = @"{
+""skeleton"": { ""hash"": ""myclone-parts"", ""spine"": ""3.8.99"", ""x"": -32, ""y"": -32, ""width"": 64, ""height"": 64 },
+""bones"": [
+	{ ""name"": ""root"" },
+	{ ""name"": ""bone1"", ""parent"": ""root"", ""x"": 8, ""y"": 8 }
+],
+""slots"": [
+	{ ""name"": ""body_slot"", ""bone"": ""bone1"", ""attachment"": ""body_img"" },
+	{ ""name"": ""head_slot"", ""bone"": ""root"", ""attachment"": ""head_img"" },
+	{ ""name"": ""face_slot"", ""bone"": ""root"", ""attachment"": ""face_img"" }
+],
+""skins"": [
+	{ ""name"": ""default"", ""attachments"": { } },
+	{ ""name"": ""body_a"", ""attachments"": {
+		""body_slot"": { ""body_img"": { ""width"": 16, ""height"": 16 } }
+	} },
+	{ ""name"": ""body_dup"", ""attachments"": {
+		""body_slot"": { ""body_img"": { ""width"": 16, ""height"": 16 } }
+	} },
+	{ ""name"": ""body_alt"", ""attachments"": {
+		""body_slot"": { ""body_img2"": { ""width"": 16, ""height"": 16 } }
+	} },
+	{ ""name"": ""head_a"", ""attachments"": {
+		""head_slot"": { ""head_img"": { ""width"": 16, ""height"": 16 } }
+	} },
+	{ ""name"": ""head_b"", ""attachments"": {
+		""head_slot"": { ""head_img2"": { ""width"": 16, ""height"": 16 } }
+	} },
+	{ ""name"": ""face_a"", ""attachments"": {
+		""face_slot"": { ""face_img"": { ""width"": 16, ""height"": 16 } }
+	} }
+],
+""animations"": {
+	""idle"": { ""bones"": { ""bone1"": { ""rotate"": [ { ""time"": 0, ""angle"": 0 }, { ""time"": 0.5, ""angle"": 90 } ] } } }
+}
+}";
+
+	/// <summary>Default skin empty; first named skin has the attachments (game-asset shape).</summary>
+	public const string EmptyDefaultSkeletonJson = @"{
+""skeleton"": { ""hash"": ""myclone-emptydefault"", ""spine"": ""3.8.99"", ""x"": -32, ""y"": -32, ""width"": 64, ""height"": 64 },
+""bones"": [
+	{ ""name"": ""root"" },
+	{ ""name"": ""bone1"", ""parent"": ""root"", ""x"": 8, ""y"": 8 }
+],
+""slots"": [
+	{ ""name"": ""slot1"", ""bone"": ""bone1"", ""attachment"": ""img1"" },
+	{ ""name"": ""slot2"", ""bone"": ""root"", ""attachment"": ""img2"" }
+],
+""skins"": [
+	{ ""name"": ""default"", ""attachments"": { } },
+	{ ""name"": ""look1"", ""attachments"": {
+		""slot1"": { ""img1"": { ""width"": 16, ""height"": 16 } },
+		""slot2"": { ""img2"": { ""width"": 16, ""height"": 16 } }
+	} },
+	{ ""name"": ""empty"", ""attachments"": { } }
+],
+""animations"": {
+	""idle"": { ""bones"": { ""bone1"": { ""rotate"": [ { ""time"": 0, ""angle"": 0 }, { ""time"": 0.5, ""angle"": 90 } ] } } }
+}
+}";
+
+	/// <summary>Every skin empty: nothing can render, no auto-pick is possible.</summary>
+	public const string OnlyEmptySkinsJson = @"{
+""skeleton"": { ""hash"": ""myclone-onlyempty"", ""spine"": ""3.8.99"", ""x"": -32, ""y"": -32, ""width"": 64, ""height"": 64 },
+""bones"": [
+	{ ""name"": ""root"" },
+	{ ""name"": ""bone1"", ""parent"": ""root"", ""x"": 8, ""y"": 8 }
+],
+""slots"": [
+	{ ""name"": ""slot1"", ""bone"": ""bone1"", ""attachment"": ""img1"" },
+	{ ""name"": ""slot2"", ""bone"": ""root"", ""attachment"": ""img2"" }
+],
+""skins"": [
+	{ ""name"": ""default"", ""attachments"": { } },
+	{ ""name"": ""empty"", ""attachments"": { } }
+],
+""animations"": {
+	""idle"": { ""bones"": { ""bone1"": { ""rotate"": [ { ""time"": 0, ""angle"": 0 }, { ""time"": 0.5, ""angle"": 90 } ] } } }
+}
+}";
+
 		public const string AtlasText = @"
 testpage.png
 size: 64, 64
@@ -70,7 +154,7 @@ alt1
 		public TextAsset AtlasTextAsset { get; private set; }
 		public Texture2D Texture { get; private set; }
 
-		public static TestSpineAssets Create (string uiShaderName = "Spine/SkeletonGraphic")
+		public static TestSpineAssets Create (string uiShaderName = "Spine/SkeletonGraphic", string skeletonJson = null)
 		{
 			var result = new TestSpineAssets ();
 
@@ -89,7 +173,7 @@ alt1
 				Shader.Find (uiShaderName),
 				true);
 
-			result.SkeletonText = new TextAsset (SkeletonJson);
+			result.SkeletonText = new TextAsset (skeletonJson ?? SkeletonJson);
 			result.Data = SkeletonDataAsset.CreateRuntimeInstance (
 				result.SkeletonText,
 				result.Atlas,

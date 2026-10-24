@@ -52,9 +52,11 @@ namespace MyClone.SpineSystem
 		// Renderer
 		// ------------------------------------------------------------------
 
+		const string RendererGameObjectName = "SpineGraphic";
+
 		protected override void CreateRenderer ()
 		{
-			var go = new GameObject ("SpineGraphic", typeof(RectTransform));
+			var go = new GameObject (RendererGameObjectName, typeof(RectTransform));
 			go.transform.SetParent (transform, false);
 
 			var graphic = go.AddComponent<SpineSkeletonGraphic> ();
@@ -101,12 +103,35 @@ namespace MyClone.SpineSystem
 
 		protected override void DestroyRenderer ()
 		{
-			if (m_Graphic != null) {
-				SafeDestroy (m_Graphic.gameObject);
+			var tracked = m_Graphic != null ? m_Graphic.gameObject : null;
+
+			DestroyOrphanRenderers (tracked);
+
+			if (tracked != null) {
+				SafeDestroy (tracked);
 				m_Graphic = null;
 			}
 
 			DestroyMaterialInstances ();
+		}
+
+		/// <summary>
+		/// The renderer GameObject and m_Graphic survive duplication/scene reload, but the
+		/// m_Graphic field does not serialize, so the next Build creates a second child.
+		/// This removes any stale renderer child that the tracked reference no longer owns.
+		/// </summary>
+		void DestroyOrphanRenderers (GameObject keep)
+		{
+			for (int i = transform.childCount - 1; i >= 0; i--) {
+				var child = transform.GetChild (i).gameObject;
+				if (child == keep)
+					continue;
+
+				if (child.name == RendererGameObjectName || child.GetComponent<SkeletonGraphic> () != null) {
+					child.SetActive (false); // stop the stale renderer drawing while Destroy is pending
+					SafeDestroy (child);
+				}
+			}
 		}
 
 		bool ShouldUseMultipleCanvasRenderers ()

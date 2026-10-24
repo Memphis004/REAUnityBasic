@@ -9,6 +9,18 @@
           "rea-agents@6.7.0",
           "mcp"
         ]
+      },
+      "unityMCP": {
+        "type": "stdio",
+        "command": "C:\\Users\\memph\\.local\\bin\\uvx.exe",
+        "args": [
+          "--offline",
+          "--from",
+          "mcpforunityserver==10.3.0",
+          "mcp-for-unity",
+          "--transport",
+          "stdio"
+        ]
       }
     }
   }
