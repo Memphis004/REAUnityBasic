@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Anatomy of a disciple — body_1110901</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #16161a;
+    --panel: #1f1f26;
+    --line: #2e2e37;
+    --ink: #e8e8ee;
+    --dim: #8b8b9a;
+    --accent: #d8a95c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+    background: var(--bg); color: var(--ink);
+    font: 14px/1.45 "Segoe UI", system-ui, sans-serif;
+  }
+  header { padding: 14px 20px 10px; border-bottom: 1px solid var(--line); }
+  header .bar { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  header select {
+    font: inherit; font-size: 12px; padding: 3px 6px; border-radius: 6px;
+    color: var(--ink); background: var(--panel); border: 1px solid var(--line);
+  }
+  header h1 { margin: 0; font-size: 16px; letter-spacing: .02em; }
+  header h1 span { color: var(--dim); font-weight: 400; }
+  header p { margin: 4px 0 0; font-size: 12px; color: var(--dim); }
+  main {
+    flex: 1; min-height: 0; display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+  }
+  #stage-wrap { min-height: 0; display: flex; align-items: center; justify-content: center; padding: 18px; }
+  #stage {
+    position: relative; height: min(84vh, 1024px); width: auto;
+    aspect-ratio: 798 / 1024;
+    background: repeating-conic-gradient(#26262c 0% 25%, #1b1b20 0% 50%) 50% / 22px 22px;
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px var(--line), 0 18px 40px #0006;
+  }
+  #stage img { position: absolute; transition: opacity .12s; }
+  #stage img.dim { opacity: .12; }
+  #stage img.off { display: none; }
+  aside { border-left: 1px solid var(--line); padding: 14px 16px 20px; overflow: auto; }
+  .tools { display: flex; gap: 6px; margin-bottom: 12px; }
+  button {
+    flex: 1; padding: 6px 8px; font: inherit; font-size: 12px; cursor: pointer;
+    color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+  }
+  button:hover { border-color: #4a4a58; }
+  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  li { border-radius: 6px; }
+  li.focused { background: var(--panel); box-shadow: inset 0 0 0 1px var(--line); }
+  .row { display: grid; grid-template-columns: 18px 1fr auto; gap: 8px; align-items: center; padding: 5px 8px; cursor: pointer; }
+  .row input { margin: 0; cursor: pointer; accent-color: var(--accent); }
+  .row .name { font-size: 13px; }
+  .row .count { font-size: 11px; color: var(--dim); }
+  .note { display: none; margin: 0 8px 7px 34px; font-size: 11px; color: var(--dim); }
+  li.focused .note, li:hover .note { display: block; }
+  #hint { margin: 14px 0 0; padding-top: 10px; border-top: 1px solid var(--line); font-size: 11px; color: var(--dim); }
+  #status { padding: 0 20px 12px; font-size: 12px; color: var(--dim); min-height: 20px; }
+  #status.bad { color: #e2777a; }
+  #picker { display: none; padding: 0 20px 20px; font-size: 12px; color: var(--dim); }
+  #picker input { margin-top: 6px; font: inherit; font-size: 12px; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <h1 id="title">Anatomy of a disciple</h1>
+      <select id="pack-select" aria-label="pack"></select>
+    </div>
+    <p id="sub">loading pack…</p>
+  </header>
+
+  <main>
+    <div id="stage-wrap"><div id="stage"></div></div>
+    <aside>
+      <div class="tools">
+        <button type="button" id="btn-all">Show all</button>
+        <button type="button" id="btn-none">Hide all</button>
+        <button type="button" id="btn-reset">Reset</button>
+      </div>
+      <ul id="groups"></ul>
+      <p id="hint">Click a group name to isolate it. Uncheck to hide a layer. Hover a part for its slot:attachment.</p>
+    </aside>
+  </main>
+
+  <div id="status">starting…</div>
+  <div id="picker">
+    <span id="picker-msg"></span><br />
+    <input type="file" id="picker-file" accept=".json,application/json" />
+  </div>
+
+<script>
+(function () {
+  'use strict';
+
+  // written by the exporter (Tools/LocalReference/Export Pack JSON) for every *.pack.json
+  // in this folder -- the page never carries its own pack id list
+  var INDEX_URL = './packs.json';
+
+  var stage = document.getElementById('stage');
+  var packSelect = document.getElementById('pack-select');
+  var groupList = document.getElementById('groups');
+  var statusLine = document.getElementById('status');
+  var title = document.getElementById('title');
+  var sub = document.getElementById('sub');
+  var picker = document.getElementById('picker');
+  var pickerMsg = document.getElementById('picker-msg');
+
+  var state = { pack: null, parts: [], focused: null };
+
+  function say(message, bad) {
+    statusLine.textContent = message;
+    statusLine.className = bad ? 'bad' : '';
+  }
+
+  function percent(value, total) {
+    return (value / total * 100).toFixed(4) + '%';
+  }
+
+  // ---------------------------------------------------------------- render
+  function render(pack) {
+    if (!pack || !Array.isArray(pack.parts) || !pack.parts.length) {
+      say('this pack has no parts', true);
+      return;
+    }
+
+    state.pack = pack;
+    state.parts = [];
+    stage.textContent = '';
+    groupList.textContent = '';
+
+    var width = pack.canvas.w;
+    var height = pack.canvas.h;
+    stage.style.aspectRatio = width + ' / ' + height;
+
+    title.innerHTML = '';
+    title.append('Anatomy of a disciple');
+    var idSpan = document.createElement('span');
+    idSpan.textContent = ' — ' + pack.name;
+    title.append(idSpan);
+
+    sub.textContent = 'canvas ' + width + ' × ' + height + ' · ' +
+      pack.parts.length + ' parts · ' + pack.groups.length + ' groups';
+
+    // draw back to front so the DOM order matches the draw order
+    var parts = pack.parts.slice().sort(function (a, b) { return a.order - b.order; });
+    parts.forEach(function (part) {
+      var img = document.createElement('img');
+      img.src = part.img;
+      img.alt = part.label;
+      img.title = part.label;
+      img.dataset.group = part.group;
+      img.dataset.label = part.label;
+      img.style.left = percent(part.x - part.w / 2, width);
+      img.style.top = percent(part.y - part.h / 2, height);
+      img.style.width = percent(part.w, width);
+      img.style.height = percent(part.h, height);
+      img.style.zIndex = String(part.order + 1);
+      img.addEventListener('mouseenter', function () {
+        say(part.label + '  ·  group ' + part.group + '  ·  draw order ' + part.order +
+            '  ·  x ' + part.x + ' y ' + part.y + ' w ' + part.w + ' h ' + part.h);
+      });
+      stage.append(img);
+      state.parts.push({ part: part, el: img });
+    });
+
+    stage.addEventListener('mouseleave', function () { say(defaultStatus()); });
+
+    // group list, in the pack's own order (= page order)
+    pack.groups.forEach(function (group) {
+      var members = parts.filter(function (part) { return part.group === group.id; });
+
+      var item = document.createElement('li');
+      item.dataset.group = group.id;
+
+      var row = document.createElement('label');
+      row.className = 'row';
+
+      var box = document.createElement('input');
+      box.type = 'checkbox';
+      box.checked = true;
+      box.addEventListener('change', function () {
+        setGroupVisible(group.id, box.checked);
+        say(group.label + ': ' + (box.checked ? 'shown' : 'hidden') + ' (' + members.length + ' parts)');
+      });
+
+      var name = document.createElement('span');
+      name.className = 'name';
+      name.textContent = group.label || group.id;
+
+      var count = document.createElement('span');
+      count.className = 'count';
+      count.textContent = members.length + (members.length === 1 ? ' part' : ' parts');
+
+      row.append(box, name, count);
+
+      var note = document.createElement('p');
+      note.className = 'note';
+      note.textContent = group.note || group.id;
+
+      item.append(row, note);
+      item.addEventListener('click', function (event) {
+        if (event.target === box) return;
+        setFocus(state.focused === group.id ? null : group.id);
+      });
+      item.addEventListener('mouseenter', function () {
+        if (state.focused === null) setFocus(group.id, true);
+      });
+      item.addEventListener('mouseleave', function () {
+        if (state.focused === null) setFocus(null, true);
+      });
+
+      groupList.append(item);
+    });
+
+    stage.addEventListener('click', function () { setFocus(null); });
+    say(defaultStatus());
+  }
+
+  function defaultStatus() {
+    if (!state.pack) return '';
+    return 'Click a group name to isolate it · showing ' +
+      state.parts.filter(function (p) { return !p.el.classList.contains('off'); }).length +
+      ' of ' + state.parts.length + ' parts';
+  }
+
+  // ---------------------------------------------------------------- state
+  function setGroupVisible(groupId, visible) {
+    state.parts.forEach(function (entry) {
+      if (entry.part.group === groupId) entry.el.classList.toggle('off', !visible);
+    });
+  }
+
+  function setFocus(groupId, transient) {
+    if (!transient) state.focused = groupId;
+    Array.prototype.forEach.call(groupList.children, function (item) {
+      item.classList.toggle('focused', item.dataset.group === groupId);
+    });
+    state.parts.forEach(function (entry) {
+      entry.el.classList.toggle('dim', groupId !== null && entry.part.group !== groupId);
+    });
+    if (!transient) say(groupId === null ? defaultStatus() : 'isolated group: ' + groupId);
+  }
+
+  function setAllVisible(visible) {
+    state.parts.forEach(function (entry) { entry.el.classList.toggle('off', !visible); });
+    Array.prototype.forEach.call(groupList.querySelectorAll('input'), function (box) { box.checked = visible; });
+    say(visible ? defaultStatus() : 'all layers hidden');
+  }
+
+  document.getElementById('btn-all').addEventListener('click', function () { setAllVisible(true); });
+  document.getElementById('btn-none').addEventListener('click', function () { setAllVisible(false); });
+  document.getElementById('btn-reset').addEventListener('click', function () {
+    setAllVisible(true);
+    setFocus(null);
+  });
+
+  // ---------------------------------------------------------------- loading
+  function offerPicker(url, reason) {
+    picker.style.display = 'block';
+    pickerMsg.textContent = 'Could not fetch ' + url + ' (' + reason + '). ' +
+      'Browsers block fetch() on file:// — either serve this folder ' +
+      '("python -m http.server" here) or pick the JSON file manually:';
+    document.getElementById('picker-file').addEventListener('change', function (event) {
+      var file = event.target.files && event.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        try {
+          render(JSON.parse(String(reader.result)));
+          picker.style.display = 'none';
+        } catch (err) {
+          say('not a valid pack JSON: ' + err.message, true);
+        }
+      };
+      reader.readAsText(file);
+    });
+    say('waiting for a pack file…', true);
+  }
+
+  // ------------------------------------------------------------ pack choice
+  function fetchJson(url) {
+    return fetch(url, { cache: 'no-store' }).then(function (response) {
+      if (!response.ok) throw new Error(response.status + ' ' + response.statusText);
+      return response.json();
+    });
+  }
+
+  function packUrl(id) { return './' + id + '.pack.json'; }
+
+  // entries: [{id, file, parts, groups}] as listed in packs.json
+  function fillSelect(entries, selected) {
+    packSelect.textContent = '';
+    var known = entries.slice();
+    if (selected && !known.some(function (e) { return e.id === selected.id; })) known.unshift(selected);
+
+    known.forEach(function (entry) {
+      var option = document.createElement('option');
+      option.value = entry.id;
+      option.textContent = entry.parts
+        ? entry.id + '  ·  ' + entry.parts + (entry.parts === 1 ? ' part' : ' parts')
+        : entry.id;
+      option.selected = entry.id === (selected && selected.id);
+      packSelect.append(option);
+    });
+  }
+
+  packSelect.addEventListener('change', function () {
+    history.replaceState(null, '', '?pack=' + encodeURIComponent(packSelect.value));
+    load({ id: packSelect.value }, true);
+  });
+
+  function load(entry, fromIndex) {
+    var url = entry.file ? './' + entry.file : packUrl(entry.id);
+    fetchJson(url)
+      .then(function (pack) {
+        render(pack);
+        packSelect.value = entry.id;
+      })
+      .catch(function (error) {
+        // file:// blocks fetch(), so only there is the manual picker the way out
+        if (fromIndex) say('could not load ' + url + ' — ' + error.message, true);
+        else offerPicker(url, error.message);
+      });
+  }
+
+  function start() {
+    var requested = new URLSearchParams(window.location.search).get('pack');
+    if (requested) requested = requested.replace(/\.pack\.json$/, '');
+
+    fetchJson(INDEX_URL)
+      .then(function (index) {
+        var entries = ((index && index.packs) || [])
+          .map(function (entry) { return typeof entry === 'string' ? { id: entry } : entry; })
+          .filter(function (entry) { return entry && entry.id; });
+
+        if (!entries.length) {
+          say(INDEX_URL + ' lists no packs — export one first', true);
+          return;
+        }
+
+        var defaultId = index.defaultPack || entries[0].id;
+        var selected = requested
+          ? (entries.filter(function (e) { return e.id === requested; })[0] || { id: requested })
+          : (entries.filter(function (e) { return e.id === defaultId; })[0] || entries[0]);
+
+        fillSelect(entries, selected);
+        load(selected, true);
+      })
+      .catch(function (error) {
+        // no index (open file:// directly, or nothing exported yet):
+        // an explicit ?pack= still works, otherwise ask for a pack file
+        if (requested) {
+          var only = { id: requested };
+          fillSelect([only], only);
+          load(only, true);
+        } else {
+          fillSelect([], null);
+          offerPicker(INDEX_URL, error.message);
+        }
+      });
+  }
+
+  start();
+})();
+</script>
+</body>
+</html>

@@ -108,6 +108,8 @@ yarn-error.log*
 # artifacts/*
 # !artifacts/.gitkeep
 
+
+
 # ---------------------------------------------------------------------------
 # Generated code that must be reproducible from data/ + proto/, not hand-edited
 # (kept tracked so `verify-generated` can diff, but binaries are not)
@@ -161,6 +163,7 @@ extracted/*
 !game_copy/.gitkeep
 !extracted/.gitkeep
 
+!extracted/web
 
 # Ignore heavy data files inside extracted/ab_text, keep folder structure
 extracted/ab_text/*

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anatomy of a disciple</title>
+<style>
+:root{--bg:#efe9dd;--fg:#17150f;--mut:#6f685a;--line:#8a6d34;--glow:rgba(138,109,52,.2);--chip:rgba(0,0,0,.06);--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#090a0c;--fg:#ece6da;--mut:#8d877b;--line:#c9a96b;--glow:rgba(201,169,107,.15);--chip:rgba(255,255,255,.07);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#090a0c;--fg:#ece6da;--mut:#8d877b;--line:#c9a96b;--glow:rgba(201,169,107,.15);--chip:rgba(255,255,255,.07);color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,"Noto Sans Thai",Tahoma,sans-serif;overflow:hidden}
+.app{height:100%;display:grid;grid-template-columns:minmax(230px,320px) minmax(0,1fr);background:radial-gradient(60% 55% at 62% 46%,var(--glow),transparent 70%)}
+.info{padding:clamp(18px,4vw,44px);display:flex;flex-direction:column;gap:14px;justify-content:center;min-width:0}
+h1{font:400 clamp(30px,4.2vw,58px)/1.04 var(--serif);margin:0;letter-spacing:-.01em}
+.info p{margin:0;color:var(--mut);font-size:14px;max-width:34ch}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-size:13px;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 15px;cursor:pointer}
+.btn:hover{background:var(--chip)}
+:focus-visible{outline:2px solid var(--line);outline-offset:3px}
+#msg{min-height:1.4em;font-size:13px;color:var(--mut)}
+.wrap{position:relative;min-width:0;overflow:hidden;touch-action:none}
+#stage,#lines{position:absolute;inset:0;width:100%;height:100%}
+.part{position:absolute;left:0;top:0;transform-origin:50% 50%;user-select:none;-webkit-user-drag:none;transition:opacity .25s;will-change:transform}
+.lab{position:absolute;left:0;top:0;max-width:30%;transition:opacity .25s;cursor:default}
+.lab b{display:block;font:400 clamp(15px,1.6vw,20px)/1.2 var(--serif)}
+.lab small{color:var(--mut);font-size:12px}
+.dots{position:absolute;right:10px;top:calc(50% - 35px);transform:translateY(-50%);display:flex;flex-direction:column;gap:12px}
+.dots button{width:9px;height:9px;padding:0;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer}
+.dots button.on{background:var(--line)}
+.bar{position:absolute;left:0;right:0;bottom:12px;display:flex;gap:10px;align-items:center;padding:0 18px}
+.bar input{flex:1;min-width:0;accent-color:var(--line)}
+@media (max-width:760px){.app{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.info{padding:14px 18px 0;gap:8px}.info p.long{display:none}h1{font-size:28px}}
+@media (prefers-reduced-motion:reduce){.part,.lab{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="info">
+    <h1>Anatomy of<br>a disciple</h1>
+    <p id="count"></p>
+    <p class="long">เลื่อนล้อเมาส์บนภาพ หรือลากแถบด้านล่าง เพื่อแยกและประกอบชิ้นส่วน ชี้ที่ชิ้นหรือชื่อกลุ่มเพื่อดูทีละกลุ่ม</p>
+    <div class="row">
+      <button class="btn" id="load">โหลดไฟล์ตัวละคร</button>
+      <button class="btn" id="theme">สลับโทนสี</button>
+    </div>
+    <input type="file" id="file" accept=".json,application/json" hidden>
+    <div id="msg" role="status"></div>
+  </section>
+  <section class="wrap" id="wrap">
+    <div id="stage"></div>
+    <svg id="lines" aria-hidden="true"></svg>
+    <div id="labels"></div>
+    <div class="dots" id="dots"></div>
+    <div class="bar">
+      <button class="btn" id="asm">ประกอบ</button>
+      <input type="range" id="rng" min="0" max="100" value="0" aria-label="แยกชิ้นส่วน">
+      <button class="btn" id="exp">แยกชิ้น</button>
+    </div>
+  </section>
+</div>
+<script>
+const $=s=>document.querySelector(s),wrap=$('#wrap'),stage=$('#stage'),lines=$('#lines'),labs=$('#labels'),dots=$('#dots'),rng=$('#rng');
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)),lerp=(a,b,k)=>a+(b-a)*k,ease=k=>k*k*(3-2*k);
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,NS='http://www.w3.org/2000/svg';
+let P=null,G=[],t=0,goal=0,sel=-1,dirty=true,W=0,H=0,demo=true;
+
+function mk(w,h,f){const c=document.createElement('canvas');c.width=w;c.height=h;f(c.getContext('2d'),w,h);return c.toDataURL()}
+function rect(x,a,b,w,h,r){x.beginPath();x.roundRect?x.roundRect(a,b,w,h,r):x.rect(a,b,w,h)}
+function demoPack(){
+  const ink='#1d2230',skin='#f3dcc3',cloth='#f6f4ee',navy='#232b45',gold='#d8c28a';
+  const leg=(cx)=>[`leg${cx}`,'leg','legs',cx,770,56,150,0,2,(x,w,h)=>{x.fillStyle=skin;rect(x,0,0,w,h-22,22);x.fill();x.fillStyle='#3a2a22';rect(x,0,h-26,w,26,10);x.fill()}];
+  const defs=[
+    ['hairb','Back hair','hair_back',300,300,250,300,0,1,(x,w,h)=>{x.fillStyle=ink;x.beginPath();x.ellipse(w/2,h*.45,w/2,h*.45,0,0,7);x.fill();rect(x,w*.1,h*.5,w*.8,h*.5,40);x.fill()}],
+    leg(265),leg(335),
+    ['lower','Shorts','lower',300,655,150,100,0,3,(x,w,h)=>{x.fillStyle=navy;rect(x,0,0,w,h,16);x.fill()}],
+    ['torso','Torso','torso',300,520,160,190,0,4,(x,w,h)=>{x.fillStyle=cloth;rect(x,0,0,w,h,28);x.fill();x.fillStyle=navy;rect(x,w*.28,0,w*.44,34,14);x.fill();x.fillStyle='#b8453f';x.beginPath();x.moveTo(w/2,26);x.lineTo(w/2+16,70);x.lineTo(w/2-16,70);x.fill()}],
+    ['armL','Left arm','torso',205,520,50,170,6,5,(x,w,h)=>{x.fillStyle=cloth;rect(x,0,0,w,h-20,24);x.fill();x.fillStyle=skin;rect(x,6,h-34,w-12,34,14);x.fill()}],
+    ['armR','Right arm','torso',395,520,50,170,-6,5,(x,w,h)=>{x.fillStyle=cloth;rect(x,0,0,w,h-20,24);x.fill();x.fillStyle=skin;rect(x,6,h-34,w-12,34,14);x.fill()}],
+    ['sash','Sash','sash',300,600,270,26,-10,6,(x,w,h)=>{x.fillStyle=gold;rect(x,0,0,w,h,13);x.fill()}],
+    ['head','Head','head',300,330,210,190,0,7,(x,w,h)=>{x.fillStyle=skin;x.beginPath();x.ellipse(w/2,h/2,w/2,h/2,0,0,7);x.fill()}],
+    ['face','Face','face',300,350,150,50,0,8,(x,w,h)=>{x.fillStyle=ink;x.beginPath();x.ellipse(w*.27,h*.42,9,13,0,0,7);x.ellipse(w*.73,h*.42,9,13,0,0,7);x.fill();x.fillStyle='rgba(224,120,120,.45)';x.beginPath();x.ellipse(w*.12,h*.75,14,8,0,0,7);x.ellipse(w*.88,h*.75,14,8,0,0,7);x.fill()}],
+    ['hairf','Bangs','hair_front',300,250,230,120,0,9,(x,w,h)=>{x.fillStyle=ink;x.beginPath();x.ellipse(w/2,h*.55,w/2,h*.55,0,Math.PI,0);for(let i=0;i<6;i++){x.lineTo(w-i*(w/6),h-(i%2?10:42))}x.closePath();x.fill()}]
+  ];
+  const groups=[['hair_front','Front hair','ผมหน้า'],['face','Face','ใบหน้า'],['head','Head','หัวเปล่า'],['hair_back','Back hair','ผมหลัง'],['torso','Torso and arms','ตัวและแขน'],['sash','Sash','ผ้าคาด'],['lower','Lower body','กางเกง'],['legs','Legs','ขา']].map(([id,label,note])=>({id,label,note}));
+  return{name:'ตัวอย่างสังเคราะห์',canvas:{w:600,h:900},groups,parts:defs.map(([id,label,group,x,y,w,h,rot,order,fn])=>({id,label,group,x,y,w,h,rot,order,img:mk(w,h,(c)=>fn(c,w,h))}))};
+}
+
+function build(p){
+  P=p;G=[];stage.textContent=labs.textContent=lines.textContent=dots.textContent='';sel=-1;
+  const gs=new Map();(p.groups||[]).forEach(g=>gs.set(g.id,{id:g.id,label:g.label||g.id,note:g.note||'',parts:[]}));
+  p.parts.forEach((q,i)=>{if(!gs.has(q.group))gs.set(q.group,{id:q.group,label:q.group,note:'',parts:[]});gs.get(q.group).parts.push(q)});
+  G=[...gs.values()].filter(g=>g.parts.length);
+  G.forEach((g,gi)=>{
+    let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+    g.parts.forEach((q,i)=>{
+      const r=(q.rot||0)*Math.PI/180,bw=Math.abs(q.w*Math.cos(r))+Math.abs(q.h*Math.sin(r)),bh=Math.abs(q.w*Math.sin(r))+Math.abs(q.h*Math.cos(r));
+      x0=Math.min(x0,q.x-bw/2);x1=Math.max(x1,q.x+bw/2);y0=Math.min(y0,q.y-bh/2);y1=Math.max(y1,q.y+bh/2);
+      const im=new Image();im.draggable=false;im.alt='';im.className='part';im.src=q.img;im.dataset.g=gi;
+      im.style.width=q.w+'px';im.style.height=q.h+'px';im.style.zIndex=q.order??i;q.el=im;stage.appendChild(im);
+    });
+    g.cx=(x0+x1)/2;g.cy=(y0+y1)/2;g.gw=x1-x0;g.gh=y1-y0;
+    const L=document.createElement('div');L.className='lab';L.innerHTML='<b></b><small></small>';
+    L.firstChild.textContent=g.label;L.lastChild.textContent=g.note;
+    L.onmouseenter=()=>setSel(gi);L.onmouseleave=()=>setSel(-1);labs.appendChild(L);g.lab=L;
+    g.ln=document.createElementNS(NS,'line');g.dt=document.createElementNS(NS,'circle');
+    g.dt.setAttribute('r',2.5);[g.ln,g.dt].forEach(n=>{n.setAttribute('stroke','var(--line)');lines.appendChild(n)});g.dt.setAttribute('fill','var(--line)');
+    const d=document.createElement('button');d.setAttribute('aria-label',g.label);d.onclick=()=>setSel(sel===gi?-1:gi);dots.appendChild(d);g.dot=d;
+  });
+  $('#count').textContent=`${p.name}: ${G.length} กลุ่ม, ${p.parts.length} ชิ้น`+(demo?' (ตัวอย่างสังเคราะห์ ยังไม่ใช่ตัวละครจริง)':'');
+  size();dirty=true;
+}
+function setSel(i){sel=i;G.forEach((g,k)=>g.dot.classList.toggle('on',k===i));dirty=true}
+function size(){W=wrap.clientWidth;H=wrap.clientHeight;lines.setAttribute('viewBox',`0 0 ${W} ${H}`);dirty=true}
+
+function render(){
+  const n=G.length,cw=P.canvas.w,ch=P.canvas.h,u=H-70,ox=W*.3,sa=Math.min(W*.5/cw,u/ch),sh=u/n;
+  const se=Math.min(sa*1.25,sh*.86/Math.max(...G.map(g=>g.gh)),W*.44/Math.max(...G.map(g=>g.gw)));
+  G.forEach((g,i)=>{
+    const e=ease(clamp(t*1.5-.5*i/n,0,1)),s=lerp(sa,se,e),dim=sel>=0&&sel!==i;
+    const x=lerp(ox+(g.cx-cw/2)*sa,ox,e),y=lerp(u/2+(g.cy-ch/2)*sa,(u-sh*n)/2+sh*(i+.5),e);
+    g.parts.forEach(q=>{
+      q.el.style.transform=`translate(${x+(q.x-g.cx)*s-q.w/2}px,${y+(q.y-g.cy)*s-q.h/2}px) rotate(${q.rot||0}deg) scale(${s})`;
+      q.el.style.opacity=dim?.16:1;
+    });
+    const a=clamp(e*1.6-.3,0,1)*(dim?.3:1),lx=W*.64,x1=x+g.gw*s/2+8;
+    g.lab.style.transform=`translate(${lx}px,${y-g.lab.offsetHeight/2}px)`;g.lab.style.opacity=a;
+    g.ln.setAttribute('x1',x1);g.ln.setAttribute('y1',y);g.ln.setAttribute('x2',lx-12);g.ln.setAttribute('y2',y+(i-(n-1)/2)*-2);
+    g.dt.setAttribute('cx',x1);g.dt.setAttribute('cy',y);g.ln.style.opacity=g.dt.style.opacity=a;
+  });
+}
+function tick(){
+  const d=goal-t;
+  if(Math.abs(d)>4e-4){t+=RM?d:d*.09;dirty=true;rng.value=t*100}else if(t!==goal){t=goal;dirty=true;rng.value=t*100}
+  if(dirty&&P){dirty=false;render()}
+  requestAnimationFrame(tick);
+}
+
+wrap.addEventListener('wheel',e=>{e.preventDefault();goal=clamp(goal+e.deltaY*.0015,0,1)},{passive:false});
+let drag=null;
+wrap.addEventListener('pointerdown',e=>{if(e.target.closest('.bar,.dots,.lab'))return;drag={y:e.clientY,g:goal}});
+addEventListener('pointermove',e=>{if(drag)goal=clamp(drag.g+(drag.y-e.clientY)/(H*.7),0,1)});
+addEventListener('pointerup',()=>drag=null);
+stage.addEventListener('pointerover',e=>{const g=e.target.dataset&&e.target.dataset.g;if(g!=null&&!drag)setSel(+g)});
+stage.addEventListener('pointerout',()=>{if(!drag)setSel(-1)});
+rng.oninput=()=>{goal=rng.value/100};
+$('#asm').onclick=()=>goal=0;$('#exp').onclick=()=>goal=1;
+$('#theme').onclick=()=>{const r=document.documentElement,dk=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dk?'light':'dark'};
+new ResizeObserver(size).observe(wrap);
+
+async function loadFile(f){
+  try{const j=JSON.parse(await f.text());if(!j.canvas||!Array.isArray(j.parts)||!j.parts.length)throw 0;
+    demo=false;build(j);goal=0;t=0;setTimeout(()=>goal=1,350);$('#msg').textContent='โหลดแล้ว: '+f.name}
+  catch(_){$('#msg').textContent='อ่านไฟล์ไม่ได้ ไฟล์ต้องเป็น .pack.json ที่มี canvas และ parts'}
+}
+$('#load').onclick=()=>$('#file').click();
+$('#file').onchange=e=>e.target.files[0]&&loadFile(e.target.files[0]);
+addEventListener('dragover',e=>e.preventDefault());
+addEventListener('drop',e=>{e.preventDefault();e.dataTransfer.files[0]&&loadFile(e.dataTransfer.files[0])});
+
+async function autoload(){
+  // Works when this file sits next to the *.pack.json files and is served over http (python -m http.server).
+  try{
+    const q=new URLSearchParams(location.search);let id=q.get('pack'),file=null;
+    if(!id){
+      const r=await fetch('./packs.json',{cache:'no-store'});if(!r.ok)throw 0;
+      const j=await r.json();id=j.defaultPack||j.default||(j.packs&&j.packs[0]&&j.packs[0].id);
+      const e=(j.packs||[]).find(x=>x.id===id);file=e&&e.file;
+    }
+    const r=await fetch('./'+(file||id+'.pack.json'),{cache:'no-store'});if(!r.ok)throw 0;
+    demo=false;build(await r.json());$('#msg').textContent='โหลดแล้ว: '+id+' (เปลี่ยนตัวด้วย ?pack=<id>)';return true;
+  }catch(_){return false}
+}
+build(demoPack());
+tick();
+autoload().then(ok=>{
+  if(ok){t=0;goal=0;rng.value=0}
+  if(RM){t=goal=1;rng.value=100}else setTimeout(()=>goal=1,ok?350:500);
+});
+</script>
+</body>
+</html>
