@@ -1,0 +1,27 @@
+pack        : extracted/web/460011_1.pack.json
+canvas      : 1192x1024 canvas px
+full ref    : 2384x2048 px -> render scale 2x (y 2x)
+parts       : 10 in 6 groups
+file size   : 5258687 bytes (5.02 MB)
+
+reassembly (alpha-over, draw order)
+  mismatch_fraction : 0.000014 (67 / 4882432 px, tolerance 2/255)
+  mean alpha diff   : 0.0002 / 255
+  max  alpha diff   : 1
+  painted px (full) : 2644400
+  painted px (pack) : 2644400
+  draw order slots with no part: [0]
+
+parts
+  order  1  leaves          460011_1ye5:460011_1ye5      x=708.25   y=433      w=438.5   h=755     rot=0
+  order  2  arm_R           460011_1youshou:460011_1youshou x=535.75   y=809.75   w=99.5    h=73.5    rot=0
+  order  3  torso           460011_1shenti:460011_1shenti x=621.25   y=866.25   w=221.5   h=283.5   rot=0
+  order  4  arm_L           460011_1zuoshou:460011_1zuoshou x=713.25   y=818.25   w=116.5   h=82.5    rot=0
+  order  5  leaves          460011_1ye4:460011_1ye4      x=942.75   y=141.75   w=157.5   h=180.5   rot=0
+  order  6  leaves          460011_1ye3:460011_1ye3      x=949.25   y=199.25   w=197.5   h=163.5   rot=0
+  order  7  mushroom        460011_1xiaomogu:460011_1xiaomogu x=941.75   y=276.25   w=182.5   h=133.5   rot=0
+  order  8  head            460011_1tou:460011_1tou      x=653.25   y=452.75   w=1044.5  h=659.5   rot=0
+  order  9  leaves          460011_1ye2:460011_1ye2      x=168.75   y=376.75   w=304.5   h=139.5   rot=0
+  order 10  leaves          460011_1ye1:460011_1ye1      x=480.5    y=204.75   w=748     h=377.5   rot=0
+
+problems: none (image size, crop-box origins and canvas bounds all check out)

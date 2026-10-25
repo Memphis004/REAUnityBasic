@@ -1,0 +1,14 @@
+var sb = new System.Text.StringBuilder();
+var ctrl = UnityEngine.Object.FindObjectOfType<MyClone.LocalReference.SpineDemoController>();
+if (ctrl == null || ctrl.portrait == null) return "no portrait in scene";
+var p = ctrl.portrait;
+sb.Append("actor=").Append(p.name).Append(" built=").Append(p.IsBuilt).Append(" children=").Append(p.transform.childCount);
+for (int i=0;i<p.transform.childCount;i++) sb.Append(" [").Append(p.transform.GetChild(i).name).Append("]");
+var graphics = p.GetComponentsInChildren<MyClone.SpineSystem.SpineSkeletonGraphic>(true);
+sb.Append("\npreviewGraphicObjects=").Append(graphics.Length);
+foreach (var g in graphics) sb.Append(" [").Append(g.gameObject.name).Append("/children=").Append(g.transform.childCount).Append("]");
+sb.Append("\nserialized initialSkin=").Append(p.InitialSkin).Append(" initialAnimation=").Append(p.InitialAnimation);
+var data = p.Data;
+sb.Append("\natlasAssets=").Append(data.atlasAssets.Length).Append(" materialCount=").Append(data.atlasAssets[0].MaterialCount);
+sb.Append(" skeletonScale=").Append(data.scale);
+return sb.ToString();

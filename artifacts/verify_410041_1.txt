@@ -1,0 +1,30 @@
+pack        : extracted/web/410041_1.pack.json
+canvas      : 1458x1024 canvas px
+full ref    : 2916x2048 px -> render scale 2x (y 2x)
+parts       : 14 in 7 groups
+file size   : 4440788 bytes (4.24 MB)
+
+reassembly (alpha-over, draw order)
+  mismatch_fraction : 0.000071 (424 / 5971968 px, tolerance 2/255)
+  mean alpha diff   : 0.0000 / 255
+  max  alpha diff   : 1
+  painted px (full) : 1583013
+  painted px (pack) : 1583013
+
+parts
+  order  0  leg_R           410041_1youtui:410041_1youtui x=595.75   y=706.5    w=135.5   h=150     rot=0
+  order  1  leg_R           410041_1youjiao:410041_1youjiao x=613.5    y=858      w=94      h=217     rot=0
+  order  2  arm_R           410041_1youbi:410041_1youbi  x=350      y=755.5    w=100     h=151     rot=0
+  order  3  arm_R           410041_1youshou:410041_1youshou x=322.25   y=898.25   w=62.5    h=172.5   rot=0
+  order  4  sash_or_ribbon  410041_1piaodai3:410041_1piaodai3 x=796.5    y=449      w=1273    h=630     rot=0
+  order  5  torso           410041_1shenti:410041_1shenti x=490.5    y=510      w=506     h=469     rot=0
+  order  6  leg_L           410041_1zuotui:410041_1zuotui x=651.5    y=687.5    w=181     h=208     rot=0
+  order  7  leg_L           410041_1zuojiao:410041_1zuojiao x=772.25   y=808.75   w=223.5   h=385.5   rot=0
+  order  8  head            410041_1tou:410041_1tou      x=330.75   y=214.75   w=628.5   h=397.5   rot=0
+  order  9  sash_or_ribbon  410041_1piaodai1:410041_1piaodai1 x=841.5    y=514      w=1200    h=526     rot=0
+  order 10  arm_L           410041_1zuobi:410041_1zuobi  x=408.25   y=751.25   w=182.5   h=225.5   rot=0
+  order 11  arm_L           410041_1zuoshou:410041_1zuoshou x=394.25   y=923.25   w=48.5    h=169.5   rot=0
+  order 12  sash_or_ribbon  410041_1piaodai2:410041_1piaodai2 x=458.75   y=693.5    w=80.5    h=111     rot=0
+  order 13  head            410041_1erduo:410041_1erduo  x=404      y=275.25   w=61      h=75.5    rot=0
+
+problems: none (image size, crop-box origins and canvas bounds all check out)

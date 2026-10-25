@@ -1,0 +1,44 @@
+{
+  "status": "success",
+  "result": {
+    "success": true,
+    "message": "Retrieved 5 log entries.",
+    "data": [
+      {
+        "type": "Warning",
+        "message": "SkeletonGraphic works best with the SkeletonGraphic material.",
+        "file": "Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+        "line": 147,
+        "stackTrace": null
+      },
+      {
+        "type": "Warning",
+        "message": "SkeletonGraphic works best with the SkeletonGraphic material.",
+        "file": "Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+        "line": 147,
+        "stackTrace": null
+      },
+      {
+        "type": "Warning",
+        "message": "SkeletonGraphic works best with the SkeletonGraphic material.",
+        "file": "Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+        "line": 147,
+        "stackTrace": null
+      },
+      {
+        "type": "Warning",
+        "message": "SkeletonGraphic works best with the SkeletonGraphic material.",
+        "file": "Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+        "line": 147,
+        "stackTrace": null
+      },
+      {
+        "type": "Warning",
+        "message": "SkeletonGraphic works best with the SkeletonGraphic material.",
+        "file": "Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+        "line": 147,
+        "stackTrace": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+pack        : extracted/web/body_1110901.pack.json
+canvas      : 798x1024 canvas px
+full ref    : 1596x2048 px -> render scale 2x (y 2x)
+parts       : 18 in 11 groups
+file size   : 4028294 bytes (3.84 MB)
+
+reassembly (alpha-over, draw order)
+  mismatch_fraction : 0.000307 (1002 / 3268608 px, tolerance 2/255)
+  mean alpha diff   : 0.0005 / 255
+  max  alpha diff   : 1
+  painted px (full) : 1332888
+  painted px (pack) : 1332888
+  draw order slots with no part: [2, 3, 4, 5, 18]
+
+parts
+  order  0  hair_back       hair_b:1110901_1houfa        x=374.5    y=509.75   w=246     h=487.5   rot=0
+  order  1  arm_R           youshou:1110901_1youshou     x=126.5    y=615.5    w=159     h=175     rot=0
+  order  6  sash_or_ribbon  piaodai2:1110901_1piaodai2   x=352.5    y=722.25   w=487     h=379.5   rot=0
+  order  7  lower_body      zuohoubai:1110901_1zuohoubai x=389.25   y=857.5    w=280.5   h=301     rot=0
+  order  8  lower_body      youhoubai:1110901_1youhoubai x=204.5    y=844.75   w=192     h=306.5   rot=0
+  order  9  leg_R           youjiao:1110901_1youjiao     x=177.25   y=837      w=117.5   h=331     rot=0
+  order 10  lower_body      youbai:1110901_1youbai       x=154.5    y=775.25   w=80      h=219.5   rot=0
+  order 11  leg_L           zuojiao:1110901_1zuojiao     x=277.75   y=844.75   w=154.5   h=326.5   rot=0
+  order 12  lower_body      zuobai:1110901_1zuobai       x=271.75   y=775.25   w=200.5   h=230.5   rot=0
+  order 13  torso           body:1110901_1shenti         x=252      y=713.5    w=278     h=514     rot=0
+  order 14  arm_R           youjian:1110901_1youjian     x=140.25   y=527.25   w=51.5    h=73.5    rot=0
+  order 15  sash_or_ribbon  piaodai1:1110901_1piaodai1   x=521.75   y=675.5    w=519.5   h=338     rot=0
+  order 16  arm_L           zuoshou:1110901_1zuoshou     x=335      y=612.5    w=146     h=169     rot=0
+  order 17  arm_L           zuojian:1110901_1jian        x=310      y=524.5    w=96      h=76      rot=0
+  order 19  head            head:1110901_1tou            x=271      y=263      w=355     h=494     rot=0
+  order 20  hair_front      hair_f1:1110901_1bin         x=331.5    y=474      w=43      h=276     rot=0
+  order 21  face_open       face:1110901_1wuguan         x=214.5    y=406.5    w=208     h=143     rot=0
+  order 22  hair_front      hair_f2:1110901_1liuhai      x=109      y=354      w=185     h=308     rot=0
+
+problems: none (image size, crop-box origins and canvas bounds all check out)

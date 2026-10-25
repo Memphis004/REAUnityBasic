@@ -1,0 +1,17 @@
+pack        : extracted/web/570036.pack.json
+canvas      : 962x1024 canvas px
+full ref    : 1924x2048 px -> render scale 2x (y 2x)
+parts       : 1 in 1 groups
+file size   : 2751870 bytes (2.62 MB)
+
+reassembly (alpha-over, draw order)
+  mismatch_fraction : 0.000000 (0 / 3940352 px, tolerance 2/255)
+  mean alpha diff   : 0.0000 / 255
+  max  alpha diff   : 0
+  painted px (full) : 1411498
+  painted px (pack) : 1411498
+
+parts
+  order  0  prop            570036:570036                x=481      y=512      w=929     h=992     rot=0
+
+problems: none (image size, crop-box origins and canvas bounds all check out)

@@ -1,7 +1,7 @@
 # Skin groups — body_1110901
 
-Source: `Assets/_LocalReference/Spine/body_1110901/body_1110901.skel.bytes`
-Generated: 2026-10-24 (offline run; same rules as Tools/Local Reference/Audit Skin Groups)
+Source: `Assets/_LocalReference/Spine/body_1110901/body_1110901_SkeletonData.asset`
+Generated: 2026-10-24 (Tools/Local Reference/Audit Skin Groups)
 
 Slots: 23 | Skins: 8 (named 7) | Animations: 23
 
@@ -36,8 +36,4 @@ Skins inside one group share slots (variants of the same part, pick at most one)
 - w_qiang
 - w_jian
 
-## Combination: body_1110901_1+head_1110901_1+face_1110901_1
-
-- slots filled by setup pose: 19/23
-- slots still EMPTY after combining (4): w_dao, w_zhang, w_qiang, w_jian
-- slots empty by design (no setup attachment, 0): (none)
+Of these, 4 have a setup attachment name, so a composed skin leaves them EMPTY: w_dao, w_zhang, w_qiang, w_jian. The rest have no setup attachment (empty by design).

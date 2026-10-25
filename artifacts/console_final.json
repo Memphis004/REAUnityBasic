@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "result": {
+    "success": true,
+    "message": "Retrieved 1 log entries.",
+    "data": [
+      {
+        "type": "Log",
+        "message": "<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: StdioBridgeHost started on port 6400. (OS=WindowsEditor, server=10.3.0)",
+        "file": "Library/PackageCache/com.coplaydev.unity-mcp@81542a7e86/Editor/Helpers/McpLog.cs",
+        "line": 40,
+        "stackTrace": null
+      }
+    ]
+  }
+}

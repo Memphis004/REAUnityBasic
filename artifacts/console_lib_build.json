@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "result": {
+    "success": true,
+    "message": "Retrieved 4 log entries.",
+    "data": [
+      "[LocalReferenceDemo][verify] LIBRARY 460011_1: no skin applied",
+      "[LocalReferenceDemo][verify] LIBRARY 410041_1: no skin applied",
+      "[LocalReferenceDemo][verify] LIBRARY 1110011: no skin applied",
+      "[LocalReferenceDemo][verify] LIBRARY 570036: no skin applied"
+    ]
+  }
+}

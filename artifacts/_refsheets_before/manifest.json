@@ -1,0 +1,512 @@
+{
+    "id": "body_1110901",
+    "generated": "2026-10-24T18:14:53",
+    "tool": "Tools/Local Reference/Export Reference Sheet",
+    "sourceSkeletonDataAsset": "Assets/_LocalReference/Spine/body_1110901/body_1110901_SkeletonData.asset",
+    "spineVersion": "3.8.75",
+    "canvas": {
+        "width": 1024,
+        "height": 1536,
+        "background": "#FF00FF",
+        "padding": 16
+    },
+    "pose": {
+        "mode": "setup",
+        "animation": "",
+        "time": 0.0
+    },
+    "skins": [
+        "body_1110901_1",
+        "face_1110901_1",
+        "head_1110901_1"
+    ],
+    "fit": {
+        "scale": 844.5549926757813,
+        "skeletonOriginXPixels": 298.6474609375,
+        "skeletonOriginYPixels": 134.2368621826172,
+        "skeletonBounds": {
+            "x": -0.3346702754497528,
+            "y": -0.01111823320388794,
+            "width": 1.174583077430725,
+            "height": 1.5230579376220704
+        },
+        "drawnPixels": {
+            "x": 16,
+            "y": 125,
+            "width": 992,
+            "height": 1286
+        }
+    },
+    "slots": [
+        {
+            "drawIndex": 0,
+            "name": "hair_b",
+            "group": "hair_back",
+            "skinPart": "head",
+            "attachment": "1110901_1houfa",
+            "renderable": true
+        },
+        {
+            "drawIndex": 1,
+            "name": "youshou",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1youshou",
+            "renderable": true
+        },
+        {
+            "drawIndex": 2,
+            "name": "w_dao",
+            "group": "accessory",
+            "skinPart": "",
+            "attachment": "",
+            "renderable": false
+        },
+        {
+            "drawIndex": 3,
+            "name": "w_zhang",
+            "group": "accessory",
+            "skinPart": "",
+            "attachment": "",
+            "renderable": false
+        },
+        {
+            "drawIndex": 4,
+            "name": "w_qiang",
+            "group": "accessory",
+            "skinPart": "",
+            "attachment": "",
+            "renderable": false
+        },
+        {
+            "drawIndex": 5,
+            "name": "w_jian",
+            "group": "accessory",
+            "skinPart": "",
+            "attachment": "",
+            "renderable": false
+        },
+        {
+            "drawIndex": 6,
+            "name": "piaodai2",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1piaodai2",
+            "renderable": true
+        },
+        {
+            "drawIndex": 7,
+            "name": "zuohoubai",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1zuohoubai",
+            "renderable": true
+        },
+        {
+            "drawIndex": 8,
+            "name": "youhoubai",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1youhoubai",
+            "renderable": true
+        },
+        {
+            "drawIndex": 9,
+            "name": "youjiao",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1youjiao",
+            "renderable": true
+        },
+        {
+            "drawIndex": 10,
+            "name": "youbai",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1youbai",
+            "renderable": true
+        },
+        {
+            "drawIndex": 11,
+            "name": "zuojiao",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1zuojiao",
+            "renderable": true
+        },
+        {
+            "drawIndex": 12,
+            "name": "zuobai",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1zuobai",
+            "renderable": true
+        },
+        {
+            "drawIndex": 13,
+            "name": "body",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1shenti",
+            "renderable": true
+        },
+        {
+            "drawIndex": 14,
+            "name": "youjian",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1youjian",
+            "renderable": true
+        },
+        {
+            "drawIndex": 15,
+            "name": "piaodai1",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1piaodai1",
+            "renderable": true
+        },
+        {
+            "drawIndex": 16,
+            "name": "zuoshou",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1zuoshou",
+            "renderable": true
+        },
+        {
+            "drawIndex": 17,
+            "name": "zuojian",
+            "group": "body",
+            "skinPart": "body",
+            "attachment": "1110901_1jian",
+            "renderable": true
+        },
+        {
+            "drawIndex": 18,
+            "name": "root_boundingBox",
+            "group": "other",
+            "skinPart": "",
+            "attachment": "root_boundingBox",
+            "renderable": false
+        },
+        {
+            "drawIndex": 19,
+            "name": "head",
+            "group": "head",
+            "skinPart": "head",
+            "attachment": "1110901_1tou",
+            "renderable": true
+        },
+        {
+            "drawIndex": 20,
+            "name": "hair_f1",
+            "group": "hair_front",
+            "skinPart": "head",
+            "attachment": "1110901_1bin",
+            "renderable": true
+        },
+        {
+            "drawIndex": 21,
+            "name": "face",
+            "group": "face",
+            "skinPart": "face",
+            "attachment": "1110901_1wuguan",
+            "renderable": true
+        },
+        {
+            "drawIndex": 22,
+            "name": "hair_f2",
+            "group": "hair_front",
+            "skinPart": "head",
+            "attachment": "1110901_1liuhai",
+            "renderable": true
+        }
+    ],
+    "groups": [
+        {
+            "name": "hair_back",
+            "silhouetteColor": "#1E3A5F",
+            "empty": false,
+            "note": "hair behind the head",
+            "slots": [
+                "hair_b"
+            ],
+            "attachments": [
+                {
+                    "slot": "hair_b",
+                    "attachment": "1110901_1houfa"
+                }
+            ],
+            "drawOrderMin": 0,
+            "drawOrderMax": 0,
+            "paintedPixels": 89618,
+            "magentaFile": "hair_back.png",
+            "alphaFile": "hair_back_alpha.png",
+            "templateFile": "template/hair_back.png",
+            "boundsPixels": {
+                "x": 320,
+                "y": 449,
+                "width": 320,
+                "height": 632
+            }
+        },
+        {
+            "name": "body",
+            "silhouetteColor": "#8C8C8C",
+            "empty": false,
+            "note": "torso, sleeves, ribbons (skin part 'body')",
+            "slots": [
+                "youshou",
+                "piaodai2",
+                "zuohoubai",
+                "youhoubai",
+                "youjiao",
+                "youbai",
+                "zuojiao",
+                "zuobai",
+                "body",
+                "youjian",
+                "piaodai1",
+                "zuoshou",
+                "zuojian"
+            ],
+            "attachments": [
+                {
+                    "slot": "youshou",
+                    "attachment": "1110901_1youshou"
+                },
+                {
+                    "slot": "piaodai2",
+                    "attachment": "1110901_1piaodai2"
+                },
+                {
+                    "slot": "zuohoubai",
+                    "attachment": "1110901_1zuohoubai"
+                },
+                {
+                    "slot": "youhoubai",
+                    "attachment": "1110901_1youhoubai"
+                },
+                {
+                    "slot": "youjiao",
+                    "attachment": "1110901_1youjiao"
+                },
+                {
+                    "slot": "youbai",
+                    "attachment": "1110901_1youbai"
+                },
+                {
+                    "slot": "zuojiao",
+                    "attachment": "1110901_1zuojiao"
+                },
+                {
+                    "slot": "zuobai",
+                    "attachment": "1110901_1zuobai"
+                },
+                {
+                    "slot": "body",
+                    "attachment": "1110901_1shenti"
+                },
+                {
+                    "slot": "youjian",
+                    "attachment": "1110901_1youjian"
+                },
+                {
+                    "slot": "piaodai1",
+                    "attachment": "1110901_1piaodai1"
+                },
+                {
+                    "slot": "zuoshou",
+                    "attachment": "1110901_1zuoshou"
+                },
+                {
+                    "slot": "zuojian",
+                    "attachment": "1110901_1jian"
+                }
+            ],
+            "drawOrderMin": 1,
+            "drawOrderMax": 17,
+            "paintedPixels": 311861,
+            "magentaFile": "body.png",
+            "alphaFile": "body_alpha.png",
+            "templateFile": "template/body.png",
+            "boundsPixels": {
+                "x": 56,
+                "y": 696,
+                "width": 952,
+                "height": 715
+            }
+        },
+        {
+            "name": "accessory",
+            "silhouetteColor": "#8A6B4A",
+            "empty": true,
+            "note": "weapons / props mounted on the character; no attachment on any of its slots",
+            "slots": [
+                "w_dao",
+                "w_zhang",
+                "w_qiang",
+                "w_jian"
+            ],
+            "attachments": [],
+            "drawOrderMin": 2,
+            "drawOrderMax": 5,
+            "paintedPixels": 0,
+            "magentaFile": "",
+            "alphaFile": "",
+            "templateFile": "",
+            "boundsPixels": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            }
+        },
+        {
+            "name": "other",
+            "silhouetteColor": "#4A4A4A",
+            "empty": true,
+            "note": "everything no other group claims (e.g. bounding boxes); only non-rendering attachments (bounding box / path / point / clipping)",
+            "slots": [
+                "root_boundingBox"
+            ],
+            "attachments": [
+                {
+                    "slot": "root_boundingBox",
+                    "attachment": "root_boundingBox"
+                }
+            ],
+            "drawOrderMin": 18,
+            "drawOrderMax": 18,
+            "paintedPixels": 0,
+            "magentaFile": "",
+            "alphaFile": "",
+            "templateFile": "",
+            "boundsPixels": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            }
+        },
+        {
+            "name": "head",
+            "silhouetteColor": "#F2E2C4",
+            "empty": false,
+            "note": "head + neck (skin part 'head', non-hair slots)",
+            "slots": [
+                "head"
+            ],
+            "attachments": [
+                {
+                    "slot": "head",
+                    "attachment": "1110901_1tou"
+                }
+            ],
+            "drawOrderMin": 19,
+            "drawOrderMax": 19,
+            "paintedPixels": 176321,
+            "magentaFile": "head.png",
+            "alphaFile": "head_alpha.png",
+            "templateFile": "template/head.png",
+            "boundsPixels": {
+                "x": 116,
+                "y": 125,
+                "width": 464,
+                "height": 641
+            }
+        },
+        {
+            "name": "hair_front",
+            "silhouetteColor": "#2C4C7A",
+            "empty": false,
+            "note": "fringe in front of the face",
+            "slots": [
+                "hair_f1",
+                "hair_f2"
+            ],
+            "attachments": [
+                {
+                    "slot": "hair_f1",
+                    "attachment": "1110901_1bin"
+                },
+                {
+                    "slot": "hair_f2",
+                    "attachment": "1110901_1liuhai"
+                }
+            ],
+            "drawOrderMin": 20,
+            "drawOrderMax": 22,
+            "paintedPixels": 48957,
+            "magentaFile": "hair_front.png",
+            "alphaFile": "hair_front_alpha.png",
+            "templateFile": "template/hair_front.png",
+            "boundsPixels": {
+                "x": 16,
+                "y": 363,
+                "width": 437,
+                "height": 535
+            }
+        },
+        {
+            "name": "face",
+            "silhouetteColor": "#E8D3B0",
+            "empty": false,
+            "note": "face features (skin part 'face')",
+            "slots": [
+                "face"
+            ],
+            "attachments": [
+                {
+                    "slot": "face",
+                    "attachment": "1110901_1wuguan"
+                }
+            ],
+            "drawOrderMin": 21,
+            "drawOrderMax": 21,
+            "paintedPixels": 44653,
+            "magentaFile": "face.png",
+            "alphaFile": "face_alpha.png",
+            "templateFile": "template/face.png",
+            "boundsPixels": {
+                "x": 138,
+                "y": 538,
+                "width": 270,
+                "height": 186
+            }
+        }
+    ],
+    "contactSheet": "_viewonly_contact_sheet.png",
+    "boundsPixelsOrigin": "top-left",
+    "checks": {
+        "canvasPixels": 1572864,
+        "alphaTolerance": 2,
+        "mismatchPixels": 0,
+        "mismatchFraction": 0.0,
+        "mismatchOverLimit": false,
+        "alphaMeanAbsDiff": 0.0052947998046875,
+        "groupsLikelyMisordered": [],
+        "layerOrderNotes": [
+            "hair_front spans draw order 20..22 but overlaps face"
+        ],
+        "nearMagentaPixels": 0,
+        "nearMagentaFraction": 0.0,
+        "nearMagentaSamples": [],
+        "edgePixels": 247915,
+        "purpleFringePixels": 158981,
+        "purpleFringeFraction": 0.6412721872329712,
+        "premultipliedEdgePixels": 68,
+        "premultipliedEdgeCompared": 61493,
+        "premultipliedEdgeFraction": 0.001105816918425262,
+        "straightEvidencePixels": 63172,
+        "notes": [
+            "mismatch = painted alpha (composite of the group alpha files in draw order) vs full_alpha.png, pixels differing by more than 2/255.",
+            "near-magenta counts canvas pixels that are transparent in full_alpha but not exactly #FF00FF in full.png.",
+            "purple fringe counts semi-transparent pixels of full.png where R and B both exceed G by 40; it is the expected blend of the magenta background at anti-aliased edges, not a render error.",
+            "premultiplied edges compare each semi-transparent pixel of full_alpha.png with its nearest opaque neighbour; a premultiplied (darkened) edge is less than 60% as bright. 68 of 61493 compared pixels failed (isolated high-contrast outline edges can trip the heuristic).",
+            "straightEvidencePixels = pixels of full_alpha.png whose RGB is above their alpha: a premultiplied export cannot produce any, so 63172 such pixels confirm straight alpha."
+        ]
+    },
+    "warnings": []
+}

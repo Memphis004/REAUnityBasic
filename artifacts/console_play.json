@@ -1,0 +1,212 @@
+{
+  "status": "success",
+  "result": {
+    "success": true,
+    "message": "Retrieved 29 log entries.",
+    "data": [
+      {
+        "type": "Log",
+        "message": "<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: StdioBridgeHost started on port 6400. (OS=WindowsEditor, server=10.3.0)",
+        "file": "Library/PackageCache/com.coplaydev.unity-mcp@81542a7e86/Editor/Helpers/McpLog.cs",
+        "line": 40,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] SCENE CHAR (fox): verts=486 shader=Spine/SkeletonGraphic skin=demo_combined_0 animation=idle1 t=0.06 scale=6.633",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1625,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] SCENE CHAR (fox): 716.9px tall = 66.4% of canvas (target 70%)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1645,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] CHIBI: verts=126 shader=Spine/SkeletonGraphic skin=demo_combined_0 animation=stand t=0.06 scale=3.086",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1625,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] CHIBI: 260px tall = 24.1% of canvas (target 25%)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1645,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] THIRD: verts=359 shader=Spine/SkeletonGraphic skin=demo_combined_0 animation=idle1 t=0.06 scale=1.696",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1625,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] THIRD: 245.5px tall = 22.7% of canvas (target 25%)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1645,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] PORTRAIT 2110101: verts=24 shader=Spine/SkeletonGraphic skin=demo_combined_0 animation=stand t=0.06 scale=1.196",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1625,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] PORTRAIT 2110101: 733.3px tall = 67.9% of canvas (target 70%)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1645,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] WEAPON: verts=4 shader=Spine/SkeletonGraphic skin=w_jian/w_jian_300101 animation=stand scale=3.709",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1603,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] layout 4:3 slot 0: 67.9% (wanted 67.9%) x=-415.8 (wanted -415.8)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1515,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] layout 4:3 slot 1: 24.3% (wanted 24.3%) x=332.6 (wanted 332.6)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1515,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] layout 4:3 slot 2: 24.3% (wanted 24.3%) x=665.2 (wanted 665.2)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1515,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] layout 4:3 slot 3: 24.3% (wanted 24.3%) x=99.8 (wanted 99.8)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1515,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] layout 4:3 slot 4: 67.9% (wanted 67.9%) x=-415.8 (wanted -415.8)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1515,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] zoom readout: 'Zoom 2.50x   pan 40, -30'",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1546,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[SpineDemo] screenshot saved: C:/Workspace/REA/my_clone/Assets\\_LocalReference\\Screenshots\\demo_01_idle1_variant0.png",
+        "file": "Assets/Scripts/LocalReference/SpineDemoController.cs",
+        "line": 494,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] screenshot: C:/Workspace/REA/my_clone/Assets\\_LocalReference\\Screenshots\\demo_01_idle1_variant0.png",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1403,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[SpineDemo] screenshot saved: C:/Workspace/REA/my_clone/Assets\\_LocalReference\\Screenshots\\demo_02_idle1_variant0.png",
+        "file": "Assets/Scripts/LocalReference/SpineDemoController.cs",
+        "line": 494,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] portrait screenshot: C:\\Workspace\\REA\\my_clone\\Assets\\_LocalReference\\Screenshots\\demo_portrait_2110101.png",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1432,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] button 'Next Skin': verts 995 -> 995",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1456,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] button 'Next Animation': verts 995 -> 995",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1456,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] button 'Toggle Gray': verts 995 -> 995",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1456,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] button 'Flip X': verts 995 -> 995",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1456,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] button 'Reset View': verts 995 -> 995",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1456,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] PORTRAIT renderers: SkeletonGraphic=1 [SpineGraphic(24)] CanvasRenderer=1 allowMultipleCanvasRenderers=False atlasPages=1 material=Portrait_2110101 (Gray) attachments=6/19 verts=24",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1581,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] PORTRAIT drawn slots: hair_b:2110101_2_2, body:2110101_4_2, face:2110101_1, face_acc:2110101_7, hair_f:2110101_1_2, hat_f:2110101_5_2",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1590,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] info text:\nSCENE CHAR (fox): bones 77 slots 25 skins 4 anims 24 | demo_combined_1 | attack2\nPORTRAIT 2110101: bones 1 slots 19 skins 11 anims 1 | demo_combined_1 | stand\nCHIBI: bones 25 slots 15 skins 15 anims 6 | demo_combined_1 | jump1\nTHIRD: bones 57 slots 27 skins 4 anims 24 | demo_combined_1 | attack2\n    shown: SCENE CHAR (fox)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1468,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][play] errors = 0",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1472,
+        "stackTrace": null
+      }
+    ]
+  }
+}

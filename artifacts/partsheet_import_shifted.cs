@@ -1,0 +1,11 @@
+var options = new MyClone.EditorTools.PartSheetImportOptions();
+options.sheetDir = @"C:/Workspace/REA/extracted/part_sheets/body_1110901";
+options.generatedSheetPath = @"C:/Workspace/REA/artifacts/partsheet_shifted_test.png";
+options.outputFolderName = "import_shifted_test";
+options.key = new MyClone.EditorTools.PartSheetKeySettings();
+options.key.keyTolerance = 24;
+options.key.minAlpha = 8;
+options.alphaThreshold = 8;
+options.reportLimit = 0.15f;
+options.writeAtlasPage = false;
+return MyClone.EditorTools.PartSheetImporter.Import(options);

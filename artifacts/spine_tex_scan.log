@@ -1,0 +1,15 @@
+[tex] 500 bundles, 438 texture names, 15s
+[tex] 1000 bundles, 893 texture names, 32s
+[tex] 1500 bundles, 1547 texture names, 50s
+[tex] 2000 bundles, 2158 texture names, 68s
+[tex] 2500 bundles, 2656 texture names, 93s
+[tex] 3000 bundles, 3156 texture names, 101s
+[tex] 3500 bundles, 3650 texture names, 114s
+[tex] 4000 bundles, 4139 texture names, 134s
+[tex] 4500 bundles, 4658 texture names, 173s
+[tex] 5000 bundles, 5173 texture names, 216s
+[tex] 5500 bundles, 5683 texture names, 253s
+[tex] 6000 bundles, 6200 texture names, 278s
+[tex] 6500 bundles, 6714 texture names, 284s
+[tex] done: 6678 bundles, 6891 texture names, 0 errors, 288s
+[tex] -> extracted\spine_tex_index.json

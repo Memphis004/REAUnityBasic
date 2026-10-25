@@ -105,8 +105,8 @@ yarn-error.log*
 # NOTE: use artifacts/* (not artifacts/) so that !artifacts/.gitkeep can
 # re-include the placeholder - git cannot re-include a file under an excluded dir.
 # ---------------------------------------------------------------------------
-artifacts/*
-!artifacts/.gitkeep
+# artifacts/*
+# !artifacts/.gitkeep
 
 # ---------------------------------------------------------------------------
 # Generated code that must be reproducible from data/ + proto/, not hand-edited

@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "result": {
+    "success": true,
+    "message": "Retrieved 7 log entries.",
+    "data": [
+      "SkeletonGraphic works best with the SkeletonGraphic material.",
+      "SkeletonGraphic works best with the SkeletonGraphic material.",
+      "SkeletonGraphic works best with the SkeletonGraphic material.",
+      "SkeletonGraphic works best with the SkeletonGraphic material.",
+      "SkeletonGraphic works best with the SkeletonGraphic material.",
+      "SkeletonGraphic works best with the SkeletonGraphic material.",
+      "SkeletonGraphic works best with the SkeletonGraphic material."
+    ]
+  }
+}

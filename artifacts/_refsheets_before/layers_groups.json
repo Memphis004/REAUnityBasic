@@ -1,0 +1,127 @@
+{
+    "skeleton": "body_1110901",
+    "generated": "2026-10-24T18:09:11",
+    "fallbackGroup": "other",
+    "note": "Editable slot -> layer group map. Explicit 'slots' win over 'matchPrefixes'; unmatched slots fall back to 'fallbackGroup'. The exporter writes this file only on the first run (it fills 'slots' and 'allSlotsInDrawOrder'), then never rewrites it: hand edits survive. manifest.json holds the resolved slot / attachment list per group.",
+    "allSlotsInDrawOrder": [
+        "hair_b",
+        "youshou",
+        "w_dao",
+        "w_zhang",
+        "w_qiang",
+        "w_jian",
+        "piaodai2",
+        "zuohoubai",
+        "youhoubai",
+        "youjiao",
+        "youbai",
+        "zuojiao",
+        "zuobai",
+        "body",
+        "youjian",
+        "piaodai1",
+        "zuoshou",
+        "zuojian",
+        "root_boundingBox",
+        "head",
+        "hair_f1",
+        "face",
+        "hair_f2"
+    ],
+    "groups": [
+        {
+            "name": "hair_back",
+            "silhouetteColor": "#1E3A5F",
+            "note": "hair behind the head",
+            "matchPrefixes": [
+                "hair_b"
+            ],
+            "slots": [
+                "hair_b"
+            ]
+        },
+        {
+            "name": "body",
+            "silhouetteColor": "#8C8C8C",
+            "note": "torso, sleeves, ribbons (skin part 'body')",
+            "matchPrefixes": [
+                "body",
+                "piaodai",
+                "you",
+                "zuo"
+            ],
+            "slots": [
+                "youshou",
+                "piaodai2",
+                "zuohoubai",
+                "youhoubai",
+                "youjiao",
+                "youbai",
+                "zuojiao",
+                "zuobai",
+                "body",
+                "youjian",
+                "piaodai1",
+                "zuoshou",
+                "zuojian"
+            ]
+        },
+        {
+            "name": "head",
+            "silhouetteColor": "#F2E2C4",
+            "note": "head + neck (skin part 'head', non-hair slots)",
+            "matchPrefixes": [
+                "head"
+            ],
+            "slots": [
+                "head"
+            ]
+        },
+        {
+            "name": "face",
+            "silhouetteColor": "#E8D3B0",
+            "note": "face features (skin part 'face')",
+            "matchPrefixes": [
+                "face"
+            ],
+            "slots": [
+                "face"
+            ]
+        },
+        {
+            "name": "hair_front",
+            "silhouetteColor": "#2C4C7A",
+            "note": "fringe in front of the face",
+            "matchPrefixes": [
+                "hair_f"
+            ],
+            "slots": [
+                "hair_f1",
+                "hair_f2"
+            ]
+        },
+        {
+            "name": "accessory",
+            "silhouetteColor": "#8A6B4A",
+            "note": "weapons / props mounted on the character",
+            "matchPrefixes": [
+                "w_"
+            ],
+            "slots": [
+                "w_dao",
+                "w_zhang",
+                "w_qiang",
+                "w_jian"
+            ]
+        },
+        {
+            "name": "other",
+            "silhouetteColor": "#4A4A4A",
+            "note": "everything no other group claims (e.g. bounding boxes)",
+            "matchPrefixes": [],
+            "slots": [
+                "root_boundingBox"
+            ]
+        }
+    ]
+}

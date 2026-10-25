@@ -1,0 +1,25 @@
+pack        : extracted/web/1110011.pack.json
+canvas      : 2942x1024 canvas px
+full ref    : 5884x2048 px -> render scale 2x (y 2x)
+parts       : 9 in 1 groups
+file size   : 13792057 bytes (13.15 MB)
+
+reassembly (alpha-over, draw order)
+  mismatch_fraction : 0.000044 (531 / 12050432 px, tolerance 2/255)
+  mean alpha diff   : 0.0000 / 255
+  max  alpha diff   : 1
+  painted px (full) : 6649827
+  painted px (pack) : 6649827
+
+parts
+  order  0  effect          csy_11:csy_11                x=400.25   y=214.25   w=265.5   h=391.5   rot=0
+  order  1  effect          csy_10:csy_10                x=2028     y=333.25   w=229     h=376.5   rot=0
+  order  2  effect          csy_9:csy_9                  x=1812.5   y=490      w=2223    h=872     rot=0
+  order  3  effect          csy_8:csy_8                  x=619.25   y=526.5    w=1203.5  h=888     rot=0
+  order  4  effect          csy_6:csy_6                  x=1470.75  y=275      w=290.5   h=257     rot=0
+  order  5  effect          csy_5:csy_5                  x=1873     y=501.75   w=166     h=197.5   rot=0
+  order  6  effect          csy_2:csy_2                  x=1098     y=506      w=1897    h=719     rot=0
+  order  7  effect          csy_7:csy_7                  x=356.5    y=568.25   w=222     h=192.5   rot=0
+  order  8  effect          csy_1:csy_1                  x=826.75   y=803.5    w=432.5   h=408     rot=0
+
+problems: none (image size, crop-box origins and canvas bounds all check out)

@@ -1,0 +1,30 @@
+var dir = @"C:/Workspace/REA/extracted/part_sheets/body_1110901";
+var layout = MyClone.EditorTools.PartSheetLayout.Load(dir);
+var manifest = UnityEngine.JsonUtility.FromJson<MyClone.EditorTools.PartSheetManifest>(System.IO.File.ReadAllText(dir + "/manifest.json"));
+var cell = layout.CellOfGroup("face_open");
+var line = "cell " + cell.rect.x + "," + cell.rect.y + " " + cell.rect.width + "x" + cell.rect.height + " placement " + cell.placement.worldCenterX + "," + cell.placement.worldCenterY + " ppu " + cell.placement.pixelsPerUnit + "\n";
+var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<Spine.Unity.SkeletonDataAsset>(manifest.sourceSkeletonDataAsset);
+var data = asset.GetSkeletonData(true);
+var sk = new Spine.Skeleton(data);
+var composite = new Spine.Skin("dbg");
+foreach (var n in manifest.skins) { var s = data.FindSkin(n); if (s != null) composite.AddSkin(s); }
+sk.SetSkin(composite);
+sk.SetToSetupPose();
+sk.UpdateWorldTransform();
+var slot = sk.FindSlot("face");
+line += "slot " + (slot == null ? "null" : slot.Data.Name + " attachment " + (slot.Attachment == null ? "null" : slot.Attachment.Name)) + "\n";
+var ra = slot.Attachment as Spine.RegionAttachment;
+var uvs = ra.UVs;
+var verts = new float[8];
+ra.ComputeWorldVertices(slot.Bone, verts, 0, 2);
+for (int i = 0; i < 4; i++) line += "v" + i + " uv " + uvs[i*2].ToString("F4") + "," + uvs[i*2+1].ToString("F4") + " world " + verts[i*2].ToString("F4") + "," + verts[i*2+1].ToString("F4") + "\n";
+var region = Spine.Unity.AttachmentTools.AttachmentRegionExtensions.GetRegion(ra);
+line += "region page " + region.page.name + " x,y " + region.x + "," + region.y + " w,h " + region.width + "x" + region.height + " u,v,u2,v2 " + region.u.ToString("F4") + "," + region.v.ToString("F4") + "," + region.u2.ToString("F4") + "," + region.v2.ToString("F4") + " rotate " + region.rotate + " page " + region.page.width + "x" + region.page.height + "\n";
+// sheet position of the face cell content centre in skeleton units
+float wx, wy;
+layout.TrySheetPixelToSkeleton(cell, cell.contentRect.x + cell.contentRect.width / 2, cell.contentRect.y + cell.contentRect.height / 2, out wx, out wy);
+line += "content centre world " + wx.ToString("F4") + "," + wy.ToString("F4") + "\n";
+float sx, sy;
+layout.TrySkeletonToSheet(cell, wx, wy, out sx, out sy);
+line += "back to sheet " + sx.ToString("F2") + "," + sy.ToString("F2") + " expected " + (cell.contentRect.x + cell.contentRect.width/2) + "," + (cell.contentRect.y + cell.contentRect.height/2) + "\n";
+return line;

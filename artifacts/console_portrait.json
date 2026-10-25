@@ -1,0 +1,674 @@
+{
+  "status": "success",
+  "result": {
+    "success": true,
+    "message": "Retrieved 95 log entries.",
+    "data": [
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] build start",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 142,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] 1113002_1_SkeletonData: version=3.8.75 bones=77 slots=25 skins=4 animations=24",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 306,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] 1123011_SkeletonData: version=3.8.75 bones=25 slots=15 skins=15 animations=6",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 306,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] 1113101_1_SkeletonData: version=3.8.75 bones=57 slots=27 skins=4 animations=24",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 306,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] 2110101_SkeletonData: version=3.8.75 bones=1 slots=19 skins=11 animations=1",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 306,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] gray material 1113002_1: shader=Spine/SkeletonGraphic Grayscale texture=1113002_1 grayAmount=1",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 345,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] gray material 1123011: shader=Spine/SkeletonGraphic Grayscale texture=1123011 grayAmount=1",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 345,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] gray material 1113101_1: shader=Spine/SkeletonGraphic Grayscale texture=1113101_1 grayAmount=1",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 345,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] weapon_SkeletonData: version=3.8.75 bones=11 slots=10 skins=153 animations=1",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 306,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] gray material 2110101: shader=Spine/SkeletonGraphic Grayscale texture=2110101 grayAmount=1",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 345,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] portrait 2110101: version=3.8.75 bones=1 slots=19 skins=11 anims=1 | skins=[body_2110101_4_1,body_2110101_4_2,body_2110101_4_3,face_2110101_1,face_acc_2110101_7,hair_2110101_1_1,hair_2110101_1_2,hair_2110101_1_3,hat_2110101_5_1,hat_2110101_5_2,hat_2110101_5_3] | anims=[stand]",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 200,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] gray material weapon: shader=Spine/SkeletonGraphic Grayscale texture=weapon grayAmount=1",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 345,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] standalone weapon skin: w_jian/w_jian_300101",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 211,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] opened existing Assets/_LocalReference/Demo.unity",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 367,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] kept existing camera 'Main Camera'",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 945,
+        "stackTrace": null
+      },
+      {
+        "type": "Warning",
+        "message": "SkeletonGraphic works best with the SkeletonGraphic material.",
+        "file": "Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+        "line": 147,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] loop check idle1: growth 1.02x1.09, stable=True",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 796,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] actor FullBody_1113002_1: mesh=115.3x110.5px scale=6.633 -> 764.5x756px on screen; multiRenderer=False atlasMaterials=1 material=Spine/SkeletonGraphic verts=486",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 608,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] actor FullBody_1113002_1: initialSkin=body_1113002_1 initialAnimation=idle1 loop=true height=756px (70% of canvas) materials=[Spine/SkeletonGraphic | Spine/SkeletonGraphic Grayscale]",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 614,
+        "stackTrace": null
+      },
+      {
+        "type": "Warning",
+        "message": "SkeletonGraphic works best with the SkeletonGraphic material.",
+        "file": "Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+        "line": 147,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] loop check idle1: growth 8.73x1.32, stable=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 796,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] loop check stand: growth 1.29x1.10, stable=True",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 796,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] Chibi_1123011: idle 'idle1' travels, using the stable loop 'stand' instead",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 579,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] actor Chibi_1123011: mesh=120.7x84.9px scale=3.086 -> 372.5x270px on screen; multiRenderer=False atlasMaterials=1 material=Spine/SkeletonGraphic verts=126",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 608,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] actor Chibi_1123011: initialSkin=body_1123011_1 initialAnimation=stand loop=true height=270px (25% of canvas) materials=[Spine/SkeletonGraphic | Spine/SkeletonGraphic Grayscale]",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 614,
+        "stackTrace": null
+      },
+      {
+        "type": "Warning",
+        "message": "SkeletonGraphic works best with the SkeletonGraphic material.",
+        "file": "Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+        "line": 147,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] loop check idle1: growth 1.10x1.05, stable=True",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 796,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] actor Third_1113101_1: mesh=125.5x154.4px scale=1.696 -> 212.8x270px on screen; multiRenderer=False atlasMaterials=1 material=Spine/SkeletonGraphic verts=359",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 608,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] actor Third_1113101_1: initialSkin=body_1113101_1 initialAnimation=idle1 loop=true height=270px (25% of canvas) materials=[Spine/SkeletonGraphic | Spine/SkeletonGraphic Grayscale]",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 614,
+        "stackTrace": null
+      },
+      {
+        "type": "Warning",
+        "message": "SkeletonGraphic works best with the SkeletonGraphic material.",
+        "file": "Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+        "line": 147,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] loop check stand: growth 1.00x1.00, stable=True",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 796,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] actor Weapon_w_jian: mesh=70.6x10.8px scale=24.295 -> 1715.7x270px on screen; multiRenderer=False atlasMaterials=1 material=Spine/SkeletonGraphic verts=4",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 608,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] actor Weapon_w_jian: initialSkin=w_jian/w_jian_300101 initialAnimation=stand loop=true height=270px (25% of canvas) materials=[Spine/SkeletonGraphic | Spine/SkeletonGraphic Grayscale]",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 614,
+        "stackTrace": null
+      },
+      {
+        "type": "Warning",
+        "message": "SkeletonGraphic works best with the SkeletonGraphic material.",
+        "file": "Assets/Spine/Runtime/spine-unity/Components/SkeletonGraphic.cs",
+        "line": 147,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] loop check stand: growth 1.00x1.00, stable=True",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 796,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] actor Portrait_2110101: mesh=656x613.1px scale=1.196 -> 784.7x756px on screen; multiRenderer=False atlasMaterials=1 material=Spine/SkeletonGraphic verts=24",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 608,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] actor Portrait_2110101: initialSkin=body_2110101_4_1 initialAnimation=stand loop=true height=756px (70% of canvas) materials=[Spine/SkeletonGraphic | Spine/SkeletonGraphic Grayscale]",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 614,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] mount skin: w_jian/w_jian_300101 @ bone wuqi (weapon_SkeletonData)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 523,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] FULL BODY: 745.2px tall = 69% of canvas (requested 70%, fit 67.9%), meshX=-477 verts=486",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1250,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] CHIBI: 260.5px tall = 24.1% of canvas (requested 25%, fit 24.3%), meshX=388.1 verts=126",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1250,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] THIRD: 246px tall = 22.8% of canvas (requested 25%, fit 24.3%), meshX=769.5 verts=359",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1250,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] WEAPON: 261.9px tall = 24.3% of canvas (requested 25%, fit 24.3%), meshX=115.2 verts=4",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1250,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] PORTRAIT 2110101: 733.3px tall = 67.9% of canvas (requested 70%, fit 67.9%), meshX=-480 verts=24",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1250,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 1920x1080 slot 0: 67.9% (wanted 67.9%) x=-480 (wanted -480)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 1920x1080 slot 0: top=873.3/992 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 1920x1080 slot 1: 24.3% (wanted 24.3%) x=384 (wanted 384)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 1920x1080 slot 1: top=401.9/992 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 1920x1080 slot 2: 24.3% (wanted 24.3%) x=768 (wanted 768)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 1920x1080 slot 2: top=401.9/992 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 1920x1080 slot 3: 24.3% (wanted 24.3%) x=115.2 (wanted 115.2)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 1920x1080 slot 3: top=401.9/992 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 1920x1080 slot 4: 67.9% (wanted 67.9%) x=-480 (wanted -480)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 1920x1080 slot 4: top=873.3/992 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 1663x1247 slot 0: 67.9% (wanted 67.9%) x=-415.8 (wanted -415.8)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 1663x1247 slot 0: top=1008.4/1159 infoPanel=left overlap=True",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 1663x1247 slot 1: 24.3% (wanted 24.3%) x=332.6 (wanted 332.6)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 1663x1247 slot 1: top=464/1159 infoPanel=left overlap=True",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 1663x1247 slot 2: 24.3% (wanted 24.3%) x=665.2 (wanted 665.2)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 1663x1247 slot 2: top=464/1159 infoPanel=left overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 1663x1247 slot 3: 24.3% (wanted 24.3%) x=99.8 (wanted 99.8)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 1663x1247 slot 3: top=464/1159 infoPanel=left overlap=True",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 1663x1247 slot 4: 67.9% (wanted 67.9%) x=-415.8 (wanted -415.8)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 1663x1247 slot 4: top=1008.4/1159 infoPanel=left overlap=True",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 2217x935 slot 0: 67.9% (wanted 67.9%) x=-554.3 (wanted -554.3)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 2217x935 slot 0: top=762.9/847 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 2217x935 slot 1: 24.3% (wanted 24.3%) x=443.4 (wanted 443.4)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 2217x935 slot 1: top=354.7/847 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 2217x935 slot 2: 24.3% (wanted 24.3%) x=886.8 (wanted 886.8)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 2217x935 slot 2: top=354.7/847 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 2217x935 slot 3: 24.3% (wanted 24.3%) x=133 (wanted 133)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 2217x935 slot 3: top=354.7/847 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 2217x935 slot 4: 67.9% (wanted 67.9%) x=-554.3 (wanted -554.3)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 2217x935 slot 4: top=762.9/847 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 2715x764 slot 0: 67.9% (wanted 67.9%) x=-678.8 (wanted -678.8)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 2715x764 slot 0: top=646.8/676 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 2715x764 slot 1: 24.3% (wanted 24.3%) x=543 (wanted 543)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 2715x764 slot 1: top=313.3/676 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 2715x764 slot 2: 24.3% (wanted 24.3%) x=1086 (wanted 1086)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 2715x764 slot 2: top=313.3/676 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 2715x764 slot 3: 24.3% (wanted 24.3%) x=162.9 (wanted 162.9)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 2715x764 slot 3: top=313.3/676 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 2715x764 slot 4: 67.9% (wanted 67.9%) x=-678.8 (wanted -678.8)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 2715x764 slot 4: top=646.8/676 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 3325x623 slot 0: 65.3% (wanted 65.3%) x=-831.3 (wanted -831.3)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 3325x623 slot 0: top=535/535 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 3325x623 slot 1: 24.3% (wanted 24.3%) x=665 (wanted 665)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 3325x623 slot 1: top=279.1/535 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 3325x623 slot 2: 24.3% (wanted 24.3%) x=1330 (wanted 1330)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 3325x623 slot 2: top=279.1/535 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 3325x623 slot 3: 24.3% (wanted 24.3%) x=199.5 (wanted 199.5)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 3325x623 slot 3: top=279.1/535 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] layout 3325x623 slot 4: 65.3% (wanted 65.3%) x=-831.3 (wanted -831.3)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1124,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] safe 3325x623 slot 4: top=535/535 infoPanel=right overlap=False",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1153,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo][verify] scene=Demo cameras=1 canvases=1 buttons=9 errors=0",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1024,
+        "stackTrace": null
+      },
+      {
+        "type": "Log",
+        "message": "[LocalReferenceDemo] build done -> Assets/_LocalReference/Demo.unity",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 219,
+        "stackTrace": null
+      }
+    ]
+  }
+}

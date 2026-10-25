@@ -1,0 +1,212 @@
+{
+  "status": "success",
+  "result": {
+    "success": true,
+    "message": "Retrieved 29 log entries.",
+    "data": [
+      {
+        "type": "Warning",
+        "message": "The referenced script (Unknown) on this Behaviour is missing!\n",
+        "file": "",
+        "line": 0,
+        "stackTrace": null
+      },
+      {
+        "type": "Warning",
+        "message": "The referenced script (Unknown) on this Behaviour is missing!\n",
+        "file": "",
+        "line": 0,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] SCENE CHAR (fox): 0 vertices",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] SCENE CHAR (fox): no skin after Start()",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] SCENE CHAR (fox): no animation after Start()",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] SCENE CHAR (fox): playing '-' instead of the initial 'idle1'",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] SCENE CHAR (fox): mesh cannot be measured",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] CHIBI: 0 vertices",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] CHIBI: no skin after Start()",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] CHIBI: no animation after Start()",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] CHIBI: playing '-' instead of the initial 'stand'",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] CHIBI: mesh cannot be measured",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] THIRD: 0 vertices",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] THIRD: no skin after Start()",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] THIRD: no animation after Start()",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] THIRD: playing '-' instead of the initial 'idle1'",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] THIRD: mesh cannot be measured",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] PORTRAIT 2110101: 0 vertices",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] PORTRAIT 2110101: no skin after Start()",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] PORTRAIT 2110101: no animation after Start()",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] PORTRAIT 2110101: playing '-' instead of the initial 'stand'",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] PORTRAIT 2110101: mesh cannot be measured",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] PORTRAIT 2110101: alpha = 0 at Start (it is the main left actor)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] SCENE CHAR (fox): visible at Start (the portrait is the main actor)",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] WEAPON: 0 vertices",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] WEAPON: no skin after Start()",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] WEAPON: no animation after Start()",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] button missing: Show Scene Char",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      },
+      {
+        "type": "Error",
+        "message": "[LocalReferenceDemo][play] button 'Next Skin' left the actors with no mesh",
+        "file": "Assets/Editor/LocalReferenceDemoBuilder.cs",
+        "line": 1486,
+        "stackTrace": null
+      }
+    ]
+  }
+}
